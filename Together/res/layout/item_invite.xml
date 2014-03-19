@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/invite_item_img"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="23dp"
+        android:src="@drawable/bear_click" />
+
+    <TextView
+        android:id="@+id/invite_item_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/invite_item_name"
+        android:layout_alignTop="@+id/invite_item_img"
+        android:text="位置XXXXXXX" />
+
+    <TextView
+        android:id="@+id/invite_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/invite_item_position"
+        android:layout_below="@+id/invite_item_position"
+        android:text="约会时间XXXXXXX" />
+
+    <TextView
+        android:id="@+id/invite_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/invite_item_position"
+        android:layout_centerHorizontal="true"
+        android:text="名字XXXXXXX" />
+
+    <TextView
+        android:id="@+id/invite_item_invited"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/invite_item_date"
+        android:layout_below="@+id/invite_item_date"
+        android:text="被邀人XXXX" />
+
+</RelativeLayout>

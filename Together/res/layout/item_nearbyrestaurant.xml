@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="140dp"
+    android:background="#000000">
+
+    <ImageView
+        android:id="@+id/item_nearbyrestaurant_img"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/empty_photo" />
+
+    <TextView
+        android:id="@+id/item_nearbyrestaurant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/item_nearbyrestaurant_img"
+        android:layout_marginLeft="20dp"
+        android:text="店名XXX" />
+
+    <TextView
+        android:id="@+id/item_nearbyrestaurant_specialty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/item_nearbyrestaurant_like"
+        android:layout_below="@+id/item_nearbyrestaurant_average"
+        android:text="招牌菜XXX" />
+
+    <TextView
+        android:id="@+id/item_nearbyrestaurant_average"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/item_nearbyrestaurant_name"
+        android:layout_below="@+id/item_nearbyrestaurant_name"
+        android:text="人均XXX" />
+
+    <TextView
+        android:id="@+id/item_nearbyrestaurant_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/item_nearbyrestaurant_img"
+        android:layout_alignLeft="@+id/item_nearbyrestaurant_average"
+        android:text="XXXX人 喜欢"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/inviteddetail_title"
+        android:layout_width="fill_parent"
+        android:layout_height="44dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="@string/myrecipe_invited"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/inviteddetail_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="返回" />
+
+    <ImageView
+        android:id="@+id/inviteddetail_img"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/inviteddetail_back"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/bear_click" />
+
+    <TextView
+        android:id="@+id/inviteddetail_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/inviteddetail_img"
+        android:layout_centerHorizontal="true"
+        android:text="名字XXX"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/inviteddetail_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/inviteddetail_img"
+        android:layout_alignLeft="@+id/inviteddetail_name"
+        android:text="位置XXXXXXXX"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/inviteddetail_invite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/inviteddetail_img"
+        android:layout_below="@+id/inviteddetail_img"
+        android:layout_marginTop="51dp"
+        android:text="被@XXXXX邀请一起去吃"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/inviteddetail_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/inviteddetail_invite"
+        android:layout_below="@+id/inviteddetail_invite"
+        android:layout_marginTop="49dp"
+        android:text="时间XXXXXXXX"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/inviteddetail_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/inviteddetail_date"
+        android:layout_below="@+id/inviteddetail_date"
+        android:text="地点XXXXXXXX"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/inviteddetail_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/inviteddetail_address"
+        android:layout_below="@+id/inviteddetail_address"
+        android:text="联系他XXXXXXXX"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

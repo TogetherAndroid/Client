@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/sendphoto_title"
+        android:layout_width="fill_parent"
+        android:layout_height="44dp"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="上传照片"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/sendphoto_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="返回" />
+
+    <Button
+        android:id="@+id/sendphoto_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="发布" />
+
+    <EditText
+        android:id="@+id/sendphoto_description"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/sendphoto_back"
+        android:ems="10"
+        android:inputType="textMultiLine" 
+        android:gravity="top">
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/sendphoto_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/sendphoto_description"
+        android:text="地址（自动定位）"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/sendphoto_image"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/sendphoto_address"
+        android:layout_marginTop="26dp"
+        android:src="@drawable/empty_photo" />
+
+</RelativeLayout>

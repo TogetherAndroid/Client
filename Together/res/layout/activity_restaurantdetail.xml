@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/restaurantdetail_title"
+        android:layout_width="fill_parent"
+        android:layout_height="44dp"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="XX饭店"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/restaurantdetail_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/restaurantdetail_title"
+        android:text="XX饭店"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/restaurantdetail_img"
+        android:layout_width="fill_parent"
+        android:layout_height="180dp"
+        android:layout_below="@+id/restaurantdetail_name"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/umeng_socialize_at_button" />
+
+    <TextView
+        android:id="@+id/restaurantdetail_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/restaurantdetail_img"
+        android:text="地址XXXXXXXXXXXXXXXXXXXX"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/restaurantdetail_specialty"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/restaurantdetail_average"
+        android:layout_below="@+id/restaurantdetail_average"
+        android:layout_marginTop="17dp"
+        android:text="招牌菜XXXXXXXXX"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/restaurantdetail_phone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/restaurantdetail_specialty"
+        android:layout_below="@+id/restaurantdetail_specialty"
+        android:layout_marginTop="17dp"
+        android:text="电话XXXXXXXXX"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:orientation="horizontal">
+	    <Button
+        	android:id="@+id/restaurantdetail_share"
+        	android:layout_height="wrap_content"
+        	android:layout_width="0dp"
+        	android:layout_weight="1"
+        	android:text="一键分享" />
+
+    	<Button
+        	android:id="@+id/restaurantdetail_store"
+        	android:layout_width="0dp"
+        	android:layout_height="wrap_content"
+        	android:layout_weight="1"
+        	android:text="收藏" />
+
+    	<Button
+        	android:id="@+id/restaurantdetail_invite"
+        	android:layout_width="0dp"
+        	android:layout_height="wrap_content"
+        	android:layout_weight="1"
+        	android:text="邀请好友" />
+	</LinearLayout>
+
+	<Button
+	    android:id="@+id/restaurantdetail_back"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentTop="true"
+	    android:text="返回" />
+
+	<TextView
+	    android:id="@+id/restaurantdetail_average"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/restaurantdetail_address"
+	    android:layout_marginTop="34dp"
+	    android:text="人均XXX"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

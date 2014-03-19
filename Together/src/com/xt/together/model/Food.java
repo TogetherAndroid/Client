@@ -1,0 +1,74 @@
+package com.xt.together.model;
+
+import java.io.Serializable;
+
+public class Food implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private String name;
+	private String shop;
+	private String price;
+	private String share;
+	private String image;
+	private String address;
+	private String description;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getShop() {
+		return shop;
+	}
+	public void setShop(String shop) {
+		this.shop = shop;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getShare() {
+		return share;
+	}
+	public void setShare(String share) {
+		this.share = share;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public Food(String name, String shop, String price, String share, String image) {
+		this.name = name;
+		this.shop = shop;
+		this.price = price;
+		this.share = share;
+		this.image = image;
+	}
+	
+	public static Food getFood() {
+		return new Food("name", "shop", "price", "share", "http://b.hiphotos.baidu.com/baike/w%3D268/sign=783b52ce3bdbb6fd255be2203125aba6/b219ebc4b74543a9abc71cf91c178a82b9011422.jpg");
+	}
+}

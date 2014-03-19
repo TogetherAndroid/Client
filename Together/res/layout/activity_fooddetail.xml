@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/fooddetail_title"
+        android:layout_width="fill_parent"
+        android:layout_height="44dp"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="鸡蛋灌饼"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/fooddetail_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="返回" />
+
+    <ImageView
+        android:id="@+id/fooddetail_head"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/fooddetail_back"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/empty_photo" />
+
+    <TextView
+        android:id="@+id/fooddetail_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/fooddetail_head"
+        android:layout_centerHorizontal="true"
+        android:text="用户名"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/fooddetail_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fooddetail_head"
+        android:layout_centerHorizontal="true"
+        android:text="在南三门吃到了鸡蛋灌饼，超级好吃"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/fooddetail_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/fooddetail_description"
+        android:src="@drawable/empty_photo" />
+    
+    <LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:orientation="horizontal">
+	    <Button
+        	android:id="@+id/fooddetail_share"
+        	android:layout_height="wrap_content"
+        	android:layout_width="0dp"
+        	android:layout_weight="1"
+        	android:text="一键分享" />
+
+    	<Button
+        	android:id="@+id/fooddetail_like"
+        	android:layout_width="0dp"
+        	android:layout_height="wrap_content"
+        	android:layout_weight="1"
+        	android:text="喜欢" />
+
+    	<Button
+        	android:id="@+id/fooddetail_invite"
+        	android:layout_width="0dp"
+        	android:layout_height="wrap_content"
+        	android:layout_weight="1"
+        	android:text="邀请好友" />
+	</LinearLayout>
+
+    <TextView
+        android:id="@+id/fooddetail_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/fooddetail_textview1"
+        android:gravity="center"
+        android:text="XXXXXXXXXXXXXXXXXX"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/fooddetail_textview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fooddetail_head"
+        android:layout_below="@+id/fooddetail_image"
+        android:layout_marginTop="16dp"
+        android:text="在这里吃"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/fooddetail_textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fooddetail_textview1"
+        android:layout_below="@+id/fooddetail_address"
+        android:text="这些人也喜欢"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
