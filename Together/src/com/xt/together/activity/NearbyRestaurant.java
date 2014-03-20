@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.List;
 
 import com.xt.together.R;
+import com.xt.together.constant.constant;
 import com.xt.together.control.PullToRefreshListView;
 import com.xt.together.http.HttpData;
 import com.xt.together.json.JsonAnalyze;
@@ -29,7 +30,6 @@ import android.widget.TextView;
 public class NearbyRestaurant extends ListFragment {
 	
 	private List<Restaurant> list;
-	public final String httpRestaurantURL = "http://togetherxt.duapp.com/nearbyrestaurant";
 	public final String DEBUG_TAG = "com.xt.together";
 	private NearbyRestaurantAdapter adapter;
 	
@@ -82,15 +82,15 @@ public class NearbyRestaurant extends ListFragment {
         	HttpData httpdata = new HttpData();
         	URL url = null;
         	try {
-				url = new URL(httpRestaurantURL);
+        		url = new URL(constant.HTTPNERABYRESTAURANTURL);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				Log.e(DEBUG_TAG, "the url has create with error");
 				e.printStackTrace();
 			}
-        	String jsonText = httpdata.getPostData(url, "");
+        	String jsonText = httpdata.getPostNearbyResData(url, "");
         	JsonAnalyze jsonAnalyze = new JsonAnalyze();
-        	Restaurant[] newrestaurant =jsonAnalyze.jsonRestaurantAnalyze(jsonText);
+        	Restaurant[] newrestaurant =jsonAnalyze.jsonNearbyRestaurantAnalyze(jsonText);
         	list.removeAll(list);
         	for(int i = 0; i < newrestaurant.length; i++){
         		Log.e("com.xt.together", newrestaurant[i].getName() + "hahahhaa");

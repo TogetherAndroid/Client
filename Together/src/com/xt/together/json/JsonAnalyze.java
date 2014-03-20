@@ -6,11 +6,13 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.xt.together.model.Food;
+import com.xt.together.model.Invite;
 import com.xt.together.model.Restaurant;
 
 public class JsonAnalyze {
 
-	public Restaurant[] jsonRestaurantAnalyze(String jsonString){
+	public Restaurant[] jsonNearbyRestaurantAnalyze(String jsonString){
 		int status = -1;
 		Restaurant[] newrestaurant  = null;
 		try {
@@ -38,5 +40,65 @@ public class JsonAnalyze {
 			e.printStackTrace();
 		}
 		return newrestaurant;		
+	}
+	
+	public Food[] jsonFoodAnalyze(String jsonString){
+		int status = -1;
+		Food[] newFood  = null;
+		try {
+			JSONObject restaurantInfo = new JSONObject(jsonString);
+			status = restaurantInfo.getInt("status");
+			
+			if(status == -1){
+				Log.e("com.xt.together", "we haven't got the json message");
+			}else if(status == 1){
+				Log.e("com.xt.together", "we have got the wrong message");
+				return null;
+			}else{
+				JSONArray dataArray = restaurantInfo.getJSONArray("data");
+				newFood = new Food[dataArray.length()];
+				for(int i = 0; i < dataArray.length(); i++){
+				JSONObject jo = (JSONObject)dataArray.opt(i);
+				newFood[i] = new Food(jo.getString("name"), null, 
+						null, null, null,jo.getString("address"), 
+						jo.getString("description"));
+				
+				}
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return newFood;		
+	}
+	
+	public Invite[] jsonInviteAnalyze(String jsonString){
+		int status = -1;
+		Invite[] newInvite  = null;
+		try {
+			JSONObject restaurantInfo = new JSONObject(jsonString);
+			status = restaurantInfo.getInt("status");
+			
+			if(status == -1){
+				Log.e("com.xt.together", "we haven't got the json message");
+			}else if(status == 1){
+				Log.e("com.xt.together", "we have got the wrong message");
+				return null;
+			}else{
+				JSONArray dataArray = restaurantInfo.getJSONArray("data");
+				newInvite = new Invite[dataArray.length()];
+				for(int i = 0; i < dataArray.length(); i++){
+				JSONObject jo = (JSONObject)dataArray.opt(i);
+				newInvite[i] = new Invite(jo.getString("name"), jo.getString("address"), 
+						jo.getString("date"), null, jo.getString("invited"),jo.getString("phone"), 
+						jo.getString("image"));
+				
+				}
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return newInvite;	
 	}
 }

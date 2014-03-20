@@ -60,7 +60,7 @@ public class Food implements Serializable {
 		this.description = description;
 	}
 	
-	public Food(String name, String shop, String price, String share, String image) {
+	public Food(String name, String shop, String price, String share, String image , String address, String description) {
 		this.name = name;
 		this.shop = shop;
 		this.price = price;
@@ -69,6 +69,6 @@ public class Food implements Serializable {
 	}
 	
 	public static Food getFood() {
-		return new Food("name", "shop", "price", "share", "http://b.hiphotos.baidu.com/baike/w%3D268/sign=783b52ce3bdbb6fd255be2203125aba6/b219ebc4b74543a9abc71cf91c178a82b9011422.jpg");
+		return new Food("name", "shop", "price", "share", "http://b.hiphotos.baidu.com/baike/w%3D268/sign=783b52ce3bdbb6fd255be2203125aba6/b219ebc4b74543a9abc71cf91c178a82b9011422.jpg", "木有地址", "木有描述");
 	}
 }
