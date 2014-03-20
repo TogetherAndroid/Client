@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="140dp"
-    android:background="#000000">
+    android:layout_height="120dp"
+    android:background="@drawable/item_restaurant">
 
     <ImageView
         android:id="@+id/item_nearbyrestaurant_img"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/empty_photo" />
 
     <TextView
         android:id="@+id/item_nearbyrestaurant_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/item_nearbyrestaurant_img"
-        android:layout_marginLeft="20dp"
-        android:text="店名XXX" />
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="30dp"
+        android:textColor="#222222"
+        android:textSize="18sp"
+        android:text="玩辣主题餐厅" />
 
     <TextView
         android:id="@+id/item_nearbyrestaurant_specialty"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
+        android:singleLine="true"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/item_nearbyrestaurant_like"
+        android:layout_alignLeft="@+id/item_nearbyrestaurant_average"
         android:layout_below="@+id/item_nearbyrestaurant_average"
-        android:text="招牌菜XXX" />
+        android:textSize="12sp"
+        android:textColor="#6A6A6A"
+        android:text="招牌菜：宫保鸡丁、麻婆豆腐" />
 
     <TextView
         android:id="@+id/item_nearbyrestaurant_average"
@@ -35,15 +39,17 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/item_nearbyrestaurant_name"
         android:layout_below="@+id/item_nearbyrestaurant_name"
-        android:text="人均XXX" />
+        android:layout_marginTop="20dp"
+        android:textSize="12sp"
+        android:textColor="#6A6A6A"
+        android:text="￥40/人" />
 
-    <TextView
-        android:id="@+id/item_nearbyrestaurant_like"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/item_nearbyrestaurant_img"
-        android:layout_alignLeft="@+id/item_nearbyrestaurant_average"
-        android:text="XXXX人 喜欢"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginRight="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/item_restaurant_arrow" />
 
 </RelativeLayout>

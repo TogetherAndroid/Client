@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="120dp"
+    android:background="@drawable/item_restaurant" >
 
     <ImageView
         android:id="@+id/invite_item_img"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="29dp"
-        android:layout_marginTop="23dp"
-        android:src="@drawable/bear_click" />
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/empty_photo" />
 
     <TextView
         android:id="@+id/invite_item_position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/invite_item_name"
-        android:layout_alignTop="@+id/invite_item_img"
+        android:layout_below="@id/invite_item_name"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"
+        android:textColor="#6A6A6A"
         android:text="位置XXXXXXX" />
 
     <TextView
@@ -27,15 +31,20 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/invite_item_position"
         android:layout_below="@+id/invite_item_position"
+        android:textSize="12sp"
+        android:textColor="#6A6A6A"
         android:text="约会时间XXXXXXX" />
 
     <TextView
         android:id="@+id/invite_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/invite_item_position"
-        android:layout_centerHorizontal="true"
-        android:text="名字XXXXXXX" />
+        android:textColor="#222222"
+        android:layout_toRightOf="@id/invite_item_img"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@id/invite_item_img"
+        android:textSize="18sp"
+        android:text="寿司" />
 
     <TextView
         android:id="@+id/invite_item_invited"
@@ -43,6 +52,16 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/invite_item_date"
         android:layout_below="@+id/invite_item_date"
+        android:textSize="12sp"
+        android:textColor="#6A6A6A"
         android:text="被邀人XXXX" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="36dp"
+        android:src="@drawable/item_restaurant_arrow" />
 
 </RelativeLayout>
