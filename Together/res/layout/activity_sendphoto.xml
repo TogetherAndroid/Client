@@ -8,55 +8,132 @@
         android:layout_width="fill_parent"
         android:layout_height="44dp"
         android:layout_alignParentTop="true"
+        android:background="@drawable/title_background"
         android:gravity="center"
         android:text="上传照片"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/sendphoto_title"
+        android:scaleType="fitXY"
+        android:src="@drawable/background" />
+
+    <ImageView
+        android:id="@+id/sendphoto_menu_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sendphoto_image"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/sendphoto_menu_address" />
+
     <Button
         android:id="@+id/sendphoto_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="返回" />
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/title_back" />
+
+    <ImageView
+        android:layout_width="3dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/sendphoto_back"
+        android:src="@drawable/title_division" />
 
     <Button
         android:id="@+id/sendphoto_send"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_alignBottom="@id/sendphoto_title"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/sendphoto_check" />
+
+    <ImageView
+        android:layout_width="3dp"
+        android:layout_height="36dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@id/sendphoto_send"
+        android:contentDescription="分割线"
+        android:src="@drawable/title_division" />
+
+    <ImageView
+        android:id="@+id/sendphoto_icon_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="发布" />
-
-    <EditText
-        android:id="@+id/sendphoto_description"
-        android:layout_width="wrap_content"
-        android:layout_height="180dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/sendphoto_back"
-        android:ems="10"
-        android:inputType="textMultiLine" 
-        android:gravity="top">
-        <requestFocus />
-    </EditText>
+        android:layout_alignLeft="@+id/sendphoto_menu_address"
+        android:layout_alignTop="@+id/sendphoto_menu_address"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/sendphoto_icon_address" />
 
     <TextView
         android:id="@+id/sendphoto_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/sendphoto_description"
-        android:text="地址（自动定位）"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_alignTop="@id/sendphoto_menu_address"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/sendphoto_icon_address"
+        android:text="点击添加位置"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#222222"
+        android:textSize="17sp" />
+
+    <ImageView
+        android:id="@+id/sendphoto_menu_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/sendphoto_menu_address"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/sendphoto_menu_description" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sendphoto_title"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/sendphoto_menu_name" />
+
+    <ImageView
+        android:id="@+id/sendphoto_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/sendphoto_send"
+        android:layout_alignTop="@+id/sendphoto_image"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="29dp"
+        android:src="@drawable/sendphoto_add" />
 
     <ImageView
         android:id="@+id/sendphoto_image"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/sendphoto_address"
-        android:layout_marginTop="26dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/sendphoto_address"
+        android:paddingBottom="30dp"
         android:src="@drawable/empty_photo" />
+	<EditText
+        android:id="@+id/sendphoto_description"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/sendphoto_menu_address"
+        android:layout_marginBottom="30dp"
+        android:layout_alignTop="@id/sendphoto_menu_description"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:gravity="top"
+        android:inputType="textMultiLine" >
 
+        <requestFocus />
+    </EditText>
 </RelativeLayout>

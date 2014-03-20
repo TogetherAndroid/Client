@@ -1,20 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <TextView
+        android:id="@+id/friendcircle_title"
         android:layout_width="fill_parent"
         android:layout_height="44dp"
         android:gravity="center"
         android:text="@string/main_circle"
+        android:background="@drawable/title_background"
+        android:layout_alignParentTop="true"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     <com.xt.together.waterfall.XListView
         android:id="@+id/friendcircle_list"
         android:scrollbars="vertical"
         android:fastScrollEnabled="true"
+        android:layout_below="@id/friendcircle_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <ImageView
+	    android:id="@+id/friendcircle_setting"
+	    android:layout_width="34dp"
+	    android:layout_height="34dp"
+	    android:layout_marginTop="6dp"
+	    android:layout_marginRight="12dp"
+	    android:layout_marginBottom="6dp"
+	    android:layout_alignBottom="@id/friendcircle_title"
+	    android:layout_alignParentRight="true"
+	    android:src="@drawable/title_setting" 
+	    android:contentDescription="设置按钮"/>
+	
+	<ImageView
+        android:layout_width="3dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/friendcircle_setting"
+        android:src="@drawable/title_division" 
+        android:contentDescription="分割线"/>
 
-</LinearLayout>
+</RelativeLayout>
