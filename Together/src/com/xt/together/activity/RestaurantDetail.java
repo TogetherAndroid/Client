@@ -38,7 +38,6 @@ public class RestaurantDetail extends Activity {
 		restaurant = (Restaurant)getIntent().getSerializableExtra("restaurant");
 		btnBack = (Button)findViewById(R.id.restaurantdetail_back);
 		btnShare = (Button)findViewById(R.id.restaurantdetail_share);
-		btnStore = (Button)findViewById(R.id.restaurantdetail_store);
 		btnInvite = (Button)findViewById(R.id.restaurantdetail_invite);
 		imageView = (ImageView)findViewById(R.id.restaurantdetail_img);
 		txtTitle = (TextView)findViewById(R.id.restaurantdetail_title);

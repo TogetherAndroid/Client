@@ -149,7 +149,6 @@ public class NearbyRestaurant extends ListFragment {
 				viewHolder = new ViewHolder();
 				viewHolder.imageView = (ImageView)convertView.findViewById(R.id.item_nearbyrestaurant_img);
 				viewHolder.txtAverage = (TextView)convertView.findViewById(R.id.item_nearbyrestaurant_average);
-				viewHolder.txtLike = (TextView)convertView.findViewById(R.id.item_nearbyrestaurant_like);
 				viewHolder.txtName = (TextView)convertView.findViewById(R.id.item_nearbyrestaurant_name);
 				viewHolder.txtSpecialty = (TextView)convertView.findViewById(R.id.item_nearbyrestaurant_specialty);
 				convertView.setTag(viewHolder);
