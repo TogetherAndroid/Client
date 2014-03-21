@@ -10,6 +10,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/title_background"
         android:text="@string/myrecipe_invited"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     <com.xt.together.control.PullToRefreshListView
@@ -20,10 +23,39 @@
 
     <Button
         android:id="@+id/invited_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="返回" />
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/title_back" />
+    <ImageView
+        android:layout_width="3dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/invited_back"
+        android:src="@drawable/title_division" />
+    
+    <ImageView
+	    android:id="@+id/invited_setting"
+	    android:layout_width="34dp"
+	    android:layout_height="34dp"
+	    android:layout_alignBottom="@+id/invited_title"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginTop="6dp"
+	    android:layout_marginRight="12dp"
+	    android:layout_marginBottom="6dp"
+	    android:src="@drawable/title_setting" 
+	    android:contentDescription="设置按钮"/>
+	
+	<ImageView
+        android:layout_width="3dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/invited_setting"
+        android:src="@drawable/title_division" 
+        android:contentDescription="分割线"/>
 
 </RelativeLayout>
