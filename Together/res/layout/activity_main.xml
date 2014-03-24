@@ -12,9 +12,9 @@
     <android.support.v4.app.FragmentTabHost
         android:id="@android:id/tabhost"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
+        android:layout_height="40dp" 
         android:layout_alignParentBottom="true"
-        android:background="@drawable/maintab_toolbar_bg">
+        android:background="@drawable/tab_background">
 
         <FrameLayout
             android:id="@android:id/tabcontent"
@@ -28,5 +28,5 @@
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentBottom="true"
 	    android:layout_centerHorizontal="true"
-	    android:text="相机"/>
+	    android:background="@drawable/tab_photo"/>
 </RelativeLayout>

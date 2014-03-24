@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class FriendCircleActivity extends Fragment implements IXListViewListener{
@@ -25,6 +26,7 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 	private XListView listView;
 	private StaggeredAdapter adapter;
 	private List<Food> list;
+	private Button btnSetting;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +40,8 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		btnSetting = (Button)getView().findViewById(R.id.friendcircle_setting);
+		btnSetting.setOnClickListener(new SettingOnClickListener());
 		listView = (XListView)getView().findViewById(R.id.friendcircle_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
@@ -51,7 +55,7 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 		list.add(Food.getFood());
 		list.add(Food.getFood());
 		list.add(Food.getFood());
-		adapter = new StaggeredAdapter(listView, list);
+		adapter = new StaggeredAdapter(list);
 		adapter.notifyDataSetChanged();
 	}
 
@@ -85,11 +89,9 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 		
 		private ImageLoader imageLoader;
         private List<Food> list;
-        private XListView mListView;
 
-        public StaggeredAdapter(XListView xListView, List<Food> list) {
+        public StaggeredAdapter(List<Food> list) {
             this.list = list;
-            this.mListView = xListView;
             this.imageLoader = new ImageLoader();
         }
 
@@ -161,4 +163,14 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
         TextView txtPrice;
         TextView txtShare;
     }
+	
+	private class SettingOnClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(FriendCircleActivity.this.getActivity(),SettingActivity.class);
+			startActivity(intent);
+		}
+		
+	}
 }

@@ -231,7 +231,7 @@ public class ImageLoader {
 		resetPurgeTimer();
 		Bitmap bitmap = getBitmapFromCache(url);// 从缓存中读取
 		if (bitmap == null) {
-			viewHolder.imageView.setImageResource(R.drawable.bear_click);// 缓存没有设为默认图片
+			viewHolder.imageView.setImageResource(R.drawable.empty_photo);// 缓存没有设为默认图片
 			ImageLoadTask imageLoadTask = new ImageLoadTask();
 			imageLoadTask.execute(url, adapter, viewHolder);
 		} else {
@@ -246,7 +246,7 @@ public class ImageLoader {
 		resetPurgeTimer();
 		Bitmap bitmap = getBitmapFromCache(url);// 从缓存中读取
 		if (bitmap == null) {
-			viewHolder.imageView.setImageResource(R.drawable.bear_click);// 缓存没有设为默认图片
+			viewHolder.imageView.setImageResource(R.drawable.empty_photo);// 缓存没有设为默认图片
 			ImageLoadTask imageLoadTask = new ImageLoadTask();
 			imageLoadTask.execute(url, adapter, viewHolder);
 		} else {
@@ -261,7 +261,7 @@ public class ImageLoader {
 		resetPurgeTimer();
 		Bitmap bitmap = getBitmapFromCache(url);// 从缓存中读取
 		if (bitmap == null) {
-			viewHolder.imageView.setImageResource(R.drawable.bear_click);// 缓存没有设为默认图片
+			viewHolder.imageView.setImageResource(R.drawable.empty_photo);// 缓存没有设为默认图片
 			ImageLoadTask imageLoadTask = new ImageLoadTask();
 			imageLoadTask.execute(url, adapter, viewHolder);
 		} else {
@@ -276,7 +276,7 @@ public class ImageLoader {
 		resetPurgeTimer();
 		Bitmap bitmap = getBitmapFromCache(url);// 从缓存中读取
 		if (bitmap == null) {
-			viewHolder.imageView.setImageResource(R.drawable.bear_click);// 缓存没有设为默认图片
+			viewHolder.imageView.setImageResource(R.drawable.empty_photo);// 缓存没有设为默认图片
 			ImageLoadTask imageLoadTask = new ImageLoadTask();
 			imageLoadTask.execute(url, adapter, viewHolder);
 		} else {
@@ -291,7 +291,7 @@ public class ImageLoader {
 		resetPurgeTimer();
 		Bitmap bitmap = getBitmapFromCache(url);// 从缓存中读取
 		if (bitmap == null) {
-			viewHolder.imageView.setImageResource(R.drawable.bear_click);// 缓存没有设为默认图片
+			viewHolder.imageView.setImageResource(R.drawable.empty_photo);// 缓存没有设为默认图片
 			ImageLoadTask imageLoadTask = new ImageLoadTask();
 			imageLoadTask.execute(url, adapter, viewHolder);
 		} else {
@@ -306,7 +306,7 @@ public class ImageLoader {
 		resetPurgeTimer();
 		Bitmap bitmap = getBitmapFromCache(url);// 从缓存中读取
 		if (bitmap == null) {
-			viewHolder.imageView.setImageResource(R.drawable.bear_click);// 缓存没有设为默认图片
+			viewHolder.imageView.setImageResource(R.drawable.empty_photo);// 缓存没有设为默认图片
 			ImageLoadTask imageLoadTask = new ImageLoadTask();
 			imageLoadTask.execute(url, adapter, viewHolder);
 		} else {
@@ -321,7 +321,7 @@ public class ImageLoader {
 		resetPurgeTimer();
 		Bitmap bitmap = getBitmapFromCache(url);// 从缓存中读取
 		if (bitmap == null) {
-			viewHolder.imageView.setImageResource(R.drawable.bear_click);// 缓存没有设为默认图片
+			viewHolder.imageView.setImageResource(R.drawable.empty_photo);// 缓存没有设为默认图片
 			ImageLoadTask imageLoadTask = new ImageLoadTask();
 			imageLoadTask.execute(url, adapter, viewHolder);
 		} else {
@@ -336,7 +336,7 @@ public class ImageLoader {
 		resetPurgeTimer();
 		Bitmap bitmap = getBitmapFromCache(url);// 从缓存中读取
 		if (bitmap == null) {
-			viewHolder.imageView.setImageResource(R.drawable.bear_click);// 缓存没有设为默认图片
+			viewHolder.imageView.setImageResource(R.drawable.empty_photo);// 缓存没有设为默认图片
 			ImageLoadTask imageLoadTask = new ImageLoadTask();
 			imageLoadTask.execute(url, adapter, viewHolder);
 		} else {

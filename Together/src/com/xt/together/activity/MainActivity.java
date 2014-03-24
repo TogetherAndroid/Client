@@ -38,8 +38,8 @@ public class MainActivity extends FragmentActivity{
 	private Button btnCamera;
 	
 	private String mTextviewArray[] = {"附近美食","附近餐厅","相机","朋友圈","我的美食"};
-	private int mImageViewArray[] = {R.drawable.tab_home_btn,R.drawable.tab_message_btn,R.drawable.tab_selfinfo_btn,
-			 R.drawable.tab_square_btn,R.drawable.tab_more_btn};
+	private int mImageViewArray[] = {R.drawable.tab_nearbyfood,R.drawable.tab_nearbyrestaurant,R.drawable.tab_nearbyfood,
+			 R.drawable.tab_friendcircle,R.drawable.tab_myrecipe};
 	
 	private final int CAPTURE_CODE = 1001;
 	private final int ALBUM_CODE   = 1002;
@@ -84,23 +84,18 @@ public class MainActivity extends FragmentActivity{
 		
 		TabSpec tabSpec0 = mTabHost.newTabSpec(mTextviewArray[0]).setIndicator(getTabItemView(0));
 		mTabHost.addTab(tabSpec0, NearbyFoodActivity.class, null);
-		mTabHost.getTabWidget().getChildAt(0).setBackgroundResource(R.drawable.selector_tab_background);
 		
 		TabSpec tabSpec1 = mTabHost.newTabSpec(mTextviewArray[1]).setIndicator(getTabItemView(1));
 		mTabHost.addTab(tabSpec1, NearbyRestaurant.class, null);
-		mTabHost.getTabWidget().getChildAt(1).setBackgroundResource(R.drawable.selector_tab_background);
 		
 		TabSpec tabSpec2 = mTabHost.newTabSpec(mTextviewArray[2]).setIndicator(getTabItemView(2));
 		mTabHost.addTab(tabSpec2, FriendCircleActivity.class, null);
-		mTabHost.getTabWidget().getChildAt(2).setBackgroundResource(R.drawable.selector_tab_background);
 		
 		TabSpec tabSpec3 = mTabHost.newTabSpec(mTextviewArray[3]).setIndicator(getTabItemView(3));
 		mTabHost.addTab(tabSpec3, FriendCircleActivity.class, null);
-		mTabHost.getTabWidget().getChildAt(3).setBackgroundResource(R.drawable.selector_tab_background);
 
 		TabSpec tabSpec4 = mTabHost.newTabSpec(mTextviewArray[4]).setIndicator(getTabItemView(4));
 		mTabHost.addTab(tabSpec4, MyRecipe.class, null);
-		mTabHost.getTabWidget().getChildAt(4).setBackgroundResource(R.drawable.selector_tab_background);
 	
 		btnCamera = (Button)findViewById(R.id.main_camera);
 		btnCamera.setOnClickListener(new CameraOnClickListener());
@@ -111,9 +106,6 @@ public class MainActivity extends FragmentActivity{
 	
 		ImageView imageView = (ImageView) view.findViewById(R.id.imageview);
 		imageView.setImageResource(mImageViewArray[index]);
-		
-		TextView textView = (TextView) view.findViewById(R.id.textview);		
-		textView.setText(mTextviewArray[index]);
 	
 		return view;
 	}

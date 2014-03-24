@@ -7,15 +7,19 @@
 
     <com.xt.together.waterfall.ScaleImageView
         android:id="@+id/item_like_img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@null" />
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/empty_photo" />
 
     <TextView
         android:id="@+id/item_like_shop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#656565" />
+        android:textColor="#222222" 
+        android:layout_marginLeft="30dp"
+        android:text="寿司"/>
 
     <TextView
         android:id="@+id/item_like_price"
@@ -23,7 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:gravity="right"
-        android:textColor="#9f9f9f" />
+        android:textColor="#222222"
+        android:layout_marginLeft="30dp"
+        android:text="好好吃..." />
     
     <TextView
         android:id="@+id/item_like_share"
@@ -31,6 +37,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left|bottom"
         android:gravity="right"
-        android:textColor="#9f9f9f" />
+        android:textColor="#222222"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:text="来自xxx" />
 
 </LinearLayout>

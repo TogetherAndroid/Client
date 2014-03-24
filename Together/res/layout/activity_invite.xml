@@ -6,7 +6,7 @@
     <TextView
         android:id="@+id/invite_title"
         android:layout_width="fill_parent"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:textSize="25sp"
@@ -18,7 +18,8 @@
 	    android:id="@+id/android:list"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:layout_below="@+id/invite_title" />
+	    android:layout_below="@+id/invite_title"
+	    android:background="@drawable/background" />
 
     <Button
         android:id="@+id/invite_back"
@@ -45,8 +46,7 @@
 	    android:layout_marginTop="6dp"
 	    android:layout_marginRight="12dp"
 	    android:layout_marginBottom="6dp"
-	    android:src="@drawable/title_setting" 
-	    android:contentDescription="设置按钮"/>
+	    android:src="@drawable/title_setting"/>
 	
 	<ImageView
         android:layout_width="3dp"
@@ -54,7 +54,6 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@id/invite_setting"
-        android:src="@drawable/title_division" 
-        android:contentDescription="分割线"/>
+        android:src="@drawable/title_division"/>
 
 </RelativeLayout>

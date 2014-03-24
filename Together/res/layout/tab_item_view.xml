@@ -11,16 +11,6 @@
         android:layout_height="wrap_content"
         android:focusable="false"
         android:padding="3dp" 
-        android:src="@drawable/tab_home_btn">
+        android:src="@drawable/tab_friendcircle">
     </ImageView>
-
-    <TextView
-        android:id="@+id/textview"       
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="首页"
-        android:textSize="10sp"
-        android:textColor="#ffffff">
-    </TextView>
-
 </LinearLayout>

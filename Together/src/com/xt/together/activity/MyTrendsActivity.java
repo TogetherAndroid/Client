@@ -27,6 +27,7 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 	private StaggeredAdapter adapter;
 	private List<Food> list;
 	private Button btnBack;
+	private Button btnSetting;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 		setContentView(R.layout.activity_mytrends);
 		btnBack = (Button)findViewById(R.id.mytrends_back);
 		btnBack.setOnClickListener(new BackOnClickListener());
+		btnSetting = (Button)findViewById(R.id.invite_setting);
+		btnSetting.setOnClickListener(new SettingOnClickListener());
 		listView = (XListView)findViewById(R.id.mytrends_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
@@ -47,7 +50,7 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 		list.add(Food.getFood());
 		list.add(Food.getFood());
 		list.add(Food.getFood());
-		adapter = new StaggeredAdapter(listView, list);
+		adapter = new StaggeredAdapter(list);
 		adapter.notifyDataSetChanged();
 	}
 
@@ -81,11 +84,9 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 		
 		private ImageLoader imageLoader;
         private List<Food> list;
-        private XListView mListView;
 
-        public StaggeredAdapter(XListView xListView, List<Food> list) {
+        public StaggeredAdapter(List<Food> list) {
             this.list = list;
-            this.mListView = xListView;
             this.imageLoader = new ImageLoader();
         }
 
@@ -163,6 +164,16 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 		@Override
 		public void onClick(View arg0) {
 			MyTrendsActivity.this.finish();
+		}
+		
+	}
+	
+	class SettingOnClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(MyTrendsActivity.this,SettingActivity.class);
+			startActivity(intent);
 		}
 		
 	}

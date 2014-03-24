@@ -58,7 +58,7 @@ public class FoodDetailActivity extends Activity {
 		ImageLoadTask imageLoadTask = new ImageLoadTask();
 		imageLoadTask.execute(food.getImage(),null,null);
 		
-		Typeface fontFace = Typeface.createFromAsset(getAssets(), "font/font.TTF");
+		//Typeface fontFace = Typeface.createFromAsset(getAssets(), "font/font.TTF");
 		
 	}
 	

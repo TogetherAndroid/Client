@@ -24,6 +24,7 @@ import android.widget.TextView;
 public class LikeActivity extends Activity implements IXListViewListener{
 	
 	private Button btnBack;
+	private Button btnSetting;
 	private XListView listView;
 	private StaggeredAdapter adapter;
 	private List<Food> list;
@@ -34,6 +35,8 @@ public class LikeActivity extends Activity implements IXListViewListener{
 		setContentView(R.layout.activity_like);
 		btnBack = (Button)findViewById(R.id.like_back);
 		btnBack.setOnClickListener(new BackOnClickListener());
+		btnSetting = (Button)findViewById(R.id.invite_setting);
+		btnSetting.setOnClickListener(new SettingOnClickListener());
 		listView = (XListView)findViewById(R.id.like_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
@@ -47,7 +50,7 @@ public class LikeActivity extends Activity implements IXListViewListener{
 		list.add(Food.getFood());
 		list.add(Food.getFood());
 		list.add(Food.getFood());
-		adapter = new StaggeredAdapter(listView, list);
+		adapter = new StaggeredAdapter(list);
 		adapter.notifyDataSetChanged();
 	}
 	
@@ -89,12 +92,10 @@ public class LikeActivity extends Activity implements IXListViewListener{
 	private class StaggeredAdapter extends BaseAdapter {
 		
         private List<Food> list;
-        private XListView mListView;
         private ImageLoader imageLoader;
 
-        public StaggeredAdapter(XListView xListView, List<Food> list) {
+        public StaggeredAdapter(List<Food> list) {
             this.list = list;
-            this.mListView = xListView;
             this.imageLoader = new ImageLoader();
         }
 
@@ -160,6 +161,16 @@ public class LikeActivity extends Activity implements IXListViewListener{
     	
         }
     }
+	
+	class SettingOnClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(LikeActivity.this,SettingActivity.class);
+			startActivity(intent);
+		}
+		
+	}
 	
 	public class ViewHolder {
         public ScaleImageView imageView;

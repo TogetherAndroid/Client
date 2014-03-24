@@ -26,6 +26,7 @@ public class InviteActivity extends ListActivity {
 	
 	private List<Invite> list;
 	private Button btnBack;
+	private Button btnSetting;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public class InviteActivity extends ListActivity {
 		setContentView(R.layout.activity_invite);
 		btnBack = (Button)findViewById(R.id.invite_back);
 		btnBack.setOnClickListener(new BackOnClickListener());
+		btnSetting = (Button)findViewById(R.id.invite_setting);
+		btnSetting.setOnClickListener(new SettingOnClickListener());
 		((PullToRefreshListView) getListView()).setOnRefreshListener(new com.xt.together.control.PullToRefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -137,6 +140,16 @@ public class InviteActivity extends ListActivity {
 		@Override
 		public void onClick(View v) {
 			InviteActivity.this.finish();
+		}
+		
+	}
+	
+	class SettingOnClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(InviteActivity.this,SettingActivity.class);
+			startActivity(intent);
 		}
 		
 	}

@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/friendcircle_title"
         android:layout_width="fill_parent"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         android:gravity="center"
         android:text="@string/main_circle"
         android:background="@drawable/title_background"
@@ -19,7 +19,8 @@
         android:fastScrollEnabled="true"
         android:layout_below="@id/friendcircle_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@drawable/background" />
     <ImageView
 	    android:id="@+id/friendcircle_setting"
 	    android:layout_width="34dp"
