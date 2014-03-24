@@ -7,9 +7,48 @@
         android:id="@+id/myrecipe_title"
         android:layout_width="fill_parent"
         android:layout_height="44dp"
+        android:background="@drawable/title_background"
         android:gravity="center"
         android:text="@string/main_recipe"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
+        android:textSize="25sp" />
+
+    <ImageView
+        android:id="@+id/myrecipe_setting"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_alignBottom="@id/myrecipe_title"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="6dp"
+        android:contentDescription="设置按钮"
+        android:src="@drawable/title_setting" />
+
+    <ImageView
+        android:id="@+id/myrecipe_menu_head"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myrecipe_title"
+        android:scaleType="fitXY"
+        android:src="@drawable/myrecipe_menu_head" />
+
+    <ImageView
+        android:id="@+id/myrecipe_menu_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myrecipe_menu_head"
+        android:src="@drawable/myrecipe_menu_info" />
+
+    <ImageView
+        android:layout_width="3dp"
+        android:layout_height="36dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@id/myrecipe_setting"
+        android:contentDescription="分割线"
+        android:src="@drawable/title_division" />
 
     <ImageView
         android:id="@+id/myrecipe_head"
@@ -18,87 +57,118 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/myrecipe_title"
         android:layout_marginLeft="18dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/empty_photo" />
-
-    <TextView
-        android:id="@+id/myrecipe_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/myrecipe_head"
-        android:layout_marginLeft="42dp"
-        android:layout_toRightOf="@+id/myrecipe_head"
-        android:text="用户名XXXX"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <TextView
         android:id="@+id/myrecipe_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/myrecipe_head"
-        android:layout_alignLeft="@+id/myrecipe_name"
+        android:layout_marginLeft="42dp"
+        android:layout_toRightOf="@+id/myrecipe_head"
         android:text="所在地XXXXX"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#222222"
+        android:textSize="17sp" />
 
-    <RelativeLayout
-        android:id="@+id/myrecipe_trends"
+    <TextView
+        android:id="@+id/myrecipe_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/myrecipe_city"
+        android:layout_alignLeft="@id/myrecipe_city"
+        android:text="用户名XXXX"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#222222"
+        android:textSize="17sp" />
+
+    <ImageView
+        android:id="@+id/myrecipe_arrow_mytrends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/myrecipe_head"
+        android:layout_alignTop="@+id/myrecipe_menu_info"
+        android:layout_marginTop="23dp"
+        android:src="@drawable/myrecipe_arrow_mytrends" />
+
+    <ImageView
+        android:id="@+id/myrecipe_arrow_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/myrecipe_arrow_like"
+        android:layout_below="@+id/myrecipe_arrow_like"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/myrecipe_arrow_store" />
+
+    <ImageView
+        android:id="@+id/myrecipe_arrow_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/myrecipe_arrow_mytrends"
+        android:layout_below="@+id/myrecipe_arrow_mytrends"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/myrecipe_arrow_like" />
+
+    <ImageView
+        android:id="@+id/myrecipe_arrow_invite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/myrecipe_arrow_store"
+        android:layout_below="@+id/myrecipe_arrow_store"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/myrecipe_arrow_invite" />
+
+    <ImageView
+        android:id="@+id/myrecipe_arrow_invited"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/myrecipe_arrow_invite"
+        android:layout_below="@+id/myrecipe_arrow_invite"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/myrecipe_arrow_invited" />
+
+    <ImageView
+        android:id="@+id/myrecipe_mytrends"
         android:layout_width="fill_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/myrecipe_head" >
+        android:layout_height="25dp"
+        android:paddingRight="100dp"
+        android:layout_alignBottom="@+id/myrecipe_arrow_mytrends"
+        android:src="@drawable/myrecipe_label_mytrends" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="24dp"
-            android:text="@string/myrecipe_trends"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="42dp"
-            android:src="@drawable/bear_click" />
-    </RelativeLayout>
-
-    <Button
+    <ImageView
         android:id="@+id/myrecipe_like"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/myrecipe_city"
-        android:text="@string/myrecipe_like" />
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
+        android:paddingRight="80dp"
+        android:layout_alignLeft="@+id/myrecipe_mytrends"
+        android:layout_alignTop="@+id/myrecipe_arrow_like"
+        android:src="@drawable/myrecipe_label_like" />
 
-    <Button
+    <ImageView
         android:id="@+id/myrecipe_store"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/myrecipe_like"
-        android:layout_alignBottom="@+id/myrecipe_like"
-        android:layout_alignLeft="@+id/myrecipe_city"
-        android:layout_marginLeft="45dp"
-        android:text="@string/myrecipe_store" />
-
-    <Button
-        android:id="@+id/myrecipe_invite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
+        android:paddingRight="80dp"
         android:layout_alignLeft="@+id/myrecipe_like"
-        android:layout_below="@+id/myrecipe_like"
-        android:layout_marginTop="44dp"
-        android:text="@string/myrecipe_invite" />
+        android:layout_alignTop="@+id/myrecipe_arrow_store"
+        android:src="@drawable/myrecipe_label_store" />
 
-    <Button
-        android:id="@+id/myrecipe_invited"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/myrecipe_invite"
-        android:layout_alignBottom="@+id/myrecipe_invite"
+    <ImageView
+        android:id="@+id/myrecipe_invite"
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
+        android:paddingRight="80dp"
         android:layout_alignLeft="@+id/myrecipe_store"
-        android:text="@string/myrecipe_invited" />
+        android:layout_alignTop="@+id/myrecipe_arrow_invite"
+        android:src="@drawable/myrecipe_label_invite" />
+
+    <ImageView
+        android:id="@+id/myrecipe_invited"
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
+        android:paddingRight="80dp"
+        android:layout_alignLeft="@+id/myrecipe_invite"
+        android:layout_alignTop="@+id/myrecipe_arrow_invited"
+        android:src="@drawable/myrecipe_label_invited" />
 
 </RelativeLayout>

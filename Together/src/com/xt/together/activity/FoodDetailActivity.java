@@ -7,6 +7,7 @@ import com.xt.together.utils.ImageLoader;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -56,6 +57,9 @@ public class FoodDetailActivity extends Activity {
 		imageLoader = new ImageLoader();
 		ImageLoadTask imageLoadTask = new ImageLoadTask();
 		imageLoadTask.execute(food.getImage(),null,null);
+		
+		Typeface fontFace = Typeface.createFromAsset(getAssets(), "font/font.TTF");
+		
 	}
 	
 	class ImageLoadTask extends AsyncTask<Object, Void, Bitmap> {
