@@ -2,6 +2,9 @@ package com.xt.together.http;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -15,11 +18,17 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.FileEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 
+import com.xt.together.constant.constant;
+
+import android.graphics.Bitmap;
+import android.os.Environment;
 import android.util.Log;
 
 public class HttpData {
@@ -390,6 +399,89 @@ public class HttpData {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return strResult;
+	}
+	
+	public String sendFriendids(String url, JSONArray jsonarray){
+		
+		String strResult = "";
+		HttpPost httpRequest = new HttpPost(url);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		
+		params.add(new BasicNameValuePair("friendidsarray", jsonarray.toString()));
+		
+		try {
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确转码");
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确执行http请求");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return strResult;
+
+	}
+	
+	public String sendpicture(String url , Bitmap bitmap){
+		
+		if(null == url || null == bitmap){
+			return "the url or the pic is null";
+		}
+		String strResult = "";
+		HttpPost httpPost = new HttpPost(url);
+		HttpResponse response = null;
+		
+		try {
+			FileOutputStream fop = new FileOutputStream(Environment.getExternalStorageDirectory() + "/temp.jpg");
+			bitmap.compress(Bitmap.CompressFormat.JPEG,  100, fop);
+			fop.close();
+			
+			File file = new File(Environment.getExternalStorageDirectory() + "/temp.jpg");
+			if(file.exists()){
+				Log.e(constant.DEBUG_TAG, "图片攒在啊");
+			}else{
+				Log.e(constant.DEBUG_TAG, "图片不攒在啊");
+			}
+			
+			FileEntity repEntity = new FileEntity(file, "binary/octet-stream");
+			httpPost.setEntity(repEntity);
+			repEntity.setContentType("binary/octet-stream");
+			
+			response = new DefaultHttpClient().execute(httpPost);
+			
+			if(response.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(response.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+//			file.delete();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			Log.e(constant.DEBUG_TAG, "error1");
+			e.printStackTrace();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Log.e(constant.DEBUG_TAG, "error2");
+			e.printStackTrace();
+		}
+		
 		
 		return strResult;
 	}

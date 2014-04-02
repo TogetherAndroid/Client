@@ -101,4 +101,20 @@ public class JsonAnalyze {
 		}
 		return newInvite;	
 	}
+	
+	public JSONArray jsonWeiboFansAnalyze(String jsonString){
+
+		JSONArray friendids = null;
+		try {
+			JSONObject restaurantInfo = new JSONObject(jsonString);
+
+			friendids = restaurantInfo.getJSONArray("ids");
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return friendids;	
+	}
+	
 }
