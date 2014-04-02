@@ -12,6 +12,12 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:src="@drawable/empty_photo" />
+<!--     <ImageView 
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/empty1"/> -->
 
     <TextView
         android:id="@+id/item_circle_shop"

@@ -25,14 +25,12 @@
     
     <Button
         android:id="@+id/invitedetail_sina"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
         android:textColor="#ffffff"
         android:textSize="18sp"
-        android:text="一键分享"
         android:background="@drawable/invitedetail_share" />
 
     <ImageView
@@ -66,15 +64,23 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/invitedetail_menu_friend"
         android:src="@drawable/invitedetail_menu_img" />
+    
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="140dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@id/invitedetail_menu_img"
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/empty" />
 
     <ImageView
         android:id="@+id/invitedetail_img"
-        android:layout_width="140dp"
-        android:layout_height="120dp"
+        android:layout_width="130dp"
+        android:layout_height="110dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/invitedetail_title"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_alignTop="@id/invitedetail_menu_img"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="15dp"
         android:src="@drawable/empty_photo" />
 
     <TextView
@@ -83,6 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/invitedetail_img"
         android:layout_toRightOf="@id/invitedetail_img"
+        android:layout_marginLeft="15dp"
         android:textColor="#222222"
         android:textSize="18sp"
         android:text="名字XXX"
