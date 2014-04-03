@@ -30,7 +30,6 @@ import android.widget.TextView;
 public class NearbyRestaurant extends ListFragment {
 	
 	private List<Restaurant> list;
-	public final String DEBUG_TAG = "com.xt.together";
 	private NearbyRestaurantAdapter adapter;
 	
 	@Override
@@ -85,7 +84,7 @@ public class NearbyRestaurant extends ListFragment {
         		url = new URL(constant.HTTPNERABYRESTAURANTURL);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
-				Log.e(DEBUG_TAG, "the url has create with error");
+				Log.e(constant.DEBUG_TAG, "the url has create with error");
 				e.printStackTrace();
 			}
         	String jsonText = httpdata.getPostNearbyResData(url, "");

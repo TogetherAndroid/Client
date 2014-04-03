@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class NearbyFoodActivity extends Fragment implements IXListViewListener{
@@ -26,6 +27,7 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 	private XListView listView;
 	private StaggeredAdapter adapter;
 	private List<Food> list = null;
+	private ImageView settingButton  ;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +44,7 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		settingButton = (ImageView)this.getView().findViewById(R.id.nearbyfood_setting);
 		listView = (XListView)getView().findViewById(R.id.food_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
@@ -57,6 +60,17 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 		list.add(Food.getFood());
 		adapter = new StaggeredAdapter(listView, list, getActivity());
 		adapter.notifyDataSetChanged();
+		
+		settingButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View view) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(NearbyFoodActivity.this.getActivity(), SettingActivity.class);
+				startActivity(intent);		
+			}
+			
+		});
 	}
 
 	@Override
