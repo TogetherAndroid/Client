@@ -3,12 +3,20 @@ package com.xt.together.activity;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.exception.WeiboException;
+import com.sina.weibo.sdk.net.RequestListener;
+import com.sina.weibo.sdk.openapi.UsersAPI;
+import com.sina.weibo.sdk.openapi.legacy.FriendshipsAPI;
+import com.sina.weibo.sdk.openapi.models.User;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.RequestType;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.controller.listener.SocializeListeners.UMDataListener;
 import com.xt.together.R;
+import com.xt.together.constant.constant;
+import com.xt.together.json.JsonAnalyze;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +28,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -44,6 +53,9 @@ public class MainActivity extends FragmentActivity{
 	private final int CAPTURE_CODE = 1001;
 	private final int ALBUM_CODE   = 1002;
 	public static Bitmap bitmap;
+	private FriendshipsAPI mFriendshipsAPI;
+	private Oauth2AccessToken mAccessToken;
+	private UsersAPI mUserAPI;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +63,9 @@ public class MainActivity extends FragmentActivity{
 		setContentView(R.layout.activity_main);
 		mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
 		mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
+		mAccessToken = AccessTokenKeeper.readAccessToken(this);
+		mUserAPI = new UsersAPI(mAccessToken);
+		mUserAPI.show(Long.parseLong(mAccessToken.getUid()), mListener);
 		initView();
 //		mController.getPlatformInfo(MainActivity.this, SHARE_MEDIA.SINA, new UMDataListener() {
 //			
@@ -128,11 +143,47 @@ public class MainActivity extends FragmentActivity{
 				return;
 			}
 		}
+		
 		Intent intent = new Intent(MainActivity.this,SendPhotoActivity.class);
 		startActivity(intent);
 	}
 
 
+	private RequestListener mListener = new RequestListener(){
+
+		@Override
+		public void onComplete(String response) {
+			// TODO Auto-generated method stub
+			constant.userScreenName = User.parse(response).screen_name;
+			mFriendshipsAPI = new FriendshipsAPI(mAccessToken);
+			mFriendshipsAPI.friends(constant.userScreenName, 50, 0, false, friendsListener);
+			Log.e(constant.DEBUG_TAG, constant.userScreenName);
+		}
+
+		@Override
+		public void onWeiboException(WeiboException arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	};
+	
+	private RequestListener friendsListener = new RequestListener(){
+
+		@Override
+		public void onComplete(String response) {
+			// TODO Auto-generated method stub
+			constant.friendsNames = new JsonAnalyze().jsonFriendsAnalyze(response);
+			Log.e(constant.DEBUG_TAG, "friends" + constant.friendsNames[0]);
+		}
+
+		@Override
+		public void onWeiboException(WeiboException arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	};
 
 	class CameraOnClickListener implements OnClickListener {
 

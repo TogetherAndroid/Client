@@ -8,10 +8,12 @@ import org.json.JSONArray;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
+import com.sina.weibo.sdk.openapi.UsersAPI;
 import com.sina.weibo.sdk.openapi.legacy.FriendshipsAPI;
 import com.sina.weibo.sdk.openapi.models.ErrorInfo;
 import com.sina.weibo.sdk.openapi.models.Status;
 import com.sina.weibo.sdk.openapi.models.StatusList;
+import com.sina.weibo.sdk.openapi.models.User;
 import com.xt.together.R;
 import com.xt.together.constant.constant;
 import com.xt.together.json.JsonAnalyze;
@@ -43,6 +45,7 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 	private ImageView btnSetting;
 	private Oauth2AccessToken mAccessToken;
 	private FriendshipsAPI mFriendshipsAPI;
+	private UsersAPI mUserAPI;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,7 +109,8 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 	private void getWeiboFansList(){
 		
 		mFriendshipsAPI = new FriendshipsAPI(mAccessToken);
-		mFriendshipsAPI.followersIds(mAccessToken.getUid(), 500, 0, mListener);
+		mFriendshipsAPI.followersIds(constant.userScreenName, 50, 0, mListener);
+		//mFriendshipsAPI.followers(mAccessToken.getUid(), 500, 0, true,mListener);
 	}
 	
 	private  RequestListener mListener = new RequestListener(){
@@ -115,7 +119,9 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 		public void onComplete(String response) {
 			// TODO Auto-generated method stub
 			if(!TextUtils.isEmpty(response)){
+				
 				Log.e(constant.DEBUG_TAG, response);
+				
 //				JSONArray friendids = new JsonAnalyze().jsonWeiboFansAnalyze(response);
 //				Log.e(constant.DEBUG_TAG, friendids.toString());
 			}
@@ -129,6 +135,7 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 			Log.e(constant.DEBUG_TAG, "获得微博信息成功，错误" +  info.toString());
 		}
 	};
+	
 
 	private class StaggeredAdapter extends BaseAdapter {
 		

@@ -29,6 +29,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,12 +41,13 @@ public class SendPhotoActivity extends Activity {
 	
 	private Button btnBack;
 	private Button btnSend;
-	private EditText txtDescription;
+	private AutoCompleteTextView txtDescription;
 	private TextView txtAddress;
 	private ImageView imageView;
 	private Oauth2AccessToken mAccessToken;
 	private StatusesAPI mStatusesAPI;
 	private FriendshipsAPI mFriendshipsAPI;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,11 @@ public class SendPhotoActivity extends Activity {
 		setContentView(R.layout.activity_sendphoto);
 		btnBack = (Button)findViewById(R.id.sendphoto_back);
 		btnSend = (Button)findViewById(R.id.sendphoto_send);
-		txtDescription = (EditText)findViewById(R.id.sendphoto_description);
+		txtDescription = (AutoCompleteTextView)findViewById(R.id.sendphoto_description);
+		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, constant.friendsNames);
+		txtDescription.setAdapter(adapter);
+		txtDescription.setThreshold(1);
+		
 		txtDescription.addTextChangedListener(freindTextWatcher);
 		txtAddress = (TextView)findViewById(R.id.sendphoto_address);
 		imageView = (ImageView)findViewById(R.id.sendphoto_image);
@@ -70,6 +77,7 @@ public class SendPhotoActivity extends Activity {
 		@Override
 		public void onClick(View arg0) {
 			SendPhotoActivity.this.finish();
+			
 		}
 		
 	}
@@ -168,12 +176,12 @@ public class SendPhotoActivity extends Activity {
 			if (txtDescription.getSelectionEnd() > 0) {
 				char lastText = text
 						.charAt(txtDescription.getSelectionEnd() - 1);
-				// Log.e(constant.DEBUG_TAG, "after input the last is " +
-				// text.charAt(txtDescription.getSelectionEnd() -1));
 				if ('@' == lastText) {
-					Log.e(constant.DEBUG_TAG, mAccessToken.getUid());
-					mFriendshipsAPI.friends(mAccessToken.getUid(), 500, 0,
-							false, mFriendshipsListner);
+					txtDescription.clearListSelection();
+					if(!txtDescription.isPopupShowing()){
+						txtDescription.showDropDown();
+					}
+					Log.e(constant.DEBUG_TAG, "i have found @");
 				}
 			}
 		}
