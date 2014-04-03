@@ -24,6 +24,8 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -34,6 +36,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.MultiAutoCompleteTextView.Tokenizer;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +45,7 @@ public class SendPhotoActivity extends Activity {
 	
 	private Button btnBack;
 	private Button btnSend;
-	private AutoCompleteTextView txtDescription;
+	private MultiAutoCompleteTextView txtDescription;
 	private TextView txtAddress;
 	private ImageView imageView;
 	private Oauth2AccessToken mAccessToken;
@@ -55,11 +59,11 @@ public class SendPhotoActivity extends Activity {
 		setContentView(R.layout.activity_sendphoto);
 		btnBack = (Button)findViewById(R.id.sendphoto_back);
 		btnSend = (Button)findViewById(R.id.sendphoto_send);
-		txtDescription = (AutoCompleteTextView)findViewById(R.id.sendphoto_description);
+		txtDescription = (MultiAutoCompleteTextView)findViewById(R.id.sendphoto_description);
 		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, constant.friendsNames);
 		txtDescription.setAdapter(adapter);
 		txtDescription.setThreshold(1);
-		txtDescription.onFilterComplete(1);
+		txtDescription.setTokenizer(new SendPhotoActivity.myTokenizer());   
 		
 		txtDescription.addTextChangedListener(freindTextWatcher);
 		txtAddress = (TextView)findViewById(R.id.sendphoto_address);
@@ -89,9 +93,8 @@ public class SendPhotoActivity extends Activity {
 		public void onClick(View arg0) {
 			String description = txtDescription.getText().toString();
 			String address = txtAddress.getText().toString();
-//			new GetDataTask().execute();
+			new GetDataTask().execute();
 			mStatusesAPI.upload(description + address, MainActivity.bitmap, null, null, mstatusListener);
-//			new HttpData().sendpicture(constant.HTTPLIKEURL, MainActivity.bitmap);
 		}
 		
 	}
@@ -152,7 +155,9 @@ public class SendPhotoActivity extends Activity {
 
         @Override
         protected String[] doInBackground(Void... params) {
-        	String aa = new HttpData().sendpicture(constant.HTTPMYRECIPEURL, MainActivity.bitmap);
+        	//String aa = new HttpData().sendpicture(constant.HTTPMYRECIPEURL, MainActivity.bitmap);
+        	String aa = new HttpData().sendPicUseUpload(MainActivity.bitmap);
+        	Log.e(constant.DEBUG_TAG,"aa is" + aa);
             return null;
         }
 
@@ -178,7 +183,6 @@ public class SendPhotoActivity extends Activity {
 				char lastText = text
 						.charAt(txtDescription.getSelectionEnd() - 1);
 				if ('@' == lastText) {
-					txtDescription.clearListSelection();
 					if(!txtDescription.isPopupShowing()){
 						txtDescription.showDropDown();
 					}
@@ -202,4 +206,73 @@ public class SendPhotoActivity extends Activity {
 		}
 		
 	};
+	
+	public static class myTokenizer implements Tokenizer
+	{
+
+		@Override
+		public int findTokenEnd(CharSequence text, int cursor) {
+			// TODO Auto-generated method stub
+			int i = cursor;
+			int len = text.length();
+			
+			while(i < len){
+				if(text.charAt(i) == '.'){
+					return i;
+				}else {
+					i++;
+				}
+			}
+			return len;
+		}
+
+		@Override
+		public int findTokenStart(CharSequence text, int cursor) {
+			// TODO Auto-generated method stub
+			int i = cursor;
+			int len = text.length();
+			
+			while(i< len){
+				if(text.charAt(i) == '.'){
+					if(i > 1){
+						return i-1;
+					}else{
+						return 0;
+					}
+				}else {
+					i++;
+				}
+			}
+			if(len > 1){
+				return len -1 ;
+			}else{
+				return len;
+			}
+			
+			
+		}
+
+		@Override
+		public CharSequence terminateToken(CharSequence text) {
+			// TODO Auto-generated method stub
+			int i = text.length();
+			
+			while(i > 0 && text.charAt(i-1) == ' '){
+				i --;
+			}
+			
+			if( i > 0 && text.charAt( i -1 ) == '.'){
+				return text;
+			}else {
+				if(text instanceof Spanned){
+					SpannableString sp = new SpannableString(text + String.valueOf('.'));
+					TextUtils.copySpansFrom((Spanned)text, 0, text.length(), Object.class, sp, 0);
+					return sp;
+				} else {
+					return text + String.valueOf('.');
+				}
+			}
+		}
+		
+	}
 }

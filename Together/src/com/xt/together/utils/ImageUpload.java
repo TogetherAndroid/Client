@@ -13,15 +13,22 @@ import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 
+import com.xt.together.constant.constant;
+
 import android.util.Base64;
+import android.util.Log;
 
 public class ImageUpload {
 	public static String Upload(File file){
 		if(!file.exists()) {
+			Log.e(constant.DEBUG_TAG,"file do not exist" );
 			System.out.println("file do not exist");
 			return null;
+		}else{
+			Log.e(constant.DEBUG_TAG,"file do exist" );
 		}
 		String url = getUrl(file.getName(), "POST");
+		Log.e(constant.DEBUG_TAG, url);
 		try {	
 			PostMethod filePost = new PostMethod(url);
 			Part[] parts = {new FilePart(file.getName(), file)};
@@ -30,9 +37,11 @@ public class ImageUpload {
 		    client.getHttpConnectionManager().getParams().setConnectionTimeout(5000);
 		    int status = client.executeMethod(filePost);
 			if(status == 200){//如果状态码为200,就是正常返回
+				Log.e(constant.DEBUG_TAG,"上传成功" );
 				System.out.println("上传成功");
 				return getUrl(file.getName(), "GET");
 			} else {
+				Log.e(constant.DEBUG_TAG,"上传失败" + status );
 				System.out.println("上传失败" + status);
 			}
 		} catch (Exception e) {
@@ -49,7 +58,7 @@ public class ImageUpload {
 							+ "Object=/" + imageName + "\n";
 		String signature = null;
 		try {
-			Base64.encodeToString(hmac_sha1(sk.getBytes(), content.getBytes()), Base64.DEFAULT);
+			signature = Base64.encodeToString(hmac_sha1(sk.getBytes(), content.getBytes()), Base64.DEFAULT);
 			signature = URLEncoder.encode(signature, "UTF-8");
 		} catch(Exception e) {
 			e.printStackTrace();

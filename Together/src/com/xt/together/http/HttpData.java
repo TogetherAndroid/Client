@@ -26,6 +26,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 
 import com.xt.together.constant.constant;
+import com.xt.together.utils.ImageUpload;
 
 import android.graphics.Bitmap;
 import android.os.Environment;
@@ -484,6 +485,35 @@ public class HttpData {
 		
 		
 		return strResult;
+	}
+	
+	public String sendPicUseUpload(Bitmap bitmap){
+		if(null == bitmap){
+			return "the pic is not exist";
+		}
+		try {
+			File together = new File(Environment.getExternalStorageDirectory() + "/together");
+			if(!together.exists()){
+				together.mkdirs();
+			}
+			FileOutputStream fop = new FileOutputStream(Environment.getExternalStorageDirectory() + "/together/temp.jpg");
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fop);
+			fop.close();
+			
+			File file = new File(Environment.getExternalStorageDirectory() + "/together/temp.jpg");
+			
+			String returnRoute = new ImageUpload().Upload(file);
+			return returnRoute;
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "error";
 	}
 }
 
