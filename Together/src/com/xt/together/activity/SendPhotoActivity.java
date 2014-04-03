@@ -59,6 +59,7 @@ public class SendPhotoActivity extends Activity {
 		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, constant.friendsNames);
 		txtDescription.setAdapter(adapter);
 		txtDescription.setThreshold(1);
+		txtDescription.onFilterComplete(1);
 		
 		txtDescription.addTextChangedListener(freindTextWatcher);
 		txtAddress = (TextView)findViewById(R.id.sendphoto_address);
