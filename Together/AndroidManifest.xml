@@ -14,10 +14,6 @@
     <uses-permission android:name="android.permission.INTERNET" />              <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />  <!-- 用于评论模块分享位置信息 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /><!-- 用于评论模块分享位置信息 -->
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />  
-	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />  
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />  
-	<uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -89,9 +85,6 @@
             android:name="UMENG_APPKEY"
             android:value="530ae82456240bbb9a1d0c9d" >
         </meta-data>
-        <meta-data  
-            android:name="com.amap.api.v2.apikey"  
-            android:value="a4f16199e67e17816a1f1ad89b34f716" /> 
     </application>
 	
 </manifest>
