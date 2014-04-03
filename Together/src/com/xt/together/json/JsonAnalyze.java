@@ -117,4 +117,22 @@ public class JsonAnalyze {
 		return friendids;	
 	}
 	
+	
+	public String[] jsonFriendsAnalyze(String jsonString){
+		String[] friendsName = null;
+		try {
+			JSONObject friendsInfo = new JSONObject(jsonString);
+			JSONArray friendsArray = friendsInfo.getJSONArray("users");
+			friendsName = new String[friendsArray.length()];
+			for(int i = 0 ; i < friendsArray.length(); i++){
+				JSONObject jo = (JSONObject)friendsArray.opt(i);
+				friendsName[i] = "@" +jo.getString("screen_name");
+			}
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return friendsName;
+	}
 }
