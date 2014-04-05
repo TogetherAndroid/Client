@@ -13,6 +13,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -502,7 +504,9 @@ public class HttpData {
 			
 			File file = new File(Environment.getExternalStorageDirectory() + "/together/temp.jpg");
 			
+			@SuppressWarnings("static-access")
 			String returnRoute = new ImageUpload().Upload(file);
+			
 			return returnRoute;
 
 		} catch (FileNotFoundException e) {
@@ -530,6 +534,8 @@ public class HttpData {
 		
 		try {
 			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){

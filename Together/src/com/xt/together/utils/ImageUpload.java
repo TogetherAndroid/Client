@@ -15,7 +15,7 @@ import org.apache.commons.httpclient.methods.multipart.Part;
 
 import com.xt.together.constant.constant;
 
-import android.util.Base64;
+import Decoder.BASE64Encoder;
 import android.util.Log;
 
 public class ImageUpload {
@@ -58,7 +58,7 @@ public class ImageUpload {
 							+ "Object=/" + imageName + "\n";
 		String signature = null;
 		try {
-			signature = Base64.encodeToString(hmac_sha1(sk.getBytes(), content.getBytes()), Base64.DEFAULT);
+			signature = new BASE64Encoder().encode(hmac_sha1(sk.getBytes(), content.getBytes()));
 			signature = URLEncoder.encode(signature, "UTF-8");
 		} catch(Exception e) {
 			e.printStackTrace();
