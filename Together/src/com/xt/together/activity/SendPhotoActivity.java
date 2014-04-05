@@ -51,6 +51,7 @@ public class SendPhotoActivity extends Activity {
 	private Oauth2AccessToken mAccessToken;
 	private StatusesAPI mStatusesAPI;
 	private FriendshipsAPI mFriendshipsAPI;
+	private Status status = null;
 	
 
 	@Override
@@ -93,8 +94,9 @@ public class SendPhotoActivity extends Activity {
 		public void onClick(View arg0) {
 			String description = txtDescription.getText().toString();
 			String address = txtAddress.getText().toString();
-			new GetDataTask().execute();
-			mStatusesAPI.upload(description + address, MainActivity.bitmap, null, null, mstatusListener);
+//			new GetDataTask().execute();
+//			mStatusesAPI.upload(description + address, MainActivity.bitmap, null, null, mstatusListener);
+			new postStatusTask().execute();
 		}
 		
 	}
@@ -133,11 +135,12 @@ public class SendPhotoActivity extends Activity {
                     }
                 } else if (response.startsWith("{\"created_at\"")) {
                     // 调用 Status#parse 解析字符串成微博对象
-                    Status status = Status.parse(response);
+                    status = Status.parse(response);
                     Log.e(constant.DEBUG_TAG, "获得微博信息成功，id" + status.id);
                 } else {
                     Log.e("com.sina.weibo.sdk.demo", response);
                 }
+                new postStatusTask().execute();
 			}
 			
 		}
@@ -156,8 +159,33 @@ public class SendPhotoActivity extends Activity {
         @Override
         protected String[] doInBackground(Void... params) {
         	//String aa = new HttpData().sendpicture(constant.HTTPMYRECIPEURL, MainActivity.bitmap);
-        	String aa = new HttpData().sendPicUseUpload(MainActivity.bitmap);
-        	Log.e(constant.DEBUG_TAG,"aa is" + aa);
+ //       	String aa = new HttpData().sendPicUseUpload(MainActivity.bitmap);
+  //      	Log.e(constant.DEBUG_TAG,"aa is" + aa);
+        	
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result) {
+            //mListItems.addFirst("Added after refresh...");
+
+            // Call onRefreshComplete when the list has been refreshed.
+            Toast.makeText(SendPhotoActivity.this,
+                    "上传服务器", 
+                    Toast.LENGTH_LONG).show();
+            super.onPostExecute(result);
+        }
+    }
+	
+	private class postStatusTask extends AsyncTask<Void, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(Void... params) {
+ //       	 Log.e(constant.DEBUG_TAG, "the status" +constant.HTTPMYRECIPEURL + constant.userScreenName + "wuhan" + txtDescription.getText().toString() + status.id ); 
+ //           String aa = new HttpData().addPostStatusData(constant.HTTPMYRECIPEURL, constant.userScreenName, "wuhan", txtDescription.getText().toString(), status.id);
+  
+        	String aa = new HttpData().addPostStatusData(constant.HTTPMYRECIPEURL, constant.userScreenName, "wuhan", txtDescription.getText().toString(), "1111111");
+            Log.e(constant.DEBUG_TAG, "we get the status response" + aa);        	
             return null;
         }
 
