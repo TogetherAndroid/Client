@@ -26,6 +26,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 
 import com.xt.together.constant.constant;
+import com.xt.together.utils.ImageUpload;
 
 import android.graphics.Bitmap;
 import android.os.Environment;
@@ -485,5 +486,73 @@ public class HttpData {
 		
 		return strResult;
 	}
+	
+	public String sendPicUseUpload(Bitmap bitmap){
+		if(null == bitmap){
+			return "the pic is not exist";
+		}
+		try {
+			File together = new File(Environment.getExternalStorageDirectory() + "/together");
+			if(!together.exists()){
+				together.mkdirs();
+			}
+			FileOutputStream fop = new FileOutputStream(Environment.getExternalStorageDirectory() + "/together/temp.jpg");
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fop);
+			fop.close();
+			
+			File file = new File(Environment.getExternalStorageDirectory() + "/together/temp.jpg");
+			
+			String returnRoute = new ImageUpload().Upload(file);
+			return returnRoute;
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "error";
+	}
+	
+	public String addPostStatusData(String url,  String name, String address, String description, String userWeiboId){
+		
+		String strResult = "";
+		HttpPost httpRequest = new HttpPost(url);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		
+		params.add(new BasicNameValuePair("order", "ADD"));
+		params.add(new BasicNameValuePair("name", name));
+		params.add(new BasicNameValuePair("address", address));
+		params.add(new BasicNameValuePair("description", description));
+		params.add(new BasicNameValuePair("userId", userWeiboId));
+		
+		try {
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确转码");
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确执行http请求");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return strResult;
+	}
+	
 }
 
