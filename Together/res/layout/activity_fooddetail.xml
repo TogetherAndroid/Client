@@ -79,13 +79,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/fooddetail_menu1"
         android:src="@drawable/restaurantdetail_menu" />
+
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/fooddetail_menu2"
         android:layout_below="@id/fooddetail_title"
         android:layout_marginTop="5dp"
-        android:scaleType="fitXY"
         android:src="@drawable/fooddetail_img" />
 
     <ImageView
