@@ -24,7 +24,6 @@ public class RestaurantDetail extends Activity {
 	private TextView txtTitle;
 	private TextView txtName;
 	private TextView txtAddress;
-	private TextView txtAverage;
 	private TextView txtSpecialty;
 	private TextView txtPhone;
 	
@@ -43,7 +42,6 @@ public class RestaurantDetail extends Activity {
 		txtTitle = (TextView)findViewById(R.id.restaurantdetail_title);
 		txtName = (TextView)findViewById(R.id.restaurantdetail_name);
 		txtAddress = (TextView)findViewById(R.id.restaurantdetail_address);
-		txtAverage = (TextView)findViewById(R.id.restaurantdetail_average);
 		txtSpecialty = (TextView)findViewById(R.id.restaurantdetail_specialty);
 		txtPhone = (TextView)findViewById(R.id.restaurantdetail_phone);
 		
@@ -55,7 +53,6 @@ public class RestaurantDetail extends Activity {
 		txtTitle.setText(restaurant.getName());
 		txtName.setText(restaurant.getName());
 		txtAddress.setText(restaurant.getAddress());
-		txtAverage.setText("人均" + restaurant.getAverage());
 		txtSpecialty.setText("招牌菜：" + restaurant.getSpecialty());
 		txtPhone.setText("电话：" + restaurant.getPhone());
 		imageLoader = new ImageLoader();

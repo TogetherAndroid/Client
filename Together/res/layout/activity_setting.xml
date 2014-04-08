@@ -2,18 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
-	<TextView
+
+    <TextView
         android:id="@+id/setting_title"
         android:layout_width="fill_parent"
         android:layout_height="44dp"
         android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:textColor="#ffffff"
         android:background="@drawable/title_background"
+        android:gravity="center"
         android:text="设置"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/setting_back"
@@ -23,6 +23,7 @@
         android:layout_marginLeft="12dp"
         android:layout_marginTop="6dp"
         android:background="@drawable/title_back" />
+
     <ImageView
         android:layout_width="3dp"
         android:layout_height="36dp"
@@ -30,39 +31,22 @@
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/setting_back"
         android:src="@drawable/title_division" />
-    
+
     <ImageView
-	    android:id="@+id/setting_setting"
-	    android:layout_width="34dp"
-	    android:layout_height="34dp"
-	    android:layout_alignBottom="@+id/setting_title"
-	    android:layout_alignParentRight="true"
-	    android:layout_marginTop="6dp"
-	    android:layout_marginRight="12dp"
-	    android:layout_marginBottom="6dp"
-	    android:src="@drawable/title_setting" 
-	    android:contentDescription="设置按钮"/>
-	
-	<ImageView
-        android:layout_width="3dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@id/setting_setting"
-        android:src="@drawable/title_division" 
-        android:contentDescription="分割线"/>
-	<ImageView
+        android:id="@+id/imageView1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/setting_title"
         android:scaleType="fitXY"
         android:src="@drawable/background" />
 
-	<Button
-	    android:id="@+id/logoutButton"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@id/setting_setting"
-	    style = "@style/com_sina_weibo_sdk_loginview_default_style" />"
-	
+    <Button
+        android:id="@+id/logoutButton"
+        style="@style/com_sina_weibo_sdk_loginview_default_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/imageView1" />
+"
+
 </RelativeLayout>

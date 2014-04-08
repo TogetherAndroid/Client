@@ -6,7 +6,7 @@
     <TextView
         android:id="@+id/restaurantdetail_title"
         android:layout_width="fill_parent"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:background="@drawable/title_background"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -30,7 +30,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="40dp"
-            android:background="@drawable/bottom_like"/>
+            android:background="@drawable/bottom_store"/>
 
         <Button
             android:id="@+id/restaurantdetail_invite"
@@ -74,20 +74,21 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/restaurantdetail_menu3"
         android:layout_below="@id/restaurantdetail_title"
-        android:scaleType="fitXY"
         android:src="@drawable/restaurantdetail_image" />
 
     <TextView
         android:id="@+id/restaurantdetail_name"
-        android:layout_width="120dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/restaurantdetail_title"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
+        android:paddingLeft="20dp"
         android:text="莲池印度餐厅"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#222222"
-        android:textSize="17sp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="17sp" 
+        android:singleLine="true"/>
 
     <ImageView
         android:id="@+id/restaurantdetail_img"
@@ -151,21 +152,11 @@
         android:layout_marginTop="6dp"
         android:background="@drawable/title_back" />
 
-    <TextView
-        android:id="@+id/restaurantdetail_average"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/restaurantdetail_address"
-        android:layout_marginTop="34dp"
-        android:text="人均XXX"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <ImageView
         android:layout_width="3dp"
         android:layout_height="36dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_toRightOf="@+id/restaurantdetail_back"
         android:src="@drawable/title_division" />
 
