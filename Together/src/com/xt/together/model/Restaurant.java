@@ -11,6 +11,7 @@ public class Restaurant implements Serializable{
 	 */
 	private static final long serialVersionUID = -790124162359628419L;
 	
+	private String Id = null;
 	private String name      = null;
 	private String average   = null;
 	private String specialty = null;
@@ -60,8 +61,14 @@ public class Restaurant implements Serializable{
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
+	}	
 	
+	public String getId() {
+		return Id;
+	}
+	public void setId(String id) {
+		Id = id;
+	}
 	public Restaurant(String name, String average, String like
 			, String specialty, String address, String phone, String image) {
 		this.name = name;
@@ -72,7 +79,19 @@ public class Restaurant implements Serializable{
 		this.phone = phone;
 		this.image = image;
 	}
-	
+		
+	public Restaurant(String id, String name, String average, String specialty,
+			String like, String address, String phone, String image) {
+		super();
+		Id = id;
+		this.name = name;
+		this.average = average;
+		this.specialty = specialty;
+		this.like = like;
+		this.address = address;
+		this.phone = phone;
+		this.image = image;
+	}
 	public static Restaurant getRestaurant() {
 		return new Restaurant("name", "average", "like", "specialty",
 				"address", "phone", 

@@ -1,15 +1,20 @@
 package com.xt.together.activity;
 
 import com.xt.together.R;
+import com.xt.together.constant.constant;
+import com.xt.together.http.HttpData;
+import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Food;
 import com.xt.together.utils.ImageLoader;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -27,6 +32,8 @@ public class FoodDetailActivity extends Activity {
 	private TextView txtName;
 	private TextView txtDescription;
 	private TextView txtAddress;
+	private Food food;
+	private String image;
 	
 	private ImageLoader imageLoader;
 
@@ -50,34 +57,43 @@ public class FoodDetailActivity extends Activity {
 		btnInvite.setOnClickListener(new InviteOnClickListener());
 		
 		Intent intent = getIntent();
-		Food food = (Food)intent.getSerializableExtra("food");
+		food = (Food)intent.getSerializableExtra("food");
+		image = intent.getStringExtra("image");
 		txtName.setText(food.getName());
 		txtDescription.setText(food.getDescription());
 		txtAddress.setText(food.getAddress());
 		imageLoader = new ImageLoader();
 		ImageLoadTask imageLoadTask = new ImageLoadTask();
-		imageLoadTask.execute(food.getImage(),null,null);
+		imageLoadTask.execute(food.getImage(), image, null,null);
+		
 		
 		//Typeface fontFace = Typeface.createFromAsset(getAssets(), "font/font.TTF");
 		
 	}
 	
-	class ImageLoadTask extends AsyncTask<Object, Void, Bitmap> {
+	class ImageLoadTask extends AsyncTask<Object, Void, Bitmap[]> {
 
 		@Override
-		protected Bitmap doInBackground(Object... params) {
+		protected Bitmap[] doInBackground(Object... params) {
 			String url = (String)params[0];
-			Bitmap bitmap = imageLoader.loadImageFromInternet(url);
-			return bitmap;
+			Bitmap[] bitmapArray = new Bitmap[2];
+			bitmapArray[0] = imageLoader.loadImageFromInternet(url);
+			bitmapArray[1] = imageLoader.loadImageFromInternet((String)params[1]);
+			return bitmapArray;
 		}
 
 		@Override
-		protected void onPostExecute(Bitmap result) {
+		protected void onPostExecute(Bitmap[] result) {
 			super.onPostExecute(result);
 			if(result == null) {
 				return;
 			}
-			imgFood.setImageBitmap(result);
+			if(null != result[0]){
+				imgFood.setImageBitmap(result[0]);
+			}
+			if(null != result[1]){
+				imgHead.setImageBitmap(result[1]);
+			}
 		}
 		
 	}
@@ -104,7 +120,7 @@ public class FoodDetailActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			
+			new GetDataTask().execute(food.getId(), constant.USERHTTPID);
 		}
 		
 	}
@@ -117,4 +133,30 @@ public class FoodDetailActivity extends Activity {
 		}
 		
 	}
+	
+	private class GetDataTask extends AsyncTask<String, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(String... params) {
+        	String resurl = "http://192.168.1.106:8080/TogetherWeb/like";
+        	String jsonString = new HttpData().addPostFoodLike(resurl, params[0], params[1]);
+        	Log.e(constant.DEBUG_TAG, "we have send the food url" + params[0] + " and " + params[1]);
+        	boolean isSuccess = false;
+        	isSuccess = new JsonAnalyze().jsonAddFoodLikeAnalyze(jsonString);
+        	if(isSuccess){
+        		Log.e(constant.DEBUG_TAG, "we have send the food like");
+        	}
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result) {
+            //mListItems.addFirst("Added after refresh...");
+
+            // Call onRefreshComplete when the list has been refreshed.
+
+            super.onPostExecute(result);
+        }
+    }
+	
 }

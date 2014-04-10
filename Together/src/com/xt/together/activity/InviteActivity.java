@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 public class InviteActivity extends ListActivity {
 	
-	private List<Invite> list;
+	private static List<Invite> listInvite;
 	private Button btnBack;
 	private Button btnSetting;
 
@@ -43,8 +43,8 @@ public class InviteActivity extends ListActivity {
                 new GetDataTask().execute();
             }
         });
-		list = Invite.getList();
-        InviteAdapter adapter = new InviteAdapter(this, list);
+		listInvite = Invite.getList();
+        InviteAdapter adapter = new InviteAdapter(this, listInvite);
         setListAdapter(adapter);
 	}
 	
@@ -53,7 +53,7 @@ public class InviteActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Intent intent = new Intent(InviteActivity.this,InviteDetailActivity.class);
-		intent.putExtra("invite", list.get(position - 1));
+		intent.putExtra("invite", listInvite.get(position - 1));
 		startActivity(intent);
 	}
 

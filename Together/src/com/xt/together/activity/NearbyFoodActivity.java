@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.xt.together.R;
+import com.xt.together.constant.constant;
+import com.xt.together.control.PullToRefreshListView;
+import com.xt.together.http.HttpData;
+import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Food;
+import com.xt.together.model.Restaurant;
 import com.xt.together.utils.ImageLoader;
 import com.xt.together.waterfall.ScaleImageView;
 import com.xt.together.waterfall.XListView;
@@ -12,8 +17,10 @@ import com.xt.together.waterfall.XListView.IXListViewListener;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,7 +33,7 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 	
 	private XListView listView;
 	private StaggeredAdapter adapter;
-	private List<Food> list = null;
+	private static List<Food> listNearbyFood = null;
 	private ImageView settingButton  ;
 	
 	@Override
@@ -48,17 +55,11 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 		listView = (XListView)getView().findViewById(R.id.food_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
-		list = new ArrayList<Food>();
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		adapter = new StaggeredAdapter(listView, list, getActivity());
+		if(null == listNearbyFood){
+			listNearbyFood = new ArrayList<Food>();
+		}
+
+		adapter = new StaggeredAdapter(listView, listNearbyFood, getActivity());
 		adapter.notifyDataSetChanged();
 		
 		settingButton.setOnClickListener(new OnClickListener(){
@@ -80,6 +81,7 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 //		} catch (InterruptedException e) {
 //			e.printStackTrace();
 //		}
+		new GetDataTask().execute();
 		listView.stopRefresh();
 	}
 
@@ -92,6 +94,36 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 //		}
 		listView.stopLoadMore();
 	}	
+	
+	private class GetDataTask extends AsyncTask<Void, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(Void... params) {
+        	String resurl = "http://192.168.1.106:8080/TogetherWeb/nearbyfood";
+        	String jsonText = new HttpData().getPostNearByFood(resurl);
+        	JsonAnalyze jsonAnalyze = new JsonAnalyze();
+        	Food[] newFood =jsonAnalyze.jsonNearbyFoodAnalyze(jsonText);
+			if (null != newFood) {
+				listNearbyFood.removeAll(listNearbyFood);
+				for (int i = 0; i < newFood.length; i++) {
+					// Log.e("com.xt.together", newFood[i].getLike() +
+					// "hahahhaa");
+					listNearbyFood.add(newFood[i]);
+				}
+			}
+        	
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result) {
+            //mListItems.addFirst("Added after refresh...");
+
+            // Call onRefreshComplete when the list has been refreshed.
+
+            super.onPostExecute(result);
+        }
+    }
 	
 	private class StaggeredAdapter extends BaseAdapter {
 		

@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -64,9 +65,18 @@ public class MainActivity extends FragmentActivity{
 		mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
 		mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 		mAccessToken = AccessTokenKeeper.readAccessToken(this);
-		mUserAPI = new UsersAPI(mAccessToken);
-		mUserAPI.show(Long.parseLong(mAccessToken.getUid()), mListener);
+//		mUserAPI = new UsersAPI(mAccessToken);
+//		mUserAPI.show(Long.parseLong(mAccessToken.getUid()), mListener);
 		initView();
+		SharedPreferences userInfo = getSharedPreferences("user_info", 0);
+		String userWeiboScreenName = userInfo.getString("screen_name", "");
+		String userHttpId = userInfo.getString("http_id", "");
+		constant.USERHTTPID = userHttpId;
+		constant.userScreenName = userWeiboScreenName;
+		Log.e(constant.DEBUG_TAG, constant.userScreenName + "hehehehe" +  constant.userScreenName);
+		mFriendshipsAPI = new FriendshipsAPI(mAccessToken);
+		mFriendshipsAPI.friends(constant.userScreenName, 50, 0, false, friendsListener);
+		
 //		mController.getPlatformInfo(MainActivity.this, SHARE_MEDIA.SINA, new UMDataListener() {
 //			
 //			@Override
@@ -154,10 +164,10 @@ public class MainActivity extends FragmentActivity{
 		@Override
 		public void onComplete(String response) {
 			// TODO Auto-generated method stub
-			constant.userScreenName = User.parse(response).screen_name;
-			mFriendshipsAPI = new FriendshipsAPI(mAccessToken);
-			mFriendshipsAPI.friends(constant.userScreenName, 50, 0, false, friendsListener);
-			Log.e(constant.DEBUG_TAG, constant.userScreenName);
+//			constant.userScreenName = User.parse(response).screen_name;
+//			mFriendshipsAPI = new FriendshipsAPI(mAccessToken);
+//			mFriendshipsAPI.friends(constant.userScreenName, 50, 0, false, friendsListener);
+//			Log.e(constant.DEBUG_TAG, constant.userScreenName);
 		}
 
 		@Override

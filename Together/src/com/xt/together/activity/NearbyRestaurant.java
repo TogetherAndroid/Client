@@ -29,7 +29,7 @@ import android.widget.TextView;
 
 public class NearbyRestaurant extends ListFragment {
 	
-	private List<Restaurant> list;
+	private static List<Restaurant> listNearbyRestaurant;
 	private NearbyRestaurantAdapter adapter;
 	
 	@Override
@@ -53,8 +53,8 @@ public class NearbyRestaurant extends ListFragment {
                 new GetDataTask().execute();
             }
         });
-		list = Restaurant.getRestaurantList();
-        adapter = new NearbyRestaurantAdapter(getActivity(), list);
+		listNearbyRestaurant = Restaurant.getRestaurantList();
+        adapter = new NearbyRestaurantAdapter(getActivity(), listNearbyRestaurant);
         setListAdapter(adapter);
 	}
 	
@@ -62,7 +62,7 @@ public class NearbyRestaurant extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Intent intent = new Intent(getActivity(),RestaurantDetail.class);
-		intent.putExtra("restaurant", list.get(position - 1));
+		intent.putExtra("restaurant", listNearbyRestaurant.get(position - 1));
 		startActivity(intent);
 	}
 
@@ -70,32 +70,18 @@ public class NearbyRestaurant extends ListFragment {
 
         @Override
         protected String[] doInBackground(Void... params) {
-            // Simulates a background job.
-/*            try {
-                Thread.sleep(2000);
-            	
-            } catch (InterruptedException e) {
-                ;
-            }
-*/
-        	HttpData httpdata = new HttpData();
-        	URL url = null;
-        	try {
-        		url = new URL(constant.HTTPNERABYRESTAURANTURL);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				Log.e(constant.DEBUG_TAG, "the url has create with error");
-				e.printStackTrace();
-			}
-        	String jsonText = httpdata.getPostNearbyResData(url, "");
+        	String resurl = "http://192.168.1.106:8080/TogetherWeb/nearbyrestaurant";
+        	String jsonText = new HttpData().getPostNearbyResData(resurl);
         	JsonAnalyze jsonAnalyze = new JsonAnalyze();
         	Restaurant[] newrestaurant =jsonAnalyze.jsonNearbyRestaurantAnalyze(jsonText);
-        	list.removeAll(list);
-        	for(int i = 0; i < newrestaurant.length; i++){
-        		Log.e("com.xt.together", newrestaurant[i].getName() + "hahahhaa");
-        		list.add(newrestaurant[i]);
-        	}
-        	
+			if (null != newrestaurant) {
+				listNearbyRestaurant.removeAll(listNearbyRestaurant);
+				for (int i = 0; i < newrestaurant.length; i++) {
+					Log.e("com.xt.together", newrestaurant[i].getLike()
+							+ "hahahhaa");
+					listNearbyRestaurant.add(newrestaurant[i]);
+				}
+			}
             return null;
         }
 
@@ -155,9 +141,9 @@ public class NearbyRestaurant extends ListFragment {
 				viewHolder = (ViewHolder)convertView.getTag();
 			}
 			Restaurant restaurant = list.get(position);
+//			Log.e(constant.DEBUG_TAG, )
 			imageLoader.nearybyRestaurantLoadImage(restaurant.getImage(), this, viewHolder);
 			viewHolder.txtAverage.setText("人均：" + restaurant.getAverage());
-			viewHolder.txtLike.setText(restaurant.getLike() + "人喜欢");
 			viewHolder.txtName.setText(restaurant.getName());
 			viewHolder.txtSpecialty.setText("招牌菜:" + restaurant.getSpecialty());
 			return convertView;
@@ -170,7 +156,6 @@ public class NearbyRestaurant extends ListFragment {
 		TextView txtName;
 		TextView txtAverage;
 		TextView txtSpecialty;
-		TextView txtLike;
 	}
 
 }

@@ -9,6 +9,7 @@ public class Food implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private String Id;
 	private String name;
 	private String shop;
 	private String price;
@@ -16,6 +17,7 @@ public class Food implements Serializable {
 	private String image;
 	private String address;
 	private String description;
+	private FoodLike[] foodlike;
 	
 	public String getName() {
 		return name;
@@ -60,12 +62,54 @@ public class Food implements Serializable {
 		this.description = description;
 	}
 	
+	public FoodLike[] getFoodlike() {
+		return foodlike;
+	}
+	public void setFoodlike(FoodLike[] foodlike) {
+		this.foodlike = foodlike;
+	}
+		
+	public String getId() {
+		return Id;
+	}
+	public void setId(String id) {
+		Id = id;
+	}
+	public Food(String name, String shop, String price, String share,
+			String image, String address, String description, FoodLike[] foodlike) {
+		super();
+		this.name = name;
+		this.shop = shop;
+		this.price = price;
+		this.share = share;
+		this.image = image;
+		this.address = address;
+		this.description = description;
+		this.foodlike = foodlike;
+	}
+	
 	public Food(String name, String shop, String price, String share, String image , String address, String description) {
 		this.name = name;
 		this.shop = shop;
 		this.price = price;
 		this.share = share;
 		this.image = image;
+		this.address = address;
+		this.description = description;
+	}	
+	
+	public Food(String id, String name, String shop, String price,
+			String share, String image, String address, String description,
+			FoodLike[] foodlike) {
+		this.Id = id;
+		this.name = name;
+		this.shop = shop;
+		this.price = price;
+		this.share = share;
+		this.image = image;
+		this.address = address;
+		this.description = description;
+		this.foodlike = foodlike;
 	}
 	
 	public static Food getFood() {

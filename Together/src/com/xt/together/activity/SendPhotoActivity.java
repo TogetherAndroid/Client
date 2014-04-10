@@ -94,9 +94,9 @@ public class SendPhotoActivity extends Activity {
 		public void onClick(View arg0) {
 			String description = txtDescription.getText().toString();
 			String address = txtAddress.getText().toString();
-//			new GetDataTask().execute();
+			new GetDataTask().execute();
 //			mStatusesAPI.upload(description + address, MainActivity.bitmap, null, null, mstatusListener);
-			new postStatusTask().execute();
+//			new postStatusTask().execute();
 		}
 		
 	}
@@ -154,37 +154,36 @@ public class SendPhotoActivity extends Activity {
 		
 	};
 	
-	private class GetDataTask extends AsyncTask<Void, Void, String[]> {
+	private class GetDataTask extends AsyncTask<Void, Void, String> {
 
         @Override
-        protected String[] doInBackground(Void... params) {
+        protected String doInBackground(Void... params) {
         	//String aa = new HttpData().sendpicture(constant.HTTPMYRECIPEURL, MainActivity.bitmap);
- //       	String aa = new HttpData().sendPicUseUpload(MainActivity.bitmap);
+        	String picAddress = new HttpData().sendPicUseUpload(MainActivity.bitmap);
   //      	Log.e(constant.DEBUG_TAG,"aa is" + aa);
         	
-            return null;
+            return picAddress;
         }
 
         @Override
-        protected void onPostExecute(String[] result) {
+        protected void onPostExecute(String result) {
             //mListItems.addFirst("Added after refresh...");
 
             // Call onRefreshComplete when the list has been refreshed.
-            Toast.makeText(SendPhotoActivity.this,
-                    "上传服务器", 
-                    Toast.LENGTH_LONG).show();
-            super.onPostExecute(result);
+        	new postStatusTask().execute(result);
+ //           super.onPostExecute(result);
         }
     }
 	
-	private class postStatusTask extends AsyncTask<Void, Void, String[]> {
+	private class postStatusTask extends AsyncTask<String, Void, String[]> {
 
         @Override
-        protected String[] doInBackground(Void... params) {
+        protected String[] doInBackground(String... params) {
  //       	 Log.e(constant.DEBUG_TAG, "the status" +constant.HTTPMYRECIPEURL + constant.userScreenName + "wuhan" + txtDescription.getText().toString() + status.id ); 
  //           String aa = new HttpData().addPostStatusData(constant.HTTPMYRECIPEURL, constant.userScreenName, "wuhan", txtDescription.getText().toString(), status.id);
-  
-        	String aa = new HttpData().addPostStatusData(constant.HTTPMYRECIPEURL, constant.userScreenName, "wuhan", txtDescription.getText().toString(), "1111111");
+        	
+        	String myurl = "http://192.168.1.106:8080/TogetherWeb/dynamic";
+        	String aa = new HttpData().addPostStatusData(myurl, constant.userScreenName, "wuhan", txtDescription.getText().toString(), params[0], constant.USERHTTPID);
             Log.e(constant.DEBUG_TAG, "we get the status response" + aa);        	
             return null;
         }
@@ -194,9 +193,7 @@ public class SendPhotoActivity extends Activity {
             //mListItems.addFirst("Added after refresh...");
 
             // Call onRefreshComplete when the list has been refreshed.
-            Toast.makeText(SendPhotoActivity.this,
-                    "上传服务器", 
-                    Toast.LENGTH_LONG).show();
+
             super.onPostExecute(result);
         }
     }

@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.xt.together.R;
+import com.xt.together.constant.constant;
+import com.xt.together.http.HttpData;
+import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Food;
+import com.xt.together.model.Trends;
 import com.xt.together.utils.ImageLoader;
 import com.xt.together.waterfall.ScaleImageView;
 import com.xt.together.waterfall.XListView;
@@ -12,22 +16,25 @@ import com.xt.together.waterfall.XListView.IXListViewListener;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class LikeActivity extends Activity implements IXListViewListener{
 	
 	private Button btnBack;
-	private Button btnSetting;
+	private ImageView btnSetting;
 	private XListView listView;
 	private StaggeredAdapter adapter;
-	private List<Food> list;
+	private static List<Food> listLike;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +42,15 @@ public class LikeActivity extends Activity implements IXListViewListener{
 		setContentView(R.layout.activity_like);
 		btnBack = (Button)findViewById(R.id.like_back);
 		btnBack.setOnClickListener(new BackOnClickListener());
-		btnSetting = (Button)findViewById(R.id.invite_setting);
+		btnSetting = (ImageView)findViewById(R.id.like_setting);
 		btnSetting.setOnClickListener(new SettingOnClickListener());
 		listView = (XListView)findViewById(R.id.like_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
-		list = new ArrayList<Food>();
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		adapter = new StaggeredAdapter(list);
+		if(null == listLike){
+			listLike = new ArrayList<Food>();
+		}
+		adapter = new StaggeredAdapter(listLike);
 		adapter.notifyDataSetChanged();
 	}
 	
@@ -71,13 +71,38 @@ public class LikeActivity extends Activity implements IXListViewListener{
 
 	@Override
 	public void onRefresh() {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		
+		new GetDataTask().execute();
+		
 		listView.stopRefresh();
 	}
+	
+	private class GetDataTask extends AsyncTask<Void, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(Void... params) {
+        	
+    		String jsonString = new HttpData().getPostFoodLikeData(constant.HTTPLIKEURL, "1");
+    		Food[] foodInfo = new JsonAnalyze().jsonFoodLikeAnalyze(jsonString);
+			if (null != foodInfo) {
+				for (int i = 0; i < foodInfo.length; i++) {
+					listLike.add(foodInfo[i]);
+				}
+			}
+    		
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result) {
+            //mListItems.addFirst("Added after refresh...");
+
+            // Call onRefreshComplete when the list has been refreshed.
+        	adapter.notifyDataSetChanged();
+            super.onPostExecute(result);
+        }
+    }
+	
 
 	@Override
 	public void onLoadMore() {

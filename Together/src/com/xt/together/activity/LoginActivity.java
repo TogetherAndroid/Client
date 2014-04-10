@@ -12,10 +12,15 @@ import com.sina.weibo.sdk.openapi.models.User;
 import com.sina.weibo.sdk.widget.LoginButton;
 import com.xt.together.R;
 import com.xt.together.constant.constant;
+import com.xt.together.control.PullToRefreshListView;
+import com.xt.together.http.HttpData;
 import com.xt.together.json.JsonAnalyze;
+import com.xt.together.model.Restaurant;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +33,7 @@ public class LoginActivity extends Activity{
 	private LoginButton loginButton;
 	private WeiboAuth mWeiboAuth;
 	private Oauth2AccessToken mAccessToken;
+	private UsersAPI mUserAPI;
 	private SsoHandler mSsoHandler;
 	
 	@Override
@@ -76,9 +82,10 @@ public class LoginActivity extends Activity{
 				AccessTokenKeeper.writeAccessToken(LoginActivity.this, mAccessToken);
 				Log.e(constant.DEBUG_TAG, "the user id is" + AccessTokenKeeper.readAccessToken(LoginActivity.this).getUid());
 				
-				Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-				startActivity(intent);
-				LoginActivity.this.finish();
+				mUserAPI = new UsersAPI(mAccessToken);
+				mUserAPI.show(Long.parseLong(mAccessToken.getUid()), mUserListener);
+				
+
 			} else {
 				String code = values.getString("code");
 				Log.e(constant.DEBUG_TAG, "收到的错误code为" + code);
@@ -93,6 +100,29 @@ public class LoginActivity extends Activity{
 			
 	}
 	
+	private RequestListener mUserListener = new RequestListener(){
+
+		@Override
+		public void onComplete(String response) {
+			// TODO Auto-generated method stub
+			Log.e(constant.DEBUG_TAG, "we get the weibo image" + User.parse(response).profile_image_url);
+			
+			SharedPreferences userInfo = getSharedPreferences("user_info", 0);
+			userInfo.edit().putString("screen_name", User.parse(response).screen_name).commit();
+			boolean issuccess = userInfo.edit().putString("image_head", User.parse(response).profile_image_url).commit();
+			
+			Log.e(constant.DEBUG_TAG, "we have store the image" + issuccess + "the image is " + userInfo.getString("image_head", ""));
+			
+			new GetDataTask().execute(mAccessToken.getUid(), User.parse(response).profile_image_url, User.parse(response).screen_name);
+		}
+
+		@Override
+		public void onWeiboException(WeiboException arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	};
 	
 
 	@Override
@@ -107,6 +137,32 @@ public class LoginActivity extends Activity{
 		
 	}
 	
-	
+	private class GetDataTask extends AsyncTask<String, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(String... params) {
+        	String url = "http://192.168.1.106:8080/TogetherWeb/user";
+        	String jsonString = new HttpData().addPostWeiboIdData(url, params[0], params[2], params[1]);
+        	Log.e(constant.DEBUG_TAG, jsonString);
+        	String HttpId = new JsonAnalyze().jsonIDAnalyze(jsonString);
+        	Log.e(constant.DEBUG_TAG, HttpId + "this is HttpId");
+        	if(null != HttpId && "" != HttpId){
+        		SharedPreferences userInfo = getSharedPreferences("user_info", 0);
+        		userInfo.edit().putString("http_id", HttpId).commit();
+        		constant.USERHTTPID = HttpId;
+        	}
+        	
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result) {
+
+			Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+			startActivity(intent);
+			LoginActivity.this.finish();
+            super.onPostExecute(result);
+        }
+    }
 
 }

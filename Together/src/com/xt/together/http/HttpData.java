@@ -23,6 +23,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
@@ -80,7 +81,7 @@ public class HttpData {
 		return getData;
 		
 	}
-*/
+
 	public String getPostNearbyResData(URL url, String postdata){
 		
 		HttpURLConnection urlConn = null;
@@ -126,7 +127,7 @@ public class HttpData {
 		
 		return returnLine;
 	}
-
+	*/
 	public String getPostFriendCircleData(String url, String userId){
 		
 		String strResult = "";
@@ -138,7 +139,12 @@ public class HttpData {
 		
 		try {
 			httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -156,7 +162,7 @@ public class HttpData {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
 		
 		return strResult;
@@ -178,7 +184,12 @@ public class HttpData {
 		
 		try {
 			httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -196,7 +207,7 @@ public class HttpData {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
 		
 		return strResult;
@@ -212,7 +223,12 @@ public class HttpData {
 		
 		try {
 			httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -230,7 +246,7 @@ public class HttpData {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
 		
 		return strResult;
@@ -262,7 +278,12 @@ public class HttpData {
 		
 		try {
 			httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -280,7 +301,7 @@ public class HttpData {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
 		
 		return strResult;
@@ -297,7 +318,12 @@ public class HttpData {
 		
 		try {
 			httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -315,7 +341,7 @@ public class HttpData {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
 		
 		return strResult;
@@ -331,7 +357,12 @@ public class HttpData {
 		
 		try {
 			httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -349,7 +380,7 @@ public class HttpData {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
 		
 		return strResult;
@@ -382,7 +413,12 @@ public class HttpData {
 		
 		try {
 			httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -400,7 +436,7 @@ public class HttpData {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
 		
 		return strResult;
@@ -412,11 +448,16 @@ public class HttpData {
 		HttpPost httpRequest = new HttpPost(url);
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		
-		params.add(new BasicNameValuePair("friendidsarray", jsonarray.toString()));
+		params.add(new BasicNameValuePair("friendIds", jsonarray.toString()));
 		
 		try {
 			httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -434,7 +475,7 @@ public class HttpData {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
 		
 		return strResult;
@@ -520,7 +561,7 @@ public class HttpData {
 		return "error";
 	}
 	
-	public String addPostStatusData(String url,  String name, String address, String description, String userWeiboId){
+	public String addPostStatusData(String url,  String name, String address, String description, String image, String userWeiboId){
 		
 		String strResult = "";
 		HttpPost httpRequest = new HttpPost(url);
@@ -530,13 +571,17 @@ public class HttpData {
 		params.add(new BasicNameValuePair("name", name));
 		params.add(new BasicNameValuePair("address", address));
 		params.add(new BasicNameValuePair("description", description));
+		params.add(new BasicNameValuePair("image", image));
 		params.add(new BasicNameValuePair("userId", userWeiboId));
 		
 		try {
 			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -554,7 +599,284 @@ public class HttpData {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			return null;
+		}
+		
+		return strResult;
+	}
+	
+	
+	
+	public String getPostNearbyResData(String url){
+		
+		String strResult = "";
+		HttpPost httpRequest = new HttpPost(url);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		try {
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确转码");
 			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确执行http请求");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
+		return strResult;
+	}
+	
+	
+	public String getPostMyTrendsData(String url, String userWeiboId){
+		
+		String strResult = "";
+		HttpPost httpRequest = new HttpPost(url);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		
+		params.add(new BasicNameValuePair("order", "SELECT"));
+		params.add(new BasicNameValuePair("userId", userWeiboId));
+		
+		try {
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确转码");
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确执行http请求");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
+		return strResult;
+	}
+	
+	public String getPostFoodLikeData(String url, String userWeiboId){
+		
+		String strResult = "";
+		HttpPost httpRequest = new HttpPost(url);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		
+		params.add(new BasicNameValuePair("order", "SELECT"));
+		params.add(new BasicNameValuePair("userId", userWeiboId));
+		
+		try {
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确转码");
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确执行http请求");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
+		return strResult;
+	}
+	
+	public String addPostWeiboIdData(String url, String userWeiboId, String userWeiboName, String userWeiboHead){
+		
+		String strResult = "";
+		HttpPost httpRequest = new HttpPost(url);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		
+		params.add(new BasicNameValuePair("order", "ADD"));
+		params.add(new BasicNameValuePair("weibo_id", userWeiboId));
+		params.add(new BasicNameValuePair("weibo_name", userWeiboName));
+		params.add(new BasicNameValuePair("weibo_head", userWeiboHead));
+		
+		
+		try {
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确转码");
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确执行http请求");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
+		return strResult;
+	}
+	
+	
+	public String getPostNearByFood(String url){
+		String strResult = "";
+		HttpPost httpRequest = new HttpPost(url);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		try {
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确转码");
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确执行http请求");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
+		return strResult;
+	}
+	
+	
+	public String addPostFoodLike(String url, String foodId, String userId){
+		String strResult = "";
+		HttpPost httpRequest = new HttpPost(url);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("order", "ADDFOOD"));
+		params.add(new BasicNameValuePair("foodId", foodId));
+		params.add(new BasicNameValuePair("userId", userId));
+		
+		try {
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确转码");
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确执行http请求");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
+		return strResult;
+	}
+	
+	public String addPostStore(String url, String userId, String restaurantId){
+		String strResult = "";
+		HttpPost httpRequest = new HttpPost(url);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("order", "ADD"));
+		params.add(new BasicNameValuePair("userId", userId));
+		params.add(new BasicNameValuePair("restaurantId", restaurantId));
+		
+		try {
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确转码");
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确执行http请求");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return null;
 		}
 		
 		return strResult;

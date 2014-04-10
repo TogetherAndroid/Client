@@ -28,5 +28,7 @@ public class constant {
     
     public static String userScreenName = "";
     
+    public static String USERHTTPID = "";
+    
     public static String[] friendsNames = new String[]{};
 }

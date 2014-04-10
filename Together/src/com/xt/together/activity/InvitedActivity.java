@@ -26,13 +26,13 @@ public class InvitedActivity extends ListActivity {
 	
 	private Button btnBack;
 	private Button btnSetting;
-	private List<Invite> list;
+	private static List<Invite> listInvited;
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Intent intent = new Intent(InvitedActivity.this,InvitedDetailActivity.class);
-		intent.putExtra("invite", list.get(position - 1));
+		intent.putExtra("invite", listInvited.get(position - 1));
 		startActivity(intent);
 	}
 
@@ -51,8 +51,8 @@ public class InvitedActivity extends ListActivity {
                 new GetDataTask().execute();
             }
         });
-		list = Invite.getList();
-        InvitedAdapter adapter = new InvitedAdapter(this, list);
+		listInvited = Invite.getList();
+        InvitedAdapter adapter = new InvitedAdapter(this, listInvited);
         setListAdapter(adapter);
 	}
 	

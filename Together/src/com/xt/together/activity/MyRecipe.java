@@ -22,7 +22,7 @@ public class MyRecipe extends Fragment {
 	private ImageView btnStore;
 	private ImageView btnInvite;
 	private ImageView btnInvited;
-	private Button btnSetting;
+	private ImageView btnSetting;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +45,7 @@ public class MyRecipe extends Fragment {
 		btnStore.setOnClickListener(new StoreOnClickListener());
 		btnInvite.setOnClickListener(new InviteOnClickListener());
 		btnInvited.setOnClickListener(new InvitedOnClickListener());
-		btnSetting = (Button)getView().findViewById(R.id.invite_setting);
+		btnSetting = (ImageView)getView().findViewById(R.id.myrecipe_setting);
 		btnSetting.setOnClickListener(new SettingOnClickListener());
 	}	
 	

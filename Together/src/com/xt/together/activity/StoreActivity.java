@@ -3,7 +3,10 @@ package com.xt.together.activity;
 import java.util.List;
 
 import com.xt.together.R;
+import com.xt.together.constant.constant;
 import com.xt.together.control.PullToRefreshListView;
+import com.xt.together.http.HttpData;
+import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Restaurant;
 import com.xt.together.utils.ImageLoader;
 
@@ -12,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +29,8 @@ import android.widget.TextView;
 public class StoreActivity extends ListActivity {
 	
 	private Button btnBack;
-	private List<Restaurant> list;
+	private static List<Restaurant> listStore;
+	private StoreAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +49,8 @@ public class StoreActivity extends ListActivity {
                 new GetDataTask().execute();
             }
         });
-		list = Restaurant.getRestaurantList();
-        StoreAdapter adapter = new StoreAdapter(StoreActivity.this, list);
+		listStore = Restaurant.getRestaurantList();
+        adapter = new StoreAdapter(StoreActivity.this, listStore);
         setListAdapter(adapter);
 	}
 	
@@ -53,7 +58,7 @@ public class StoreActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Intent intent = new Intent(StoreActivity.this,RestaurantDetail.class);
-		intent.putExtra("restaurant", list.get(position - 1));
+		intent.putExtra("restaurant", listStore.get(position - 1));
 		startActivity(intent);
 	}
 	
@@ -62,11 +67,18 @@ public class StoreActivity extends ListActivity {
         @Override
         protected String[] doInBackground(Void... params) {
             // Simulates a background job.
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                ;
-            }
+        	
+        	String jsonString = new HttpData().getPostStoreData("http://192.168.1.106:8080/TogetherWeb/store", "1");
+        	
+        	Restaurant[] restaurantInfo = new JsonAnalyze().jsonStoreAnalyze(jsonString);
+			if (null != restaurantInfo) {
+				listStore.remove(listStore);
+				for (int i = 0; i < restaurantInfo.length; i++) {
+					Log.e(constant.DEBUG_TAG, "we get the store json"
+							+ restaurantInfo[i].getLike());
+					listStore.add(restaurantInfo[i]);
+				}
+			}
             return null;
         }
 
@@ -74,6 +86,7 @@ public class StoreActivity extends ListActivity {
         protected void onPostExecute(String[] result) {
             //mListItems.addFirst("Added after refresh...");
 
+        	adapter.notifyDataSetChanged();
             // Call onRefreshComplete when the list has been refreshed.
             ((PullToRefreshListView) getListView()).onRefreshComplete();
 
@@ -125,7 +138,7 @@ public class StoreActivity extends ListActivity {
 			Restaurant restaurant = list.get(position);
 			imageLoader.storeLoadImage(restaurant.getImage(), this, viewHolder);
 			viewHolder.txtAverage.setText("人均：" + restaurant.getAverage());
-			viewHolder.txtLike.setText(restaurant.getLike() + "人喜欢");
+	//		viewHolder.txtLike.setText(restaurant.getLike() + "人喜欢");
 			viewHolder.txtName.setText(restaurant.getName());
 			viewHolder.txtSpecialty.setText("招牌菜:" + restaurant.getSpecialty());
 			return convertView;

@@ -16,14 +16,17 @@ import com.sina.weibo.sdk.openapi.models.StatusList;
 import com.sina.weibo.sdk.openapi.models.User;
 import com.xt.together.R;
 import com.xt.together.constant.constant;
+import com.xt.together.http.HttpData;
 import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Food;
+import com.xt.together.model.FriendsCircle;
 import com.xt.together.utils.ImageLoader;
 import com.xt.together.waterfall.ScaleImageView;
 import com.xt.together.waterfall.XListView;
 import com.xt.together.waterfall.XListView.IXListViewListener;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -41,11 +44,10 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 	
 	private XListView listView;
 	private StaggeredAdapter adapter;
-	private List<Food> list;
+	private static List<FriendsCircle> listFriendCircle;
 	private ImageView btnSetting;
 	private Oauth2AccessToken mAccessToken;
 	private FriendshipsAPI mFriendshipsAPI;
-	private UsersAPI mUserAPI;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,20 +66,13 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 		listView = (XListView)getView().findViewById(R.id.friendcircle_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
-		list = new ArrayList<Food>();
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		adapter = new StaggeredAdapter(list);
+		if(null == listFriendCircle){
+			listFriendCircle = new ArrayList<FriendsCircle>();
+		}
+		adapter = new StaggeredAdapter(listFriendCircle);
 		adapter.notifyDataSetChanged();
 		mAccessToken = AccessTokenKeeper.readAccessToken(this.getActivity());
-		getWeiboFansList();
+
 	}
 
 	@Override
@@ -88,11 +83,9 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 
 	@Override
 	public void onRefresh() {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		Log.e(constant.DEBUG_TAG, "we start to send ids" + System.currentTimeMillis());
+		mFriendshipsAPI = new FriendshipsAPI(mAccessToken);
+		mFriendshipsAPI.followersIds(constant.userScreenName, 50, 0, mListener);
 		listView.stopRefresh();
 	}
 
@@ -106,13 +99,6 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 		listView.stopLoadMore();
 	}
 	
-	private void getWeiboFansList(){
-		
-		mFriendshipsAPI = new FriendshipsAPI(mAccessToken);
-		mFriendshipsAPI.followersIds(constant.userScreenName, 50, 0, mListener);
-		//mFriendshipsAPI.followers(mAccessToken.getUid(), 500, 0, true,mListener);
-	}
-	
 	private  RequestListener mListener = new RequestListener(){
 
 		@Override
@@ -120,10 +106,9 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 			// TODO Auto-generated method stub
 			if(!TextUtils.isEmpty(response)){
 				
-				Log.e(constant.DEBUG_TAG, response);
-				
-//				JSONArray friendids = new JsonAnalyze().jsonWeiboFansAnalyze(response);
-//				Log.e(constant.DEBUG_TAG, friendids.toString());
+				JSONArray friendids = new JsonAnalyze().jsonWeiboFansAnalyze(response);
+				Log.e(constant.DEBUG_TAG, friendids.toString() + System.currentTimeMillis());				
+				new GetDataTask().execute(friendids);
 			}
 			
 		}
@@ -136,13 +121,41 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 		}
 	};
 	
+	private class GetDataTask extends AsyncTask<JSONArray, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(JSONArray... params) {
+        	String resurl = "http://192.168.1.106:8080/TogetherWeb/friendcircle";
+        	String jsonString = new HttpData().sendFriendids(resurl, params[0]);
+        	Log.e(constant.DEBUG_TAG, "we start to get json" + System.currentTimeMillis());
+        	FriendsCircle[] newFriendsCircle = new JsonAnalyze().jsonFriendsCircleAnalyze(jsonString);
+        	if(null != newFriendsCircle){
+        		listFriendCircle.remove(listFriendCircle);
+        		for(int i = 0; i < newFriendsCircle.length ; i ++){
+        			listFriendCircle.add(newFriendsCircle[i]);
+        		}
+        	}
+        	Log.e(constant.DEBUG_TAG, jsonString.toString() + System.currentTimeMillis());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result) {
+            //mListItems.addFirst("Added after refresh...");
+
+            // Call onRefreshComplete when the list has been refreshed.
+        	adapter.notifyDataSetChanged();
+            super.onPostExecute(result);
+        }
+    }
+	
 
 	private class StaggeredAdapter extends BaseAdapter {
 		
 		private ImageLoader imageLoader;
-        private List<Food> list;
+        private List<FriendsCircle> list;
 
-        public StaggeredAdapter(List<Food> list) {
+        public StaggeredAdapter(List<FriendsCircle> list) {
             this.list = list;
             this.imageLoader = new ImageLoader();
         }
@@ -151,7 +164,7 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
         public View getView(int position, View convertView, ViewGroup parent) {
 
             ViewHolder viewHolder;
-            Food food = list.get(position);
+            FriendsCircle friendsCircle = list.get(position);
 
             if (convertView == null) {
                 LayoutInflater layoutInflator = LayoutInflater.from(parent.getContext());
@@ -166,13 +179,13 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
             		viewHolder = (ViewHolder) convertView.getTag();
             }
             
-            imageLoader.FriendCircleLoadImage(food.getImage(), this, viewHolder);
+            imageLoader.FriendCircleLoadImage(friendsCircle.getImage(), this, viewHolder);
             viewHolder.imageView.setImageWidth(240);
             viewHolder.imageView.setImageHeight(240);
-            viewHolder.txtPrice.setText(food.getPrice());
-            viewHolder.txtShare.setText(food.getShare());
-            viewHolder.txtShop.setText(food.getShop());
-            convertView.setOnClickListener(new ViewOnClickListener(food));
+            viewHolder.txtPrice.setText(friendsCircle.getName());
+            viewHolder.txtShare.setText(friendsCircle.getAddress());
+            viewHolder.txtShop.setText(friendsCircle.getDescription());
+            convertView.setOnClickListener(new ViewOnClickListener(friendsCircle));
             
             return convertView;
         }
@@ -194,16 +207,18 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
         
         class ViewOnClickListener implements OnClickListener {
         	
-    			private Food food;
+    			private FriendsCircle friendsCircle;
     	
-    			public ViewOnClickListener (Food food){
-    				this.food = food;
+    			public ViewOnClickListener (FriendsCircle friendsCircle){
+    				this.friendsCircle = friendsCircle;
     			}
 
     			@Override
     			public void onClick(View v) {
+    				Food food = new Food(null, friendsCircle.getName(), null, null, friendsCircle.getImage(),
+    						friendsCircle.getAddress(), friendsCircle.getDescription(), friendsCircle.getFoodLike());
     				Intent intent = new Intent(FriendCircleActivity.this.getActivity(), FoodDetailActivity.class);
-    				intent.putExtra("food", this.food);
+    				intent.putExtra("food", food);
     				startActivity(intent);
     			}
         }

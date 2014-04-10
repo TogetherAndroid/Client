@@ -3,8 +3,15 @@ package com.xt.together.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.xt.together.R;
+import com.xt.together.constant.constant;
+import com.xt.together.control.PullToRefreshListView;
+import com.xt.together.http.HttpData;
+import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Food;
+import com.xt.together.model.Restaurant;
+import com.xt.together.model.Trends;
 import com.xt.together.utils.ImageLoader;
 import com.xt.together.waterfall.ScaleImageView;
 import com.xt.together.waterfall.XListView;
@@ -12,22 +19,27 @@ import com.xt.together.waterfall.XListView.IXListViewListener;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MyTrendsActivity extends Activity implements IXListViewListener{
 	
 	private XListView listView;
 	private StaggeredAdapter adapter;
-	private List<Food> list;
+	private static List<Trends> listTrends;
 	private Button btnBack;
-	private Button btnSetting;
+	private ImageView btnSetting;
+	private Oauth2AccessToken mAccessToken;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +47,17 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 		setContentView(R.layout.activity_mytrends);
 		btnBack = (Button)findViewById(R.id.mytrends_back);
 		btnBack.setOnClickListener(new BackOnClickListener());
-		btnSetting = (Button)findViewById(R.id.invite_setting);
+		btnSetting = (ImageView)findViewById(R.id.mytrends_setting);
 		btnSetting.setOnClickListener(new SettingOnClickListener());
 		listView = (XListView)findViewById(R.id.mytrends_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
-		list = new ArrayList<Food>();
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		list.add(Food.getFood());
-		adapter = new StaggeredAdapter(list);
+		if(null == listTrends){
+			listTrends = new ArrayList<Trends>();
+		}
+
+		mAccessToken = AccessTokenKeeper.readAccessToken(this);
+		adapter = new StaggeredAdapter(listTrends);
 		adapter.notifyDataSetChanged();
 	}
 
@@ -62,13 +69,49 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 
 	@Override
 	public void onRefresh() {
-		try {
+/*		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+*/				
+		new GetDataTask().execute();		
 		listView.stopRefresh();
 	}
+	
+	private class GetDataTask extends AsyncTask<Void, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(Void... params) {
+        	Log.e(constant.DEBUG_TAG, "zhixingle!");
+        	String resurl = "http://192.168.1.106:8080/TogetherWeb/dynamic";
+        	String jsonText = new HttpData().getPostMyTrendsData(resurl, "1");
+        	JsonAnalyze jsonAnalyze = new JsonAnalyze();
+        	Trends[] trends =jsonAnalyze.jsonMyTrendsAnalyze(jsonText);
+  //      	Log.e(constant.DEBUG_TAG,trends[0].getName());
+			if (null != trends) {
+				listTrends.remove(listTrends);
+				for (int i = 0; i < trends.length; i++) {
+					for (int j = 0; j < trends[i].getTrendslike().length; j++) {
+						Log.e(constant.DEBUG_TAG, "my liketrends is "
+								+ trends[i].getTrendslike()[j].getHead());
+					}
+					listTrends.add(trends[i]);
+				}
+			}
+        	
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result) {
+            //mListItems.addFirst("Added after refresh...");
+
+            // Call onRefreshComplete when the list has been refreshed.
+        	adapter.notifyDataSetChanged();
+            super.onPostExecute(result);
+        }
+    }
 
 	@Override
 	public void onLoadMore() {
@@ -83,9 +126,9 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 	private class StaggeredAdapter extends BaseAdapter {
 		
 		private ImageLoader imageLoader;
-        private List<Food> list;
+        private List<Trends> list;
 
-        public StaggeredAdapter(List<Food> list) {
+        public StaggeredAdapter(List<Trends> list) {
             this.list = list;
             this.imageLoader = new ImageLoader();
         }
@@ -94,7 +137,7 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
         public View getView(int position, View convertView, ViewGroup parent) {
 
             ViewHolder viewHolder;
-            Food food = list.get(position);
+            Trends trends = list.get(position);
 
             if (convertView == null) {
                 LayoutInflater layoutInflator = LayoutInflater.from(parent.getContext());
@@ -109,13 +152,13 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
             		viewHolder = (ViewHolder) convertView.getTag();
             }
             
-            imageLoader.MyTrendsLoadImage(food.getImage(), this, viewHolder);
+            imageLoader.MyTrendsLoadImage(trends.getImage(), this, viewHolder);
             viewHolder.imageView.setImageWidth(240);
             viewHolder.imageView.setImageHeight(240);
-            viewHolder.txtPrice.setText(food.getPrice());
-            viewHolder.txtShare.setText(food.getShare());
-            viewHolder.txtShop.setText(food.getShop());
-            convertView.setOnClickListener(new ViewOnClickListener(food));
+            viewHolder.txtPrice.setText(trends.getName());
+            viewHolder.txtShare.setText(trends.getDescription());
+            viewHolder.txtShop.setText(trends.getAddress());
+            convertView.setOnClickListener(new ViewOnClickListener(trends));
             return convertView;
         }
 
@@ -136,16 +179,22 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
         
         class ViewOnClickListener implements OnClickListener {
         	
-			private Food food;
+			private Trends trends;
 	
-			public ViewOnClickListener (Food food){
-				this.food = food;
+			public ViewOnClickListener (Trends trends){
+				this.trends = trends;
 			}
 
 			@Override
 			public void onClick(View v) {
+				Food food = new Food(trends.getId(), trends.getName(), "", "", "", trends.getImage(),
+						trends.getAddress(), trends.getDescription(), null);
+				SharedPreferences userInfo = getSharedPreferences("user_info", 0);
+				String selfImage = userInfo.getString("image_head", "");
+				Log.e(constant.DEBUG_TAG, selfImage + "we get the iamge");
 				Intent intent = new Intent(MyTrendsActivity.this, FoodDetailActivity.class);
-				intent.putExtra("food", this.food);
+				intent.putExtra("food", food);
+				intent.putExtra("image", selfImage);
 				startActivity(intent);
 			}
         }
