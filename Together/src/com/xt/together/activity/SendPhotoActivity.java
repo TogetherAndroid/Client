@@ -1,10 +1,5 @@
 package com.xt.together.activity;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import org.json.JSONArray;
-
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
@@ -15,10 +10,7 @@ import com.sina.weibo.sdk.openapi.models.Status;
 import com.sina.weibo.sdk.openapi.models.StatusList;
 import com.xt.together.R;
 import com.xt.together.constant.constant;
-import com.xt.together.control.PullToRefreshListView;
 import com.xt.together.http.HttpData;
-import com.xt.together.json.JsonAnalyze;
-import com.xt.together.model.Restaurant;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -32,14 +24,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.MultiAutoCompleteTextView.Tokenizer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SendPhotoActivity extends Activity {
 	
@@ -95,8 +84,6 @@ public class SendPhotoActivity extends Activity {
 			String description = txtDescription.getText().toString();
 			String address = txtAddress.getText().toString();
 			new GetDataTask().execute();
-//			mStatusesAPI.upload(description + address, MainActivity.bitmap, null, null, mstatusListener);
-//			new postStatusTask().execute();
 		}
 		
 	}
@@ -105,18 +92,11 @@ public class SendPhotoActivity extends Activity {
 
 		@Override
 		public void onComplete(String response) {
-			// TODO Auto-generated method stub
-			if(!TextUtils.isEmpty(response)){
-//				JSONArray friendlist = new JsonAnalyze().jsonWeiboFansAnalyze(response);
-				Log.e(constant.DEBUG_TAG, response);
-			}
 		}
 
 		@Override
 		public void onWeiboException(WeiboException e) {
-			// TODO Auto-generated method stub
 			ErrorInfo info = ErrorInfo.parse(e.getMessage());
-			Log.e(constant.DEBUG_TAG, "获得微博信息成功，错误" +  info.toString());
 		}
 		
 	};
@@ -147,7 +127,6 @@ public class SendPhotoActivity extends Activity {
 
 		@Override
 		public void onWeiboException(WeiboException e) {
-			// TODO Auto-generated method stub
 			ErrorInfo info = ErrorInfo.parse(e.getMessage());
 			Log.e(constant.DEBUG_TAG, "获得微博信息成功，错误" +  info.toString());
 		}
@@ -158,20 +137,13 @@ public class SendPhotoActivity extends Activity {
 
         @Override
         protected String doInBackground(Void... params) {
-        	//String aa = new HttpData().sendpicture(constant.HTTPMYRECIPEURL, MainActivity.bitmap);
-        	String picAddress = new HttpData().sendPicUseUpload(MainActivity.bitmap);
-  //      	Log.e(constant.DEBUG_TAG,"aa is" + aa);
-        	
+        		String picAddress = new HttpData().sendPicUseUpload(MainActivity.bitmap);
             return picAddress;
         }
 
         @Override
         protected void onPostExecute(String result) {
-            //mListItems.addFirst("Added after refresh...");
-
-            // Call onRefreshComplete when the list has been refreshed.
-        	new postStatusTask().execute(result);
- //           super.onPostExecute(result);
+        		new postStatusTask().execute(result);
         }
     }
 	
@@ -179,21 +151,12 @@ public class SendPhotoActivity extends Activity {
 
         @Override
         protected String[] doInBackground(String... params) {
- //       	 Log.e(constant.DEBUG_TAG, "the status" +constant.HTTPMYRECIPEURL + constant.userScreenName + "wuhan" + txtDescription.getText().toString() + status.id ); 
- //           String aa = new HttpData().addPostStatusData(constant.HTTPMYRECIPEURL, constant.userScreenName, "wuhan", txtDescription.getText().toString(), status.id);
-        	
-        	String myurl = "http://192.168.1.106:8080/TogetherWeb/dynamic";
-        	String aa = new HttpData().addPostStatusData(myurl, constant.userScreenName, "wuhan", txtDescription.getText().toString(), params[0], constant.USERHTTPID);
-            Log.e(constant.DEBUG_TAG, "we get the status response" + aa);        	
+        		String aa = new HttpData().addPostStatusData(constant.HTTPMYRECIPEURL, constant.userScreenName, "wuhan", txtDescription.getText().toString(), params[0], constant.USERHTTPID);
             return null;
         }
 
         @Override
         protected void onPostExecute(String[] result) {
-            //mListItems.addFirst("Added after refresh...");
-
-            // Call onRefreshComplete when the list has been refreshed.
-
             super.onPostExecute(result);
         }
     }
@@ -202,8 +165,6 @@ public class SendPhotoActivity extends Activity {
 
 		@Override
 		public void afterTextChanged(Editable text) {
-			// TODO Auto-generated method stub
-//			Log.e(constant.DEBUG_TAG, "after input the chars is " + text);
 			if (txtDescription.getSelectionEnd() > 0) {
 				char lastText = text
 						.charAt(txtDescription.getSelectionEnd() - 1);
@@ -211,7 +172,6 @@ public class SendPhotoActivity extends Activity {
 					if(!txtDescription.isPopupShowing()){
 						txtDescription.showDropDown();
 					}
-					Log.e(constant.DEBUG_TAG, "i have found @");
 				}
 			}
 		}
@@ -219,14 +179,12 @@ public class SendPhotoActivity extends Activity {
 		@Override
 		public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
 				int arg3) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void onTextChanged(CharSequence arg0, int arg1, int arg2,
 				int arg3) {
-			// TODO Auto-generated method stub
 
 		}
 		
@@ -237,7 +195,6 @@ public class SendPhotoActivity extends Activity {
 
 		@Override
 		public int findTokenEnd(CharSequence text, int cursor) {
-			// TODO Auto-generated method stub
 			int i = cursor;
 			int len = text.length();
 			
@@ -253,7 +210,6 @@ public class SendPhotoActivity extends Activity {
 
 		@Override
 		public int findTokenStart(CharSequence text, int cursor) {
-			// TODO Auto-generated method stub
 			int i = cursor;
 			int len = text.length();
 			
@@ -279,7 +235,6 @@ public class SendPhotoActivity extends Activity {
 
 		@Override
 		public CharSequence terminateToken(CharSequence text) {
-			// TODO Auto-generated method stub
 			int i = text.length();
 			
 			while(i > 0 && text.charAt(i-1) == ' '){

@@ -14,30 +14,17 @@
 
     <Button
         android:id="@+id/fooddetail_back"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="6dp"
+        style="@style/btn_back"
         android:background="@drawable/title_back" />
     
     <ImageView
-        android:layout_width="3dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/fooddetail_back"
+        style="@style/division_left"
         android:src="@drawable/title_division" />
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/fooddetail_title"
-        android:scaleType="fitXY"
-        android:src="@drawable/background" />
     <RelativeLayout
         android:id="@+id/fooddetail_bottom"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bottom_background">
         <Button
@@ -67,92 +54,90 @@
             android:background="@drawable/bottom_share"/>
     </RelativeLayout>
     
-    <ImageView
-        android:id="@+id/fooddetail_menu1"
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/fooddetail_bottom"
-        android:src="@drawable/restaurantdetail_menu" />
-    <ImageView
-        android:id="@+id/fooddetail_menu2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/fooddetail_menu1"
-        android:src="@drawable/restaurantdetail_menu" />
-
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/fooddetail_menu2"
+        android:layout_height="fill_parent"
         android:layout_below="@id/fooddetail_title"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/fooddetail_img" />
+        android:layout_above="@id/fooddetail_bottom">
+        <RelativeLayout 
+            android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:background="@drawable/background"
+        	>
+        	<ImageView
+        		android:id="@+id/fooddetail_menu_img"
+        		android:layout_width="fill_parent"
+        		android:layout_height="wrap_content"
+        		android:layout_alignParentTop="true"
+        		android:layout_marginTop="5dp"
+        		android:src="@drawable/fooddetail_img" />
+            <ImageView
+        		android:id="@+id/fooddetail_menu1"
+        		android:layout_width="fill_parent"
+        		android:layout_height="wrap_content"
+        		android:layout_below="@id/fooddetail_menu_img"
+        		android:src="@drawable/fooddetail_menu_address" />
+    		<ImageView
+        		android:id="@+id/fooddetail_menu2"
+        		android:layout_width="fill_parent"
+        		android:layout_height="wrap_content"
+        		android:layout_below="@id/fooddetail_menu1"
+        		android:src="@drawable/fooddetail_menu_like" />
+    		<TextView
+        		android:id="@+id/fooddetail_address"
+        		android:layout_width="240dp"
+        		android:singleLine="true"
+        		android:layout_centerHorizontal="true"
+        		android:layout_height="wrap_content"
+        		android:layout_above="@id/fooddetail_menu2"
+        		android:layout_marginBottom="25dp"
+        		android:paddingLeft="20dp"
+        		android:textColor="#222222"
+        		android:textSize="17sp"
+        		android:text="XXXXXXXXXXXXXXXXXX"
+        		android:textAppearance="?android:attr/textAppearanceMedium" />
+    		<ImageView
+        		android:id="@+id/fooddetail_head"
+        		android:layout_width="60dp"
+        		android:layout_height="60dp"
+        		android:layout_alignTop="@id/fooddetail_menu_img"
+        		android:layout_alignLeft="@id/fooddetail_address"
+        		android:layout_marginTop="10dp"
+        		android:src="@drawable/empty_photo" />
 
-    <ImageView
-        android:id="@+id/fooddetail_head"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/fooddetail_back"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/empty_photo" />
+    		<TextView
+        		android:id="@+id/fooddetail_name"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_alignTop="@id/fooddetail_head"
+        		android:layout_toRightOf="@id/fooddetail_head"
+        		android:layout_marginLeft="10dp"
+        		android:textColor="#222222"
+        		android:textSize="17sp"
+        		android:text="Scarecrow"
+        		android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/fooddetail_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/fooddetail_head"
-        android:layout_toRightOf="@id/fooddetail_head"
-        android:layout_marginLeft="10dp"
-        android:textColor="#222222"
-        android:textSize="17sp"
-        android:text="Scarecrow"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    		<TextView
+        		android:id="@+id/fooddetail_description"
+        		android:layout_width="180dp"
+        		android:layout_height="wrap_content"
+        		android:lines="2"
+        		android:layout_below="@+id/fooddetail_name"
+        		android:layout_alignLeft="@id/fooddetail_name"
+        		android:textColor="#222222"
+        		android:textSize="17sp"
+        		android:text="在南三门吃到了鸡蛋灌饼，超级好吃"
+        		android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/fooddetail_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fooddetail_name"
-        android:layout_alignLeft="@id/fooddetail_name"
-        android:textColor="#222222"
-        android:textSize="17sp"
-        android:text="在南三门吃到了鸡蛋灌饼，超级好吃"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ImageView
-        android:id="@+id/fooddetail_image"
-        android:layout_width="250dp"
-        android:layout_height="170dp"
-        android:layout_below="@+id/fooddetail_description"
-        android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/empty_photo" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/fooddetail_head"
-        android:layout_alignTop="@+id/fooddetail_menu2"
-        android:src="@drawable/restaurantdetail_address" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/fooddetail_head"
-        android:layout_alignTop="@+id/fooddetail_menu1"
-        android:src="@drawable/fooddetail_like" />
-    <TextView
-        android:id="@+id/fooddetail_address"
-        android:layout_width="240dp"
-        android:singleLine="true"
-        android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/fooddetail_menu1"
-        android:layout_marginBottom="25dp"
-        android:paddingLeft="20dp"
-        android:textColor="#222222"
-        android:textSize="17sp"
-        android:text="XXXXXXXXXXXXXXXXXX"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    		<ImageView
+        		android:id="@+id/fooddetail_image"
+        		android:layout_width="250dp"
+        		android:layout_height="170dp"
+        		android:layout_below="@+id/fooddetail_head"
+        		android:layout_marginTop="10dp"
+        		android:layout_centerHorizontal="true"
+        		android:src="@drawable/empty_photo" />
+        	</RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

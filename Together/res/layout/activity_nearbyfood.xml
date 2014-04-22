@@ -6,7 +6,7 @@
     <TextView
         android:id="@+id/nearbyfood_title"
         android:layout_width="fill_parent"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:text="附近美食"
@@ -24,22 +24,14 @@
         android:background="@drawable/background" />
     <ImageView
 	    android:id="@+id/nearbyfood_setting"
-	    android:layout_width="34dp"
-	    android:layout_height="34dp"
-	    android:layout_marginTop="6dp"
-	    android:layout_marginRight="12dp"
-	    android:layout_marginBottom="6dp"
 	    android:layout_alignBottom="@id/nearbyfood_title"
-	    android:layout_alignParentRight="true"
+	    style="@style/btn_setting"
 	    android:src="@drawable/title_setting" 
 	    android:contentDescription="设置按钮"/>
 	
 	<ImageView
-        android:layout_width="3dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
         android:layout_toLeftOf="@id/nearbyfood_setting"
+        style="@style/division_right"
         android:src="@drawable/title_division" 
         android:contentDescription="分割线"/>
 

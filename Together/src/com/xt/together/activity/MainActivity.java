@@ -1,19 +1,13 @@
 package com.xt.together.activity;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
 import com.sina.weibo.sdk.openapi.UsersAPI;
 import com.sina.weibo.sdk.openapi.legacy.FriendshipsAPI;
-import com.sina.weibo.sdk.openapi.models.User;
-import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.RequestType;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
-import com.umeng.socialize.controller.listener.SocializeListeners.UMDataListener;
 import com.xt.together.R;
 import com.xt.together.constant.constant;
 import com.xt.together.json.JsonAnalyze;
@@ -36,7 +30,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.TabHost.TabSpec;
 
 public class MainActivity extends FragmentActivity{

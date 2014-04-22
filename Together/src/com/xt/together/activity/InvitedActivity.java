@@ -25,7 +25,7 @@ import android.widget.TextView;
 public class InvitedActivity extends ListActivity {
 	
 	private Button btnBack;
-	private Button btnSetting;
+	private ImageView btnSetting;
 	private static List<Invite> listInvited;
 
 	@Override
@@ -42,7 +42,7 @@ public class InvitedActivity extends ListActivity {
 		setContentView(R.layout.activity_invited);
 		btnBack = (Button)findViewById(R.id.invited_back);
 		btnBack.setOnClickListener(new BackOnClickListener());
-		btnSetting = (Button)findViewById(R.id.invite_setting);
+		btnSetting = (ImageView)findViewById(R.id.invite_setting);
 		btnSetting.setOnClickListener(new SettingOnClickListener());
 		((PullToRefreshListView) getListView()).setOnRefreshListener(new com.xt.together.control.PullToRefreshListView.OnRefreshListener() {
             @Override

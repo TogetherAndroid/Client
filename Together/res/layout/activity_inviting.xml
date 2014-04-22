@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <TextView
+        android:id="@+id/inviting_title"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:text="邀请好友"
+        android:gravity="center"
+        android:background="@drawable/title_background"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <Button
+        android:id="@+id/inviting_back"
+        style="@style/btn_back"
+        android:background="@drawable/title_back" />
+    
+    <ImageView
+        android:layout_toRightOf="@+id/inviting_back"
+        style="@style/division_left"
+        android:src="@drawable/title_division" />
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/inviting_title"
+        android:scaleType="fitXY"
+        android:src="@drawable/background" />
+    <Button
+        android:id="@+id/inviting_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:background="@drawable/inviting_btn_inviting" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/inviting_title"
+        android:layout_above="@id/inviting_finish" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background" >
+            <ImageView
+                android:id="@+id/inviting_menu_inviting"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/inviting_menu_inviting" />
+            <ImageView
+                android:id="@+id/inviting_menu_date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inviting_menu_inviting"
+                android:src="@drawable/inviting_menu_date" />
+            <ImageView
+                android:id="@+id/inviting_menu_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inviting_menu_date"
+                android:src="@drawable/fooddetail_menu_address" />
+
+            <ImageView
+                android:id="@+id/inviting_menu_phone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inviting_menu_address"
+                android:src="@drawable/inviting_menu_phone" />
+         </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

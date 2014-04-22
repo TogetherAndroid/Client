@@ -3,14 +3,11 @@ package com.xt.together.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.xt.together.R;
 import com.xt.together.constant.constant;
-import com.xt.together.control.PullToRefreshListView;
 import com.xt.together.http.HttpData;
 import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Food;
-import com.xt.together.model.Restaurant;
 import com.xt.together.model.Trends;
 import com.xt.together.utils.ImageLoader;
 import com.xt.together.waterfall.ScaleImageView;
@@ -39,7 +36,6 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 	private static List<Trends> listTrends;
 	private Button btnBack;
 	private ImageView btnSetting;
-	private Oauth2AccessToken mAccessToken;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +52,6 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 			listTrends = new ArrayList<Trends>();
 		}
 
-		mAccessToken = AccessTokenKeeper.readAccessToken(this);
 		adapter = new StaggeredAdapter(listTrends);
 		adapter.notifyDataSetChanged();
 	}
@@ -68,13 +63,7 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 	}
 
 	@Override
-	public void onRefresh() {
-/*		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-*/				
+	public void onRefresh() {			
 		new GetDataTask().execute();		
 		listView.stopRefresh();
 	}
@@ -83,43 +72,28 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 
         @Override
         protected String[] doInBackground(Void... params) {
-        	Log.e(constant.DEBUG_TAG, "zhixingle!");
-        	String resurl = "http://192.168.1.106:8080/TogetherWeb/dynamic";
-        	String jsonText = new HttpData().getPostMyTrendsData(resurl, "1");
+        	String jsonText = new HttpData().getPostMyTrendsData(constant.HTTPMYRECIPEURL, "1");
         	JsonAnalyze jsonAnalyze = new JsonAnalyze();
         	Trends[] trends =jsonAnalyze.jsonMyTrendsAnalyze(jsonText);
-  //      	Log.e(constant.DEBUG_TAG,trends[0].getName());
-			if (null != trends) {
-				listTrends.remove(listTrends);
-				for (int i = 0; i < trends.length; i++) {
-					for (int j = 0; j < trends[i].getTrendslike().length; j++) {
-						Log.e(constant.DEBUG_TAG, "my liketrends is "
-								+ trends[i].getTrendslike()[j].getHead());
-					}
-					listTrends.add(trends[i]);
-				}
+		if (null != trends) {
+			listTrends.remove(listTrends);
+			for (int i = 0; i < trends.length; i++) {
+				listTrends.add(trends[i]);
 			}
+		}
         	
             return null;
         }
 
         @Override
         protected void onPostExecute(String[] result) {
-            //mListItems.addFirst("Added after refresh...");
-
-            // Call onRefreshComplete when the list has been refreshed.
-        	adapter.notifyDataSetChanged();
+        		adapter.notifyDataSetChanged();
             super.onPostExecute(result);
         }
     }
 
 	@Override
 	public void onLoadMore() {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		listView.stopLoadMore();
 	}
 	

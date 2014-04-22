@@ -23,20 +23,20 @@
 
     <TextView
         android:id="@+id/item_food_price"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
+        android:singleLine="true"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:gravity="right"
         android:textColor="#222222"
         android:layout_marginLeft="30dp"
         android:text="好好吃..." />
     
     <TextView
         android:id="@+id/item_food_share"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
+        android:singleLine="true"
         android:layout_height="wrap_content"
         android:layout_gravity="left|bottom"
-        android:gravity="right"
         android:textColor="#222222"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"

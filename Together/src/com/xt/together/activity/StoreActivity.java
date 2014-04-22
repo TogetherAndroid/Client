@@ -15,7 +15,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +44,6 @@ public class StoreActivity extends ListActivity {
 		((PullToRefreshListView) getListView()).setOnRefreshListener(new com.xt.together.control.PullToRefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Do work to refresh the list here.
                 new GetDataTask().execute();
             }
         });
@@ -66,16 +64,11 @@ public class StoreActivity extends ListActivity {
 
         @Override
         protected String[] doInBackground(Void... params) {
-            // Simulates a background job.
-        	
-        	String jsonString = new HttpData().getPostStoreData("http://192.168.1.106:8080/TogetherWeb/store", "1");
-        	
-        	Restaurant[] restaurantInfo = new JsonAnalyze().jsonStoreAnalyze(jsonString);
+        		String jsonString = new HttpData().getPostStoreData(constant.HTTPSTOREURL, "1");
+        		Restaurant[] restaurantInfo = new JsonAnalyze().jsonStoreAnalyze(jsonString);
 			if (null != restaurantInfo) {
 				listStore.remove(listStore);
 				for (int i = 0; i < restaurantInfo.length; i++) {
-					Log.e(constant.DEBUG_TAG, "we get the store json"
-							+ restaurantInfo[i].getLike());
 					listStore.add(restaurantInfo[i]);
 				}
 			}
@@ -84,9 +77,7 @@ public class StoreActivity extends ListActivity {
 
         @Override
         protected void onPostExecute(String[] result) {
-            //mListItems.addFirst("Added after refresh...");
-
-        	adapter.notifyDataSetChanged();
+        		adapter.notifyDataSetChanged();
             // Call onRefreshComplete when the list has been refreshed.
             ((PullToRefreshListView) getListView()).onRefreshComplete();
 

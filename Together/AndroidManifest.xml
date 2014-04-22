@@ -85,6 +85,9 @@
         <activity 
             android:name="com.xt.together.activity.SettingActivity">
         </activity>
+        <activity 
+            android:name="com.xt.together.activity.InvitingActivity">
+        </activity>
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="530ae82456240bbb9a1d0c9d" >

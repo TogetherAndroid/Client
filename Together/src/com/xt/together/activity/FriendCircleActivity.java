@@ -8,12 +8,8 @@ import org.json.JSONArray;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
-import com.sina.weibo.sdk.openapi.UsersAPI;
 import com.sina.weibo.sdk.openapi.legacy.FriendshipsAPI;
 import com.sina.weibo.sdk.openapi.models.ErrorInfo;
-import com.sina.weibo.sdk.openapi.models.Status;
-import com.sina.weibo.sdk.openapi.models.StatusList;
-import com.sina.weibo.sdk.openapi.models.User;
 import com.xt.together.R;
 import com.xt.together.constant.constant;
 import com.xt.together.http.HttpData;
@@ -30,13 +26,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -83,7 +77,6 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 
 	@Override
 	public void onRefresh() {
-		Log.e(constant.DEBUG_TAG, "we start to send ids" + System.currentTimeMillis());
 		mFriendshipsAPI = new FriendshipsAPI(mAccessToken);
 		mFriendshipsAPI.followersIds(constant.userScreenName, 50, 0, mListener);
 		listView.stopRefresh();
@@ -103,11 +96,8 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 
 		@Override
 		public void onComplete(String response) {
-			// TODO Auto-generated method stub
 			if(!TextUtils.isEmpty(response)){
-				
 				JSONArray friendids = new JsonAnalyze().jsonWeiboFansAnalyze(response);
-				Log.e(constant.DEBUG_TAG, friendids.toString() + System.currentTimeMillis());				
 				new GetDataTask().execute(friendids);
 			}
 			
@@ -115,9 +105,7 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 		
 		@Override
 		public void onWeiboException(WeiboException e) {
-			// TODO Auto-generated method stub
 			ErrorInfo info = ErrorInfo.parse(e.getMessage());
-			Log.e(constant.DEBUG_TAG, "获得微博信息成功，错误" +  info.toString());
 		}
 	};
 	
@@ -125,26 +113,20 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 
         @Override
         protected String[] doInBackground(JSONArray... params) {
-        	String resurl = "http://192.168.1.106:8080/TogetherWeb/friendcircle";
-        	String jsonString = new HttpData().sendFriendids(resurl, params[0]);
-        	Log.e(constant.DEBUG_TAG, "we start to get json" + System.currentTimeMillis());
-        	FriendsCircle[] newFriendsCircle = new JsonAnalyze().jsonFriendsCircleAnalyze(jsonString);
-        	if(null != newFriendsCircle){
-        		listFriendCircle.remove(listFriendCircle);
-        		for(int i = 0; i < newFriendsCircle.length ; i ++){
-        			listFriendCircle.add(newFriendsCircle[i]);
+        		String jsonString = new HttpData().sendFriendids(constant.HTTPFRIENDCIRCLE, params[0]);
+        		FriendsCircle[] newFriendsCircle = new JsonAnalyze().jsonFriendsCircleAnalyze(jsonString);
+        		if(null != newFriendsCircle){
+        			listFriendCircle.remove(listFriendCircle);
+        			for(int i = 0; i < newFriendsCircle.length ; i ++){
+        				listFriendCircle.add(newFriendsCircle[i]);
+        			}
         		}
-        	}
-        	Log.e(constant.DEBUG_TAG, jsonString.toString() + System.currentTimeMillis());
             return null;
         }
 
         @Override
         protected void onPostExecute(String[] result) {
-            //mListItems.addFirst("Added after refresh...");
-
-            // Call onRefreshComplete when the list has been refreshed.
-        	adapter.notifyDataSetChanged();
+        		adapter.notifyDataSetChanged();
             super.onPostExecute(result);
         }
     }

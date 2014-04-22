@@ -1,7 +1,5 @@
 package com.xt.together.activity;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 import com.xt.together.R;
@@ -22,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -31,6 +30,7 @@ public class NearbyRestaurant extends ListFragment {
 	
 	private static List<Restaurant> listNearbyRestaurant;
 	private NearbyRestaurantAdapter adapter;
+	private ImageView btnSetting;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +41,8 @@ public class NearbyRestaurant extends ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		btnSetting = (ImageView)getView().findViewById(R.id.nearbyrestaurant_setting);
+		btnSetting.setOnClickListener(new SettingOnClickListener());
 		initView();
 	}
 
@@ -49,7 +51,6 @@ public class NearbyRestaurant extends ListFragment {
 		((PullToRefreshListView) getListView()).setOnRefreshListener(new com.xt.together.control.PullToRefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Do work to refresh the list here.
                 new GetDataTask().execute();
             }
         });
@@ -70,8 +71,7 @@ public class NearbyRestaurant extends ListFragment {
 
         @Override
         protected String[] doInBackground(Void... params) {
-        	String resurl = "http://192.168.1.106:8080/TogetherWeb/nearbyrestaurant";
-        	String jsonText = new HttpData().getPostNearbyResData(resurl);
+        	String jsonText = new HttpData().getPostNearbyResData(constant.HTTPNERABYRESTAURANTURL);
         	JsonAnalyze jsonAnalyze = new JsonAnalyze();
         	Restaurant[] newrestaurant =jsonAnalyze.jsonNearbyRestaurantAnalyze(jsonText);
 			if (null != newrestaurant) {
@@ -87,11 +87,7 @@ public class NearbyRestaurant extends ListFragment {
 
         @Override
         protected void onPostExecute(String[] result) {
-            //mListItems.addFirst("Added after refresh...");
-
-            // Call onRefreshComplete when the list has been refreshed.
-        	
-        	adapter.notifyDataSetChanged();
+        		adapter.notifyDataSetChanged();
             ((PullToRefreshListView) getListView()).onRefreshComplete();
 
             super.onPostExecute(result);
@@ -141,7 +137,6 @@ public class NearbyRestaurant extends ListFragment {
 				viewHolder = (ViewHolder)convertView.getTag();
 			}
 			Restaurant restaurant = list.get(position);
-//			Log.e(constant.DEBUG_TAG, )
 			imageLoader.nearybyRestaurantLoadImage(restaurant.getImage(), this, viewHolder);
 			viewHolder.txtAverage.setText("人均：" + restaurant.getAverage());
 			viewHolder.txtName.setText(restaurant.getName());
@@ -156,6 +151,16 @@ public class NearbyRestaurant extends ListFragment {
 		TextView txtName;
 		TextView txtAverage;
 		TextView txtSpecialty;
+	}
+    
+    private class SettingOnClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(NearbyRestaurant.this.getActivity(),SettingActivity.class);
+			startActivity(intent);
+		}
+		
 	}
 
 }

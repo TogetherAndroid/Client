@@ -8,21 +8,32 @@
         android:layout_width="fill_parent"
         android:layout_height="48dp"
         android:layout_alignParentTop="true"
-        android:background="@drawable/title_background"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:background="@drawable/title_background"/>
     
+    <Button
+        android:id="@+id/restaurantdetail_back"
+		style="@style/btn_back"
+        android:background="@drawable/title_back" />
+    
+    <ImageView
+        android:layout_toRightOf="@+id/restaurantdetail_back"
+        style="@style/division_left"
+        android:src="@drawable/title_division" />
+
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/restaurantdetail_title"
         android:scaleType="fitXY"
         android:src="@drawable/background" />
+
     <RelativeLayout
         android:id="@+id/restaurantdetail_bottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bottom_background">
+        android:background="@drawable/bottom_background" >
+
         <Button
             android:id="@+id/restaurantdetail_like"
             android:layout_width="wrap_content"
@@ -30,16 +41,16 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="40dp"
-            android:background="@drawable/bottom_store"/>
+            android:background="@drawable/bottom_store" />
 
         <Button
             android:id="@+id/restaurantdetail_invite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bottom_invite"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
-        
+            android:layout_centerVertical="true"
+            android:background="@drawable/bottom_invite" />
+
         <Button
             android:id="@+id/restaurantdetail_share"
             android:layout_width="wrap_content"
@@ -47,138 +58,115 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="40dp"
-            android:background="@drawable/bottom_share"/>
+            android:background="@drawable/bottom_share" />
     </RelativeLayout>
-    
-    <ImageView
-        android:id="@+id/restaurantdetail_menu1"
+
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_above="@id/restaurantdetail_bottom"
-        android:src="@drawable/restaurantdetail_menu" />
-    <ImageView
-        android:id="@+id/restaurantdetail_menu2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/restaurantdetail_menu1"
-        android:src="@drawable/restaurantdetail_menu" />
-    <ImageView
-        android:id="@+id/restaurantdetail_menu3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/restaurantdetail_menu2"
-        android:src="@drawable/restaurantdetail_menu" />
+        android:layout_below="@id/restaurantdetail_title" >
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/restaurantdetail_menu3"
-        android:layout_below="@id/restaurantdetail_title"
-        android:src="@drawable/restaurantdetail_image" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background" >
 
-    <TextView
-        android:id="@+id/restaurantdetail_name"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/restaurantdetail_title"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="20dp"
-        android:text="莲池印度餐厅"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#222222"
-        android:textSize="17sp" 
-        android:singleLine="true"/>
+            <ImageView
+                android:id="@+id/restaurantdetail_menu_img"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/restaurantdetail_image" />
 
-    <ImageView
-        android:id="@+id/restaurantdetail_img"
-        android:layout_width="fill_parent"
-        android:layout_height="170dp"
-        android:layout_below="@+id/restaurantdetail_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:src="@drawable/umeng_socialize_at_button" />
+            <ImageView
+                android:id="@+id/restaurantdetail_menu1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/restaurantdetail_menu_img"
+                android:src="@drawable/restaurantdetail_menu_phone" />
 
-    <TextView
-        android:id="@+id/restaurantdetail_address"
-        android:layout_width="240dp"
-        android:singleLine="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/restaurantdetail_menu2"
-        android:gravity="center_horizontal"
-        android:paddingLeft="20dp"
-        android:textColor="#222222"
-        android:textSize="16sp"
-        android:text="洪山区珞瑜路1037号华中科技大学"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <ImageView
+                android:id="@+id/restaurantdetail_menu2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/restaurantdetail_menu1"
+                android:src="@drawable/restaurantdetail_menu_specialty" />
 
-    <TextView
-        android:id="@+id/restaurantdetail_specialty"
-        android:layout_width="240dp"
-        android:singleLine="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:layout_above="@id/restaurantdetail_menu1"
-        android:textColor="#222222"
-        android:textSize="16sp"
-        android:text="泰国菜、泰国菜、泰国菜"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <ImageView
+                android:id="@+id/restaurantdetail_menu3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/restaurantdetail_menu2"
+                android:src="@drawable/fooddetail_menu_address" />
 
-    <TextView
-        android:id="@+id/restaurantdetail_phone"
-        android:layout_width="240dp"
-        android:singleLine="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        android:paddingLeft="20dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/restaurantdetail_bottom"
-        android:textColor="#222222"
-        android:textSize="16sp"
-        android:text="电话18771051583"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/restaurantdetail_name"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/restaurantdetail_title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:singleLine="true"
+                android:text="莲池印度餐厅"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#222222"
+                android:textSize="17sp" />
 
-    <Button
-        android:id="@+id/restaurantdetail_back"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="6dp"
-        android:background="@drawable/title_back" />
+            <ImageView
+                android:id="@+id/restaurantdetail_img"
+                android:layout_width="fill_parent"
+                android:layout_height="170dp"
+                android:layout_below="@+id/restaurantdetail_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/umeng_socialize_at_button" />
 
-    <ImageView
-        android:layout_width="3dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="3dp"
-        android:layout_toRightOf="@+id/restaurantdetail_back"
-        android:src="@drawable/title_division" />
+            <TextView
+                android:id="@+id/restaurantdetail_specialty"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/restaurantdetail_menu3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="25dp"
+                android:paddingLeft="20dp"
+                android:singleLine="true"
+                android:text="泰国菜、泰国菜、泰国菜"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#222222"
+                android:textSize="16sp" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/restaurantdetail_name"
-        android:layout_alignTop="@+id/restaurantdetail_menu3"
-        android:src="@drawable/restaurantdetail_address" />
+            <TextView
+                android:id="@+id/restaurantdetail_phone"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/restaurantdetail_menu2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="25dp"
+                android:paddingLeft="20dp"
+                android:singleLine="true"
+                android:text="电话18771051583"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#222222"
+                android:textSize="16sp" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/restaurantdetail_name"
-        android:layout_alignTop="@+id/restaurantdetail_menu2"
-        android:src="@drawable/restaurantdetail_specialty" />
+            <TextView
+                android:id="@+id/restaurantdetail_address"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignTop="@+id/restaurantdetail_menu3"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:paddingLeft="16dp"
+                android:singleLine="true"
+                android:text="洪山区珞瑜路1037号华中科技大学"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#222222"
+                android:textSize="16sp" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/restaurantdetail_name"
-        android:layout_alignTop="@+id/restaurantdetail_menu1"
-        android:src="@drawable/restaurantdetail_phone" />
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -16,13 +16,8 @@
 
     <ImageView
         android:id="@+id/myrecipe_setting"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
         android:layout_alignBottom="@id/myrecipe_title"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="6dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="6dp"
+        style="@style/btn_setting"
         android:contentDescription="设置按钮"
         android:src="@drawable/title_setting" />
 
@@ -39,14 +34,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/myrecipe_menu_head"
+        android:scaleType="fitXY"
         android:src="@drawable/myrecipe_menu_info" />
 
     <ImageView
-        android:layout_width="3dp"
-        android:layout_height="36dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
         android:layout_toLeftOf="@id/myrecipe_setting"
+        style="@style/division_right"
         android:contentDescription="分割线"
         android:src="@drawable/title_division" />
 

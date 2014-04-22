@@ -7,15 +7,12 @@ import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
 import com.sina.weibo.sdk.openapi.UsersAPI;
-import com.sina.weibo.sdk.openapi.legacy.FriendshipsAPI;
 import com.sina.weibo.sdk.openapi.models.User;
 import com.sina.weibo.sdk.widget.LoginButton;
 import com.xt.together.R;
 import com.xt.together.constant.constant;
-import com.xt.together.control.PullToRefreshListView;
 import com.xt.together.http.HttpData;
 import com.xt.together.json.JsonAnalyze;
-import com.xt.together.model.Restaurant;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,7 +22,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 
 public class LoginActivity extends Activity{
 
@@ -38,10 +34,8 @@ public class LoginActivity extends Activity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
-//		AccessTokenKeeper.clear(LoginActivity.this);
 		if("" != AccessTokenKeeper.readAccessToken(LoginActivity.this).getUid()){
 			Log.e(constant.DEBUG_TAG, AccessTokenKeeper.readAccessToken(LoginActivity.this).toString());
 			Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -141,11 +135,8 @@ public class LoginActivity extends Activity{
 
         @Override
         protected String[] doInBackground(String... params) {
-        	String url = "http://192.168.1.106:8080/TogetherWeb/user";
-        	String jsonString = new HttpData().addPostWeiboIdData(url, params[0], params[2], params[1]);
-        	Log.e(constant.DEBUG_TAG, jsonString);
+        	String jsonString = new HttpData().addPostWeiboIdData(constant.HTTPUSERURL, params[0], params[2], params[1]);
         	String HttpId = new JsonAnalyze().jsonIDAnalyze(jsonString);
-        	Log.e(constant.DEBUG_TAG, HttpId + "this is HttpId");
         	if(null != HttpId && "" != HttpId){
         		SharedPreferences userInfo = getSharedPreferences("user_info", 0);
         		userInfo.edit().putString("http_id", HttpId).commit();

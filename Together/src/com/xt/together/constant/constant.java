@@ -9,6 +9,8 @@ public class constant {
 	
 	public static final String HTTPMYRECIPEURL = "http://togetherxt.duapp.com/dynamic";
 	
+	public static final String HTTPFRIENDCIRCLE = "http://togetherxt.duapp.com/friendcircle";
+	
 	public static final String HTTPLIKEURL = "http://togetherxt.duapp.com/like";
 	
 	public static final String HTTPSTOREURL = "http://togetherxt.duapp.com/store";
@@ -16,6 +18,8 @@ public class constant {
 	public static final String HTTPINVITEURL = "http://togetherxt.duapp.com/invite";
 	
 	public static final String HTTPNEARBYFOODURL = "http://togetherxt.duapp.com/nearbyfood";
+	
+	public static final String HTTPUSERURL = "http://togetherxt.duapp.com/user";
 	
 	public static final String APP_KEY = "3181511283";
 	

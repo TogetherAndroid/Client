@@ -23,22 +23,14 @@
         android:background="@drawable/background" />
     <ImageView
 	    android:id="@+id/friendcircle_setting"
-	    android:layout_width="34dp"
-	    android:layout_height="34dp"
-	    android:layout_marginTop="6dp"
-	    android:layout_marginRight="12dp"
-	    android:layout_marginBottom="6dp"
 	    android:layout_alignBottom="@id/friendcircle_title"
-	    android:layout_alignParentRight="true"
+	    style="@style/btn_setting"
 	    android:src="@drawable/title_setting" 
 	    android:contentDescription="设置按钮"/>
 	
 	<ImageView
-        android:layout_width="3dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
         android:layout_toLeftOf="@id/friendcircle_setting"
+        style="@style/division_right"
         android:src="@drawable/title_division" 
         android:contentDescription="分割线"/>
 

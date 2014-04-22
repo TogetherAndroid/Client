@@ -6,7 +6,7 @@
     <TextView
         android:id="@+id/sendphoto_title"
         android:layout_width="fill_parent"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:background="@drawable/title_background"
         android:gravity="center"
@@ -30,38 +30,23 @@
 
     <Button
         android:id="@+id/sendphoto_back"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="6dp"
+		style="@style/btn_back"
         android:background="@drawable/title_back" />
 
     <ImageView
-        android:layout_width="3dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/sendphoto_back"
+        style="@style/division_left"
         android:src="@drawable/title_division" />
 
     <Button
         android:id="@+id/sendphoto_send"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
         android:layout_alignBottom="@id/sendphoto_title"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="6dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="6dp"
+		style="@style/btn_setting"
         android:background="@drawable/sendphoto_check" />
 
     <ImageView
-        android:layout_width="3dp"
-        android:layout_height="36dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
         android:layout_toLeftOf="@id/sendphoto_send"
+        style="@style/division_right"
         android:contentDescription="分割线"
         android:src="@drawable/title_division" />
 

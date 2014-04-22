@@ -8,7 +8,6 @@ import com.xt.together.constant.constant;
 import com.xt.together.http.HttpData;
 import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Food;
-import com.xt.together.model.Trends;
 import com.xt.together.utils.ImageLoader;
 import com.xt.together.waterfall.ScaleImageView;
 import com.xt.together.waterfall.XListView;
@@ -18,7 +17,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,10 +93,7 @@ public class LikeActivity extends Activity implements IXListViewListener{
 
         @Override
         protected void onPostExecute(String[] result) {
-            //mListItems.addFirst("Added after refresh...");
-
-            // Call onRefreshComplete when the list has been refreshed.
-        	adapter.notifyDataSetChanged();
+        		adapter.notifyDataSetChanged();
             super.onPostExecute(result);
         }
     }
@@ -106,11 +101,6 @@ public class LikeActivity extends Activity implements IXListViewListener{
 
 	@Override
 	public void onLoadMore() {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		listView.stopLoadMore();
 	}
 	
@@ -146,9 +136,9 @@ public class LikeActivity extends Activity implements IXListViewListener{
             imageLoader.likeLoadImage(food.getImage(), this, viewHolder);
             viewHolder.imageView.setImageWidth(240);
             viewHolder.imageView.setImageHeight(240);
-            viewHolder.txtPrice.setText(food.getPrice());
-            viewHolder.txtShare.setText(food.getShare());
-            viewHolder.txtShop.setText(food.getShop());
+            viewHolder.txtPrice.setText(food.getName());
+            viewHolder.txtShare.setText(food.getAddress());
+            viewHolder.txtShop.setText(food.getDescription());
             convertView.setOnClickListener(new ViewOnClickListener(food));
             
             return convertView;

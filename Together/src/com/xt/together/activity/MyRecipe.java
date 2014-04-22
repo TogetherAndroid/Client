@@ -1,14 +1,18 @@
 package com.xt.together.activity;
 
 import com.xt.together.R;
+import com.xt.together.utils.ImageLoader;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +27,8 @@ public class MyRecipe extends Fragment {
 	private ImageView btnInvite;
 	private ImageView btnInvited;
 	private ImageView btnSetting;
+	
+	private ImageLoader imageLoader;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,6 +39,7 @@ public class MyRecipe extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		imgHead = (ImageView)getView().findViewById(R.id.myrecipe_head);
 		txtName = (TextView)getView().findViewById(R.id.myrecipe_name);
 		txtCity = (TextView)getView().findViewById(R.id.myrecipe_city);
 		btnTrends  = (ImageView)getView().findViewById(R.id.myrecipe_mytrends);
@@ -47,7 +54,38 @@ public class MyRecipe extends Fragment {
 		btnInvited.setOnClickListener(new InvitedOnClickListener());
 		btnSetting = (ImageView)getView().findViewById(R.id.myrecipe_setting);
 		btnSetting.setOnClickListener(new SettingOnClickListener());
+		
+		SharedPreferences userInfo = getActivity().getSharedPreferences("user_info", 0);
+		String userWeiboScreenName = userInfo.getString("screen_name", "");
+		String img_head = userInfo.getString("image_head", "");
+		txtName.setText(userWeiboScreenName);
+		txtCity.setText("武汉");
+		ImageLoadTask imageLoadTask = new ImageLoadTask();
+		imageLoader = new ImageLoader();
+		imageLoadTask.execute(img_head,null,null);
+		
 	}	
+	
+	class ImageLoadTask extends AsyncTask<Object, Void, Bitmap> {
+
+		@Override
+		protected Bitmap doInBackground(Object... params) {
+			String url = (String)params[0];
+			Bitmap bitmap = imageLoader.loadImageFromInternet(url);
+
+			return bitmap;
+		}
+
+		@Override
+		protected void onPostExecute(Bitmap result) {
+			super.onPostExecute(result);
+			imgHead.setImageBitmap(result);
+		}
+		
+		
+		
+	}
+	
 	
 	class LikeOnClickListener implements OnClickListener {
 

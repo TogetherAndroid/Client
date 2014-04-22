@@ -23,6 +23,7 @@ import android.widget.Button;
 public class SettingActivity extends Activity {
 
 	private Button logoutButton;
+	private Button btnBack;
 	private Oauth2AccessToken mAccessToken;
 	private LogOutRequestListener mLogoutRequestListener = new LogOutRequestListener();
 	
@@ -31,6 +32,8 @@ public class SettingActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_setting);
 		
+		btnBack = (Button)findViewById(R.id.setting_back);
+		btnBack.setOnClickListener(new BackOnClickListener());
 		logoutButton = (Button)findViewById(R.id.logoutButton);
 		mAccessToken = AccessTokenKeeper.readAccessToken(SettingActivity.this);
 		logoutButton.setOnClickListener(new OnClickListener(){
@@ -76,6 +79,15 @@ public class SettingActivity extends Activity {
 		public void onWeiboException(WeiboException arg0) {
 			// TODO Auto-generated method stub
 			 Log.e(constant.DEBUG_TAG, "logout failuer");
+		}
+		
+	}
+	
+	class BackOnClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			SettingActivity.this.finish();
 		}
 		
 	}

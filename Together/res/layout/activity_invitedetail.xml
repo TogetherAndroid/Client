@@ -32,142 +32,137 @@
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:background="@drawable/invitedetail_share" />
-
-    <ImageView
-        android:id="@+id/invitedetail_menu_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/invitedetail_sina"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/invitedetail_group" />
-
-    <ImageView
-        android:id="@+id/invitedetail_menu_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/invitedetail_menu_group"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/invitedetail_menu_date" />
-
-    <ImageView
-        android:id="@+id/invitedetail_menu_friend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/invitedetail_menu_date"
-        android:src="@drawable/invitedetail_menu_friend" />
-
-    <ImageView
-        android:id="@+id/invitedetail_menu_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/invitedetail_menu_friend"
-        android:src="@drawable/invitedetail_menu_img" />
     
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="140dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@id/invitedetail_menu_img"
-        android:layout_marginLeft="30dp"
-        android:src="@drawable/empty" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/invitedetail_title"
+        android:layout_above="@id/invitedetail_sina">
 
-    <ImageView
-        android:id="@+id/invitedetail_img"
-        android:layout_width="130dp"
-        android:layout_height="110dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@id/invitedetail_menu_img"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/empty_photo" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background" >
 
-    <TextView
-        android:id="@+id/invitedetail_name"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/invitedetail_img"
-        android:layout_toRightOf="@id/invitedetail_img"
-        android:layout_marginLeft="15dp"
-        android:textColor="#222222"
-        android:textSize="18sp"
-        android:text="名字XXX"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <ImageView
+                android:id="@+id/invitedetail_menu_img"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/invitedetail_title"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/invitedetail_menu_img" />
 
-    <TextView
-        android:id="@+id/invitedetail_position"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/invitedetail_name"
-        android:layout_below="@id/invitedetail_name"
-        android:textColor="#222222"
-        android:textSize="18sp"
-        android:text="位置XXX"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <ImageView
+                android:id="@+id/invitedetail_menu_friend"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/invitedetail_menu_img"
+                android:src="@drawable/invitedetail_menu_friend" />
 
-    <TextView
-        android:id="@+id/invitedetail_invite"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_alignLeft="@+id/invitedetail_img"
-        android:layout_alignTop="@id/invitedetail_menu_friend"
-        android:layout_marginTop="10dp"
-        android:textColor="#222222"
-        android:textSize="18sp"
-        android:text="邀请 \n @XXX    @XXX \n 一起去吃"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <ImageView
+                android:id="@+id/invitedetail_menu_date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/invitedetail_menu_friend"
+                android:src="@drawable/invitedetail_menu_date" />
 
-    <TextView
-        android:id="@+id/invitedetail_date"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/invitedetail_invite"
-        android:layout_alignTop="@id/invitedetail_menu_date"
-        android:layout_marginTop="5dp"
-        android:textColor="#222222"
-        android:textSize="16sp"
-        android:text="时间XXXXXXXXXXX"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/invitedetail_name"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/invitedetail_img"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/invitedetail_img"
+                android:text="名字XXX"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#222222"
+                android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/invitedetail_phone"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/invitedetail_address"
-        android:layout_below="@+id/invitedetail_address"
-        android:textColor="#222222"
-        android:textSize="16sp"
-        android:text="联系我XXXXXXXXXXX"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/invitedetail_position"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/invitedetail_name"
+                android:layout_below="@id/invitedetail_name"
+                android:text="位置XXX"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#222222"
+                android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/invitedetail_address"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/invitedetail_date"
-        android:layout_below="@+id/invitedetail_date"
-        android:textColor="#222222"
-        android:textSize="16sp"
-        android:text="地点XXXXXXXXXXX"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/invitedetail_invite"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_alignTop="@id/invitedetail_menu_friend"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="邀请 \n @XXX    @XXX \n 一起去吃"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#222222"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/invitedetail_date"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/invitedetail_invite"
+                android:layout_alignTop="@id/invitedetail_menu_date"
+                android:layout_marginTop="5dp"
+                android:text="时间XXXXXXXXXXX"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#222222"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/invitedetail_phone"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/invitedetail_address"
+                android:layout_below="@+id/invitedetail_address"
+                android:text="联系我XXXXXXXXXXX"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#222222"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/invitedetail_address"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/invitedetail_date"
+                android:layout_below="@+id/invitedetail_date"
+                android:text="地点XXXXXXXXXXX"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#222222"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_alignLeft="@+id/invitedetail_invite"
+                android:layout_alignTop="@+id/invitedetail_menu_img"
+                android:src="@drawable/empty" />
+            <ImageView
+                android:id="@+id/invitedetail_img"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_alignBottom="@+id/imageView2"
+                android:layout_alignLeft="@+id/imageView2"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/empty_photo" />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/invitedetail_back"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="6dp"
+        style="@style/btn_back"
         android:background="@drawable/title_back" />
 
     <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="3dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/invitedetail_back"
+        style="@style/division_left"
         android:src="@drawable/title_division" />
 
 </RelativeLayout>

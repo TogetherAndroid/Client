@@ -11,10 +11,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -59,15 +57,16 @@ public class FoodDetailActivity extends Activity {
 		Intent intent = getIntent();
 		food = (Food)intent.getSerializableExtra("food");
 		image = intent.getStringExtra("image");
+		if (image == null || image.length() == 0) {
+			SharedPreferences userInfo = getSharedPreferences("user_info", 0);
+			image = userInfo.getString("image_head", "");
+		}
 		txtName.setText(food.getName());
 		txtDescription.setText(food.getDescription());
 		txtAddress.setText(food.getAddress());
 		imageLoader = new ImageLoader();
 		ImageLoadTask imageLoadTask = new ImageLoadTask();
 		imageLoadTask.execute(food.getImage(), image, null,null);
-		
-		
-		//Typeface fontFace = Typeface.createFromAsset(getAssets(), "font/font.TTF");
 		
 	}
 	
@@ -129,7 +128,8 @@ public class FoodDetailActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			
+			Intent intent = new Intent(FoodDetailActivity.this,InvitingActivity.class);
+			startActivity(intent);
 		}
 		
 	}
@@ -138,23 +138,13 @@ public class FoodDetailActivity extends Activity {
 
         @Override
         protected String[] doInBackground(String... params) {
-        	String resurl = "http://192.168.1.106:8080/TogetherWeb/like";
-        	String jsonString = new HttpData().addPostFoodLike(resurl, params[0], params[1]);
-        	Log.e(constant.DEBUG_TAG, "we have send the food url" + params[0] + " and " + params[1]);
-        	boolean isSuccess = false;
-        	isSuccess = new JsonAnalyze().jsonAddFoodLikeAnalyze(jsonString);
-        	if(isSuccess){
-        		Log.e(constant.DEBUG_TAG, "we have send the food like");
-        	}
+        		String jsonString = new HttpData().addPostFoodLike(constant.HTTPLIKEURL, params[0], params[1]);
+        		new JsonAnalyze().jsonAddFoodLikeAnalyze(jsonString);
             return null;
         }
 
         @Override
         protected void onPostExecute(String[] result) {
-            //mListItems.addFirst("Added after refresh...");
-
-            // Call onRefreshComplete when the list has been refreshed.
-
             super.onPostExecute(result);
         }
     }
