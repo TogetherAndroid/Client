@@ -1,5 +1,6 @@
 package com.xt.together.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.xt.together.R;
@@ -28,7 +29,7 @@ import android.widget.TextView;
 public class StoreActivity extends ListActivity {
 	
 	private Button btnBack;
-	private static List<Restaurant> listStore;
+	private static List<Restaurant> listStore = new ArrayList<Restaurant>();
 	private StoreAdapter adapter;
 
 	@Override
@@ -47,7 +48,6 @@ public class StoreActivity extends ListActivity {
                 new GetDataTask().execute();
             }
         });
-		listStore = Restaurant.getRestaurantList();
         adapter = new StoreAdapter(StoreActivity.this, listStore);
         setListAdapter(adapter);
 	}

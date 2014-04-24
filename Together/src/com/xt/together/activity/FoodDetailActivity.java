@@ -1,6 +1,13 @@
 package com.xt.together.activity;
 
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.exception.WeiboException;
+import com.sina.weibo.sdk.net.RequestListener;
+import com.sina.weibo.sdk.openapi.StatusesAPI;
+import com.sina.weibo.sdk.openapi.models.ErrorInfo;
+import com.sina.weibo.sdk.openapi.models.Status;
 import com.xt.together.R;
+import com.xt.together.activity.InvitedDetailActivity.sendSinaTask;
 import com.xt.together.constant.constant;
 import com.xt.together.http.HttpData;
 import com.xt.together.json.JsonAnalyze;
@@ -13,11 +20,14 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FoodDetailActivity extends Activity {
 	
@@ -34,6 +44,9 @@ public class FoodDetailActivity extends Activity {
 	private String image;
 	
 	private ImageLoader imageLoader;
+	private Oauth2AccessToken mAccessToken;
+	private StatusesAPI mStatusesAPI;
+	private Bitmap bitmap = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +81,9 @@ public class FoodDetailActivity extends Activity {
 		ImageLoadTask imageLoadTask = new ImageLoadTask();
 		imageLoadTask.execute(food.getImage(), image, null,null);
 		
+		mAccessToken = AccessTokenKeeper.readAccessToken(FoodDetailActivity.this);
+		mStatusesAPI = new StatusesAPI(mAccessToken);
+		
 	}
 	
 	class ImageLoadTask extends AsyncTask<Object, Void, Bitmap[]> {
@@ -87,7 +103,9 @@ public class FoodDetailActivity extends Activity {
 			if(result == null) {
 				return;
 			}
+
 			if(null != result[0]){
+				bitmap = result[0];
 				imgFood.setImageBitmap(result[0]);
 			}
 			if(null != result[1]){
@@ -110,7 +128,7 @@ public class FoodDetailActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			
+			new sendSinaTask().execute();
 		}
 		
 	}
@@ -129,6 +147,9 @@ public class FoodDetailActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(FoodDetailActivity.this,InvitingActivity.class);
+			intent.putExtra("foodName", txtName.getText());
+			intent.putExtra("foodAddress", txtAddress.getText());
+			intent.putExtra("foodImage", food.getImage());
 			startActivity(intent);
 		}
 		
@@ -149,4 +170,53 @@ public class FoodDetailActivity extends Activity {
         }
     }
 	
+	
+	class sendSinaTask extends AsyncTask<Void, Void, Void>{
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			// TODO Auto-generated method stub
+			while(null == bitmap){
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			mStatusesAPI.upload(txtName.getText().toString(), bitmap, null, null, mListener);
+			return null;
+		}
+				
+	}
+	
+	
+	private RequestListener mListener = new RequestListener(){
+
+		@Override
+		public void onComplete(String response) {
+			// TODO Auto-generated method stub
+            if (!TextUtils.isEmpty(response)) {
+                if (response.startsWith("{\"created_at\"")) {
+                    // 调用 Status#parse 解析字符串成微博对象
+                    Status status = Status.parse(response);
+                    Toast.makeText(FoodDetailActivity.this, 
+                            "发送一送微博成功, id = " + status.id, 
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(FoodDetailActivity.this, response, Toast.LENGTH_LONG).show();
+                    Log.e(constant.DEBUG_TAG, response);
+                }
+            }
+		}
+
+		@Override
+		public void onWeiboException(WeiboException e) {
+			// TODO Auto-generated method stub
+			ErrorInfo info = ErrorInfo.parse(e.getMessage());
+			Log.e(constant.DEBUG_TAG, "获得微博信息成功，错误" +  info.toString());
+		}
+		
+	};
 }

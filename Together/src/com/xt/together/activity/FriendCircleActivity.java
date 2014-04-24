@@ -38,7 +38,7 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 	
 	private XListView listView;
 	private StaggeredAdapter adapter;
-	private static List<FriendsCircle> listFriendCircle;
+	private static List<FriendsCircle> listFriendCircle = new ArrayList<FriendsCircle>();
 	private ImageView btnSetting;
 	private Oauth2AccessToken mAccessToken;
 	private FriendshipsAPI mFriendshipsAPI;
@@ -60,9 +60,6 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 		listView = (XListView)getView().findViewById(R.id.friendcircle_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
-		if(null == listFriendCircle){
-			listFriendCircle = new ArrayList<FriendsCircle>();
-		}
 		adapter = new StaggeredAdapter(listFriendCircle);
 		adapter.notifyDataSetChanged();
 		mAccessToken = AccessTokenKeeper.readAccessToken(this.getActivity());

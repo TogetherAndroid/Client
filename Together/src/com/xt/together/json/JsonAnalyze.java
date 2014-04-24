@@ -79,36 +79,6 @@ public class JsonAnalyze {
 		return newFood;		
 	}
 	
-	public Invite[] jsonInviteAnalyze(String jsonString){
-		int status = -1;
-		Invite[] newInvite  = null;
-		try {
-			JSONObject restaurantInfo = new JSONObject(jsonString);
-			status = restaurantInfo.getInt("status");
-			
-			if(status == -1){
-				Log.e("com.xt.together", "we haven't got the json message");
-			}else if(status == 1){
-				Log.e("com.xt.together", "we have got the wrong message");
-				return null;
-			}else{
-				JSONArray dataArray = restaurantInfo.getJSONArray("data");
-				newInvite = new Invite[dataArray.length()];
-				for(int i = 0; i < dataArray.length(); i++){
-				JSONObject jo = (JSONObject)dataArray.opt(i);
-				newInvite[i] = new Invite(jo.getString("name"), jo.getString("address"), 
-						jo.getString("date"), null, jo.getString("invited"),jo.getString("phone"), 
-						jo.getString("image"));
-				
-				}
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return newInvite;	
-	}
-	
 	public JSONArray jsonWeiboFansAnalyze(String jsonString){
 
 		JSONArray friendids = null;
@@ -134,6 +104,42 @@ public class JsonAnalyze {
 			for(int i = 0 ; i < friendsArray.length(); i++){
 				JSONObject jo = (JSONObject)friendsArray.opt(i);
 				friendsName[i] = "@" +jo.getString("screen_name");
+			}
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return friendsName;
+	}
+	
+	public String[] jsonFriendsHeadAnalyze(String jsonString){
+		String[] friendsName = null;
+		try {
+			JSONObject friendsInfo = new JSONObject(jsonString);
+			JSONArray friendsArray = friendsInfo.getJSONArray("users");
+			friendsName = new String[friendsArray.length()];
+			for(int i = 0 ; i < friendsArray.length(); i++){
+				JSONObject jo = (JSONObject)friendsArray.opt(i);
+				friendsName[i] = jo.getString("profile_image_url");
+			}
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return friendsName;
+	}
+	
+	public String[] jsonFriendsIdAnalyze(String jsonString){
+		String[] friendsName = null;
+		try {
+			JSONObject friendsInfo = new JSONObject(jsonString);
+			JSONArray friendsArray = friendsInfo.getJSONArray("users");
+			friendsName = new String[friendsArray.length()];
+			for(int i = 0 ; i < friendsArray.length(); i++){
+				JSONObject jo = (JSONObject)friendsArray.opt(i);
+				friendsName[i] = jo.getString("idstr");
 			}
 			
 		} catch (JSONException e) {
@@ -379,5 +385,81 @@ public class JsonAnalyze {
 			e.printStackTrace();
 		}
 		return newFriendsCircle;	
+	}
+	
+	public Invite[] jsonInviteAnalyze(String jsonString){
+		int status = -1;
+		Invite[] newInvite  = null;
+		try {
+			JSONObject inviteInfo = new JSONObject(jsonString);
+			status = inviteInfo.getInt("status");
+			
+			if(status == -1){
+				Log.e("com.xt.together", "we haven't got the json message");
+			}else if(status == 1){
+				Log.e("com.xt.together", "we have got the wrong message");
+				return null;
+			}else{
+				JSONArray dataArray = inviteInfo.getJSONArray("data");
+				newInvite = new Invite[dataArray.length()];
+				for(int i = 0; i < dataArray.length(); i++){
+					JSONObject jo = (JSONObject)dataArray.opt(i);
+					JSONArray invitedArray = jo.getJSONArray("invited");
+					String invitedString = "";
+					for(int j = 0; j < invitedArray.length(); j++){
+						JSONObject joinvited = (JSONObject)invitedArray.opt(j);
+						String invitedname = joinvited.getString("name");
+						invitedname = invitedname.replace("@", "");
+						invitedString += invitedname;
+					}
+					newInvite[i] = new Invite(jo.getString("name"), jo.getString("address"),
+							jo.getString("date"), null, invitedString, jo.getString("phone"),jo.getString("image")
+							);
+				
+					}
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return newInvite;	
+	}
+	
+	public Invite[] jsonInvitedAnalyze(String jsonString){
+		int status = -1;
+		Invite[] newInvite  = null;
+		try {
+			JSONObject inviteInfo = new JSONObject(jsonString);
+			status = inviteInfo.getInt("status");
+			
+			if(status == -1){
+				Log.e("com.xt.together", "we haven't got the json message");
+			}else if(status == 1){
+				Log.e("com.xt.together", "we have got the wrong message");
+				return null;
+			}else{
+				JSONArray dataArray = inviteInfo.getJSONArray("data");
+				newInvite = new Invite[dataArray.length()];
+				for(int i = 0; i < dataArray.length(); i++){
+					JSONObject jo = (JSONObject)dataArray.opt(i);
+					JSONArray invitedArray = jo.getJSONArray("invited");
+					String invitedString = "";
+					for(int j = 0; j < invitedArray.length(); j++){
+						JSONObject joinvited = (JSONObject)invitedArray.opt(j);
+						String invitedname = joinvited.getString("name");
+						invitedname = invitedname.replace("@", "");
+						invitedString += invitedname;
+					}
+					newInvite[i] = new Invite(jo.getString("name"), jo.getString("address"),
+							jo.getString("date"), null, invitedString, jo.getString("phone"),jo.getString("image")
+							);
+				
+					}
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return newInvite;	
 	}
 }

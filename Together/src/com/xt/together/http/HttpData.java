@@ -27,6 +27,7 @@ import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import com.xt.together.constant.constant;
 import com.xt.together.utils.ImageUpload;
@@ -347,7 +348,7 @@ public class HttpData {
 		return strResult;
 	}
 	
-	public String getPostInviteData(String url, String request, String Id){
+	public String getPostInviteDataInterface(String url, String request, String Id){
 		String strResult = "";
 		HttpPost httpRequest = new HttpPost(url);
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -387,12 +388,12 @@ public class HttpData {
 	}
 	
 	public String getPostSendInviteData(String url, String userId){
-		String strResult = getPostInviteData(url, "SEND", userId);
+		String strResult = getPostInviteDataInterface(url, "SEND", userId);
 		return strResult;
 	}
 	
 	public String getPostReceiveInviteData(String url, String userId){
-		String strResult = getPostInviteData(url, "RECEIVE", userId);
+		String strResult = getPostInviteDataInterface(url, "RECEIVE", userId);
 		return strResult;
 	}
 	
@@ -882,5 +883,134 @@ public class HttpData {
 		return strResult;
 	}
 	
+	
+	/*
+	 * 这是在inviting界面发送要@的好友id和一些其他乱七八糟的东西
+	 */
+	public String addPostInviting(String url, String name, String address, String date, String userId, JSONArray invited, String phone, String image){
+		String strResult = "";
+		HttpPost httpRequest = new HttpPost(url);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("order", "ADD"));
+		params.add(new BasicNameValuePair("name", name));
+		params.add(new BasicNameValuePair("address", address));
+		params.add(new BasicNameValuePair("date", date));
+		params.add(new BasicNameValuePair("userId", userId));
+		params.add(new BasicNameValuePair("phone", phone));
+		params.add(new BasicNameValuePair("image", image));
+		params.add(new BasicNameValuePair("invited", invited.toString()));
+		Log.e(constant.DEBUG_TAG, invited.toString());
+		
+		try {
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确转码");
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确执行http请求");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
+		return strResult;
+	}
+	
+	public String getPostInviteData(String url, String userWeiboId){
+		
+		String strResult = "";
+		HttpPost httpRequest = new HttpPost(url);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		
+		params.add(new BasicNameValuePair("order", "SEND"));
+		params.add(new BasicNameValuePair("userId", userWeiboId));
+		
+		try {
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确转码");
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确执行http请求");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
+		return strResult;
+	}
+	
+	public String getPostInvitedData(String url, String userWeiboId){
+		
+		String strResult = "";
+		HttpPost httpRequest = new HttpPost(url);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		
+		params.add(new BasicNameValuePair("order", "RECEIVE"));
+		params.add(new BasicNameValuePair("userId", userWeiboId));
+		Log.e(constant.DEBUG_TAG, "http send weibo id" + userWeiboId);
+		
+		try {
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpRequest);
+			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200){
+				strResult = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e(DEBUG_TAG, "请求相应状态码不为200，说明服务器没有正确相应客户端请求 ");
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确转码");
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(DEBUG_TAG, "没有正确执行http请求");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
+		return strResult;
+	}
 }
 

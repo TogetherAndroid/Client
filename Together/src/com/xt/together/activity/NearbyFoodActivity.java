@@ -29,7 +29,7 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 	
 	private XListView listView;
 	private StaggeredAdapter adapter;
-	private static List<Food> listNearbyFood = null;
+	private static List<Food> listNearbyFood = new ArrayList<Food>();
 	private ImageView settingButton  ;
 	
 	@Override
@@ -51,10 +51,6 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 		listView = (XListView)getView().findViewById(R.id.food_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
-		if(null == listNearbyFood){
-			listNearbyFood = new ArrayList<Food>();
-		}
-
 		adapter = new StaggeredAdapter(listNearbyFood);
 		adapter.notifyDataSetChanged();
 		settingButton.setOnClickListener(new OnClickListener(){
@@ -88,7 +84,7 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
         		JsonAnalyze jsonAnalyze = new JsonAnalyze();
         		Food[] newFood =jsonAnalyze.jsonNearbyFoodAnalyze(jsonText);
 			if (null != newFood) {
-				listNearbyFood.removeAll(null);
+				listNearbyFood.removeAll(listNearbyFood);
 				for (int i = 0; i < newFood.length; i++) {
 					listNearbyFood.add(newFood[i]);
 				}

@@ -53,18 +53,54 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/inviting_menu_inviting" />
+ 
+            <!--  
+            <TextView 
+                android:id="@+id/inviting_menu_inviting_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                />
+            -->
+            <MultiAutoCompleteTextView
+       			android:id="@+id/inviting_menu_inviting_text"
+        		android:layout_width="fill_parent"
+        		android:layout_height="wrap_content"
+        		android:layout_marginBottom="30dp"
+        		android:layout_alignParentTop="true"
+        		android:layout_marginTop="10dp"
+        		android:layout_centerHorizontal="true"
+        		android:ems="10"
+        		android:gravity="top"
+       			android:inputType="textMultiLine" >
+        		<requestFocus />
+        	</MultiAutoCompleteTextView>
+        	
             <ImageView
                 android:id="@+id/inviting_menu_date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/inviting_menu_inviting"
                 android:src="@drawable/inviting_menu_date" />
+            
+            <TextView 
+                android:id="@+id/inviting_menu_date_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inviting_menu_inviting"
+                />
             <ImageView
                 android:id="@+id/inviting_menu_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/inviting_menu_date"
                 android:src="@drawable/fooddetail_menu_address" />
+            <TextView 
+                android:id="@+id/inviting_menu_address_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inviting_menu_date"
+                />
 
             <ImageView
                 android:id="@+id/inviting_menu_phone"
@@ -72,6 +108,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/inviting_menu_address"
                 android:src="@drawable/inviting_menu_phone" />
+            
+            <TextView 
+                android:id="@+id/inviting_menu_phone_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inviting_menu_address"
+                />
+            
          </RelativeLayout>
     </ScrollView>
 

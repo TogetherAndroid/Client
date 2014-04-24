@@ -33,7 +33,7 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 	
 	private XListView listView;
 	private StaggeredAdapter adapter;
-	private static List<Trends> listTrends;
+	private static List<Trends> listTrends = new ArrayList<Trends>();
 	private Button btnBack;
 	private ImageView btnSetting;
 
@@ -48,9 +48,6 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 		listView = (XListView)findViewById(R.id.mytrends_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
-		if(null == listTrends){
-			listTrends = new ArrayList<Trends>();
-		}
 
 		adapter = new StaggeredAdapter(listTrends);
 		adapter.notifyDataSetChanged();
@@ -87,7 +84,7 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 
         @Override
         protected void onPostExecute(String[] result) {
-        		adapter.notifyDataSetChanged();
+        	adapter.notifyDataSetChanged();
             super.onPostExecute(result);
         }
     }

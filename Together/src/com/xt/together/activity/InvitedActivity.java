@@ -1,9 +1,13 @@
 package com.xt.together.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.xt.together.R;
+import com.xt.together.constant.constant;
 import com.xt.together.control.PullToRefreshListView;
+import com.xt.together.http.HttpData;
+import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Invite;
 import com.xt.together.utils.ImageLoader;
 
@@ -12,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,7 +31,8 @@ public class InvitedActivity extends ListActivity {
 	
 	private Button btnBack;
 	private ImageView btnSetting;
-	private static List<Invite> listInvited;
+	private static List<Invite> listInvited = new ArrayList<Invite>();
+	private InvitedAdapter adapter;
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -42,7 +48,7 @@ public class InvitedActivity extends ListActivity {
 		setContentView(R.layout.activity_invited);
 		btnBack = (Button)findViewById(R.id.invited_back);
 		btnBack.setOnClickListener(new BackOnClickListener());
-		btnSetting = (ImageView)findViewById(R.id.invite_setting);
+		btnSetting = (ImageView)findViewById(R.id.invited_setting);
 		btnSetting.setOnClickListener(new SettingOnClickListener());
 		((PullToRefreshListView) getListView()).setOnRefreshListener(new com.xt.together.control.PullToRefreshListView.OnRefreshListener() {
             @Override
@@ -51,8 +57,7 @@ public class InvitedActivity extends ListActivity {
                 new GetDataTask().execute();
             }
         });
-		listInvited = Invite.getList();
-        InvitedAdapter adapter = new InvitedAdapter(this, listInvited);
+		adapter = new InvitedAdapter(this, listInvited);
         setListAdapter(adapter);
 	}
 	
@@ -114,11 +119,17 @@ public class InvitedActivity extends ListActivity {
         @Override
         protected String[] doInBackground(Void... params) {
             // Simulates a background job.
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                ;
-            }
+        	String url = "http://togetherxt.duapp.com/invite";
+        	Log.e(constant.DEBUG_TAG, "the send id is " +  AccessTokenKeeper.readAccessToken(InvitedActivity.this).getUid());
+        	String jsonString = new HttpData().getPostInvitedData(url, AccessTokenKeeper.readAccessToken(InvitedActivity.this).getUid());
+        	Invite[] newInvited = new JsonAnalyze().jsonInviteAnalyze(jsonString);
+        	if( null != newInvited){
+        		listInvited.removeAll(listInvited);
+        		for(int i = 0; i < newInvited.length; i ++){
+        			listInvited.add(newInvited[i]);
+        		}
+        	}
+        	Log.e(constant.DEBUG_TAG, jsonString);
             return null;
         }
 
@@ -127,6 +138,7 @@ public class InvitedActivity extends ListActivity {
             //mListItems.addFirst("Added after refresh...");
 
             // Call onRefreshComplete when the list has been refreshed.
+        	adapter.notifyDataSetChanged();
             ((PullToRefreshListView) getListView()).onRefreshComplete();
 
             super.onPostExecute(result);

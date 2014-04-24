@@ -35,4 +35,8 @@ public class constant {
     public static String USERHTTPID = "";
     
     public static String[] friendsNames = new String[]{};
+    
+    public static String[] friendsIds = new String[]{};
+    
+    public static String[] friendsHeads = new String[]{};
 }

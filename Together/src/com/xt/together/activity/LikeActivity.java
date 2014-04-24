@@ -32,7 +32,7 @@ public class LikeActivity extends Activity implements IXListViewListener{
 	private ImageView btnSetting;
 	private XListView listView;
 	private StaggeredAdapter adapter;
-	private static List<Food> listLike;
+	private static List<Food> listLike = new ArrayList<Food>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,6 @@ public class LikeActivity extends Activity implements IXListViewListener{
 		listView = (XListView)findViewById(R.id.like_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
-		if(null == listLike){
-			listLike = new ArrayList<Food>();
-		}
 		adapter = new StaggeredAdapter(listLike);
 		adapter.notifyDataSetChanged();
 	}

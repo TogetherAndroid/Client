@@ -177,7 +177,10 @@ public class MainActivity extends FragmentActivity{
 		public void onComplete(String response) {
 			// TODO Auto-generated method stub
 			constant.friendsNames = new JsonAnalyze().jsonFriendsAnalyze(response);
-			Log.e(constant.DEBUG_TAG, "friends" + constant.friendsNames[0]);
+			constant.friendsIds = new JsonAnalyze().jsonFriendsIdAnalyze(response);
+			constant.friendsHeads = new JsonAnalyze().jsonFriendsHeadAnalyze(response);
+			Log.e(constant.DEBUG_TAG, "friends" + constant.friendsHeads[0]);
+//			Log.e(constant.DEBUG_TAG, response);
 		}
 
 		@Override

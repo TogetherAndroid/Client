@@ -1,5 +1,6 @@
 package com.xt.together.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.xt.together.R;
@@ -28,7 +29,7 @@ import android.widget.TextView;
 
 public class NearbyRestaurant extends ListFragment {
 	
-	private static List<Restaurant> listNearbyRestaurant;
+	private static List<Restaurant> listNearbyRestaurant = new ArrayList<Restaurant>();
 	private NearbyRestaurantAdapter adapter;
 	private ImageView btnSetting;
 	
@@ -54,7 +55,7 @@ public class NearbyRestaurant extends ListFragment {
                 new GetDataTask().execute();
             }
         });
-		listNearbyRestaurant = Restaurant.getRestaurantList();
+//		listNearbyRestaurant = Restaurant.getRestaurantList();
         adapter = new NearbyRestaurantAdapter(getActivity(), listNearbyRestaurant);
         setListAdapter(adapter);
 	}
@@ -66,7 +67,7 @@ public class NearbyRestaurant extends ListFragment {
 		intent.putExtra("restaurant", listNearbyRestaurant.get(position - 1));
 		startActivity(intent);
 	}
-
+	
 	private class GetDataTask extends AsyncTask<Void, Void, String[]> {
 
         @Override
@@ -163,4 +164,18 @@ public class NearbyRestaurant extends ListFragment {
 		
 	}
 
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		String info = null;
+		if( listNearbyRestaurant.isEmpty() == true){
+			info = "nothing";
+		}else{
+			info =  listNearbyRestaurant.get(0).getName();
+		}
+		Log.e(constant.DEBUG_TAG, "when the activity is onsume we get he list name " + info );
+		super.onResume();
+	}
+
+    
 }

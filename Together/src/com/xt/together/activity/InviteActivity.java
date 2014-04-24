@@ -1,9 +1,13 @@
 package com.xt.together.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.xt.together.R;
+import com.xt.together.constant.constant;
 import com.xt.together.control.PullToRefreshListView;
+import com.xt.together.http.HttpData;
+import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Invite;
 import com.xt.together.utils.ImageLoader;
 
@@ -12,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +29,10 @@ import android.widget.TextView;
 
 public class InviteActivity extends ListActivity {
 	
-	private static List<Invite> listInvite;
+	private static List<Invite> listInvite = new ArrayList<Invite>();
 	private Button btnBack;
 	private ImageView btnSetting;
+	private InviteAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +49,7 @@ public class InviteActivity extends ListActivity {
                 new GetDataTask().execute();
             }
         });
-		listInvite = Invite.getList();
-        InviteAdapter adapter = new InviteAdapter(this, listInvite);
+		adapter = new InviteAdapter(this, listInvite);
         setListAdapter(adapter);
 	}
 	
@@ -116,11 +121,16 @@ public class InviteActivity extends ListActivity {
         @Override
         protected String[] doInBackground(Void... params) {
             // Simulates a background job.
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                ;
-            }
+        	String url = "http://togetherxt.duapp.com/invite";
+        	String jsonString = new HttpData().getPostInviteData(url, constant.USERHTTPID);
+        	Invite[] newInvite = new JsonAnalyze().jsonInviteAnalyze(jsonString);
+        	if( null != newInvite){
+        		listInvite.removeAll(listInvite);
+        		for(int i = 0; i < newInvite.length; i ++){
+        			listInvite.add(newInvite[i]);
+        		}
+        	}
+        	Log.e(constant.DEBUG_TAG, jsonString);
             return null;
         }
 
@@ -129,7 +139,8 @@ public class InviteActivity extends ListActivity {
             //mListItems.addFirst("Added after refresh...");
 
             // Call onRefreshComplete when the list has been refreshed.
-            ((PullToRefreshListView) getListView()).onRefreshComplete();
+        	adapter.notifyDataSetChanged();
+        	((PullToRefreshListView) getListView()).onRefreshComplete();
 
             super.onPostExecute(result);
         }
