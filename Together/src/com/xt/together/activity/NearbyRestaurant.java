@@ -74,11 +74,12 @@ public class NearbyRestaurant extends ListFragment {
         protected String[] doInBackground(Void... params) {
         	String jsonText = new HttpData().getPostNearbyResData(constant.HTTPNERABYRESTAURANTURL);
         	JsonAnalyze jsonAnalyze = new JsonAnalyze();
+        	Log.e(constant.DEBUG_TAG, jsonText);
         	Restaurant[] newrestaurant =jsonAnalyze.jsonNearbyRestaurantAnalyze(jsonText);
 			if (null != newrestaurant) {
 				listNearbyRestaurant.removeAll(listNearbyRestaurant);
 				for (int i = 0; i < newrestaurant.length; i++) {
-					Log.e("com.xt.together", newrestaurant[i].getLike()
+					Log.e("com.xt.together", newrestaurant[i].getName()
 							+ "hahahhaa");
 					listNearbyRestaurant.add(newrestaurant[i]);
 				}

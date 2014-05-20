@@ -35,8 +35,13 @@ public class JsonAnalyze {
 				JSONArray dataArray = restaurantInfo.getJSONArray("data");
 				newrestaurant = new Restaurant[dataArray.length()];
 				for(int i = 0; i < dataArray.length(); i++){
-				JSONObject jo = (JSONObject)dataArray.opt(i);
-				newrestaurant[i] = new Restaurant(jo.getString("id"),jo.getString("name"), jo.getString("average"), 
+					Log.e(constant.DEBUG_TAG, "we get the dataarray length"+dataArray.length());
+					JSONObject jo = (JSONObject)dataArray.opt(i);
+					if(jo == null){
+						Log.e(constant.DEBUG_TAG, "3333333");
+					}
+					Log.e(constant.DEBUG_TAG, jo.getString("id"));
+					newrestaurant[i] = new Restaurant(jo.getString("id"),jo.getString("name"), jo.getString("average"), 
 						jo.getString("like"), jo.getString("specialty"), jo.getString("address"), 
 						jo.getString("phone"), jo.getString("image"));
 				
@@ -44,6 +49,7 @@ public class JsonAnalyze {
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
+			Log.e(constant.DEBUG_TAG, "something wrong");
 			e.printStackTrace();
 		}
 		return newrestaurant;		
