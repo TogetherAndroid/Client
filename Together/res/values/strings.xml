@@ -32,5 +32,10 @@
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
     
     <string name="login_button_text">登陆绑定微博账号</string>
+    <string name="setting_change_city_text">切换城市：</string>
+    <string name="setting_bind_sina">新浪微博</string>
+    <string name="setting_receive_push">接收推送</string>
+    <string name="setting_new">检测新版本</string>
+    <string name="setting_aboutus">关于我们</string>
 
 </resources>

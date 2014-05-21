@@ -22,7 +22,7 @@ import android.widget.Button;
 
 public class SettingActivity extends Activity {
 
-	private Button logoutButton;
+//	private Button logoutButton;
 	private Button btnBack;
 	private Oauth2AccessToken mAccessToken;
 	private LogOutRequestListener mLogoutRequestListener = new LogOutRequestListener();
@@ -34,9 +34,9 @@ public class SettingActivity extends Activity {
 		
 		btnBack = (Button)findViewById(R.id.setting_back);
 		btnBack.setOnClickListener(new BackOnClickListener());
-		logoutButton = (Button)findViewById(R.id.logoutButton);
+//		logoutButton = (Button)findViewById(R.id.logoutButton);
 		mAccessToken = AccessTokenKeeper.readAccessToken(SettingActivity.this);
-		logoutButton.setOnClickListener(new OnClickListener(){
+/*		logoutButton.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View arg0) {
@@ -48,8 +48,8 @@ public class SettingActivity extends Activity {
 			}
 			
 		});
+	*/
 	}
-	
 	private class LogOutRequestListener implements RequestListener{
 
 		@Override

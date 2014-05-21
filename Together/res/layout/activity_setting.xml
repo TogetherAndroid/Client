@@ -19,7 +19,7 @@
         android:id="@+id/setting_back"
 		style="@style/btn_back"
         android:background="@drawable/title_back" />
-
+    
     <ImageView
         android:layout_toRightOf="@+id/setting_back"
         style="@style/division_left"
@@ -33,13 +33,150 @@
         android:scaleType="fitXY"
         android:src="@drawable/background" />
 
-    <Button
-        android:id="@+id/logoutButton"
-        style="@style/com_sina_weibo_sdk_loginview_default_style"
+    <LinearLayout
+        android:id="@+id/setting_change_city_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/imageView1" />
-"
+        android:layout_alignLeft="@+id/setting_back"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_marginTop="10sp"
+        android:background="@drawable/setting_changecity"
+        android:orientation="horizontal" >
 
+        <TextView
+            android:id="@+id/setting_change_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="18sp"
+            android:text="@string/setting_change_city_text"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+        
+        <TextView 
+            android:id="@+id/setting_current_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="武汉（当前城市）"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
+    
+    <RelativeLayout
+        android:id="@+id/setting_bind_sina_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/setting_change_city_layout"
+        android:layout_alignRight="@+id/setting_change_city_layout"
+        android:layout_below="@+id/setting_change_city_layout"
+        android:layout_marginTop="10sp"
+        android:orientation="horizontal"
+        android:background="@drawable/setting_bind_sina">
+        
+        <TextView
+            android:id="@+id/setting_bind_sina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18sp"
+            android:layout_centerVertical="true"
+            android:text="@string/setting_bind_sina"
+            android:textColor="#000000"
+            android:textSize="14sp"/>
+        
+        <Button 
+            android:id="@+id/setting_bind_sina_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10sp"
+            android:background="@drawable/setting_btn_bac_unbind"/>
+        
+    </RelativeLayout>
+    
+	<RelativeLayout
+        android:id="@+id/setting_push_and_new_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/setting_change_city_layout"
+        android:layout_alignRight="@+id/setting_change_city_layout"
+        android:layout_below="@+id/setting_bind_sina_layout"
+        android:layout_marginTop="10sp"
+        android:background="@drawable/setting_push_back">
+        
+	    <RelativeLayout
+        	android:id="@+id/setting_push_layout"
+        	android:layout_width="wrap_content"
+       		android:layout_height="wrap_content"
+        	android:layout_marginTop="10sp"
+        	android:layout_marginRight="10sp">
+        
+	    	<TextView
+            	android:id="@+id/setting_push_text"
+            	android:layout_width="wrap_content"
+           		android:layout_height="wrap_content"
+            	android:layout_marginLeft="18sp"
+            	android:layout_marginTop="10sp"
+            	android:text="@string/setting_receive_push"
+           	 	android:textColor="#000000"
+            	android:textSize="14sp"/>
+        
+       		<Button 
+            	android:id="@+id/setting_push_button"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:layout_alignParentRight="true"
+            	android:layout_marginTop="10sp"           	 	
+            	android:background="@drawable/setting_receive_push"/>
+	    
+    	</RelativeLayout>
+	    
+	    
+	    <LinearLayout
+        	android:id="@+id/setting_new_layout"
+        	android:layout_width="wrap_content"
+       	 	android:layout_height="wrap_content"
+        	android:layout_alignLeft="@+id/setting_push_layout"
+        	android:layout_below="@+id/setting_push_layout"
+       		android:layout_marginTop="24sp"
+        	android:orientation="horizontal" >
+
+        	<TextView
+            	android:id="@+id/setting_new"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:layout_gravity="center_vertical"
+            	android:layout_marginLeft="18sp"
+            	android:text="@string/setting_new"
+            	android:textColor="#000000"
+            	android:textSize="14sp" />
+
+    	</LinearLayout>
+    </RelativeLayout>
+    
+	<RelativeLayout
+        android:id="@+id/setting_aboutus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/setting_change_city_layout"
+        android:layout_below="@+id/setting_push_and_new_layout"
+        android:layout_marginTop="10sp"
+        android:orientation="horizontal"
+        android:background="@drawable/setting_bind_sina">
+        
+        <TextView
+            android:id="@+id/setting_aboutus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18sp"
+            android:layout_centerVertical="true"
+            android:text="@string/setting_aboutus"
+            android:textColor="#000000"
+            android:textSize="14sp"/>
+        
+    </RelativeLayout>
+	
 </RelativeLayout>
