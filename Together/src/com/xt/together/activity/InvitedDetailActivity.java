@@ -7,6 +7,8 @@ import com.sina.weibo.sdk.openapi.StatusesAPI;
 import com.sina.weibo.sdk.openapi.models.ErrorInfo;
 import com.sina.weibo.sdk.openapi.models.Status;
 import com.xt.together.R;
+import com.xt.together.activity.InviteDetailActivity.ImageLoadTask;
+import com.xt.together.activity.InviteDetailActivity.SinaOnClickListener;
 import com.xt.together.activity.InviteDetailActivity.sendSinaTask;
 import com.xt.together.constant.constant;
 import com.xt.together.model.Invite;
@@ -28,42 +30,50 @@ import android.widget.Toast;
 public class InvitedDetailActivity extends Activity {
 	
 	private Button btnBack;
-	private Button btnSina;
-	private TextView txtName;
-	private TextView txtPosition;
-	private TextView txtInvite;
-	private TextView txtDate;
-	private TextView txtAddress;
-	private TextView txtPhone;
-	private ImageView imageView;	
 	private ImageLoader imageLoader;
 	private Oauth2AccessToken mAccessToken;
 	private StatusesAPI mStatusesAPI;
 	private Bitmap bitmap = null;
+	
+	private ImageView invitedDetailPic;
+	private ImageView invitedDetailHeadPic;
+	private TextView invitedDetailName;
+	private TextView invitedDetailTime;
+	private TextView invitedDetailLocation;
+	private TextView invitedDetailPhone;
+	private ImageView invitedDetailShare;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_inviteddetail);
-		btnBack = (Button)findViewById(R.id.inviteddetail_back);
-		txtName = (TextView)findViewById(R.id.inviteddetail_name);
-		txtPosition = (TextView)findViewById(R.id.inviteddetail_position);
-		txtInvite = (TextView)findViewById(R.id.inviteddetail_invite);
-		txtDate = (TextView)findViewById(R.id.inviteddetail_date);
-		txtAddress = (TextView)findViewById(R.id.inviteddetail_address);
-		txtPhone = (TextView)findViewById(R.id.inviteddetail_phone);
-		imageView = (ImageView)findViewById(R.id.inviteddetail_img);
-		btnBack.setOnClickListener(new BackOnClickListener());
+		
 		Invite invite = (Invite)getIntent().getSerializableExtra("invite");
-		txtName.setText(invite.getName());
-		txtPosition.setText(invite.getAddress());
-		txtInvite.setText(invite.getInvited());
-		txtDate.setText(invite.getDate());
-		txtAddress.setText(invite.getAddress());
-		txtPhone.setText(invite.getPhone());
+		
+		invitedDetailPic = (ImageView)findViewById(R.id.inviteddetail_foodpic);
 		imageLoader = new ImageLoader();
 		ImageLoadTask imageLoadTask = new ImageLoadTask();
 		imageLoadTask.execute(invite.getImage(),null,null);
+		
+		invitedDetailHeadPic = (ImageView)findViewById(R.id.inviteddetail_invite_head);
+		
+		invitedDetailName = (TextView)findViewById(R.id.inviteddetail_invite_person);
+		invitedDetailName.setText(invite.getInvited());
+		
+		invitedDetailTime = (TextView)findViewById(R.id.inviteddetail_time_text);
+		invitedDetailTime.setText(invite.getDate());
+		
+		invitedDetailLocation = (TextView)findViewById(R.id.inviteddetail_location_text);
+		invitedDetailLocation.setText(invite.getAddress());
+		
+		invitedDetailPhone = (TextView)findViewById(R.id.inviteddetail_phone_text);
+		invitedDetailPhone.setText(invite.getPhone());
+		
+		invitedDetailShare = (ImageView)findViewById(R.id.inviteddetail_share);
+		invitedDetailShare.setOnClickListener(new SinaOnClickListener());
+		
+		btnBack = (Button)findViewById(R.id.inviteddetail_back);
+		btnBack.setOnClickListener(new BackOnClickListener());
 		
 		mAccessToken = AccessTokenKeeper.readAccessToken(InvitedDetailActivity.this);
 		mStatusesAPI = new StatusesAPI(mAccessToken);
@@ -104,7 +114,7 @@ public class InvitedDetailActivity extends Activity {
 				return;
 			}
 			bitmap = result;
-			imageView.setImageBitmap(result);
+			invitedDetailPic.setImageBitmap(result);
 		}
 		
 	}
@@ -123,7 +133,7 @@ public class InvitedDetailActivity extends Activity {
 				}
 			}
 			
-			mStatusesAPI.upload(txtName.getText().toString(), bitmap, null, null, mListener);
+			mStatusesAPI.upload(invitedDetailName.getText().toString(), bitmap, null, null, mListener);
 			return null;
 		}
 				

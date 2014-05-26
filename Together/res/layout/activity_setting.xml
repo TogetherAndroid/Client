@@ -20,6 +20,13 @@
 		style="@style/btn_back"
         android:background="@drawable/title_back" />
     
+    <ImageView 
+        android:id="@+id/setting_done"
+        android:layout_alignBottom="@+id/setting_title"
+        style="@style/btn_setting"
+        android:src="@drawable/setting_done"
+        />
+    
     <ImageView
         android:layout_toRightOf="@+id/setting_back"
         style="@style/division_left"
@@ -35,9 +42,10 @@
 
     <LinearLayout
         android:id="@+id/setting_change_city_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/setting_back"
+        android:layout_alignRight="@+id/setting_done"
         android:layout_alignTop="@+id/imageView1"
         android:layout_marginTop="10sp"
         android:background="@drawable/setting_changecity"
@@ -86,14 +94,16 @@
             android:textColor="#000000"
             android:textSize="14sp"/>
         
-        <Button 
-            android:id="@+id/setting_bind_sina_button"
+        <CheckBox 
+            android:id="@+id/setting_bind_sina_checkbox"
+            android:button="@null"
+            android:background="@drawable/setting_check_bind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10sp"
-            android:background="@drawable/setting_btn_bac_unbind"/>
+            />
         
     </RelativeLayout>
     
@@ -123,14 +133,16 @@
             	android:text="@string/setting_receive_push"
            	 	android:textColor="#000000"
             	android:textSize="14sp"/>
-        
-       		<Button 
-            	android:id="@+id/setting_push_button"
-            	android:layout_width="wrap_content"
-            	android:layout_height="wrap_content"
-            	android:layout_alignParentRight="true"
-            	android:layout_marginTop="10sp"           	 	
-            	android:background="@drawable/setting_receive_push"/>
+	    
+	    	<CheckBox 
+	    	    android:id="@+id/setting_push_checkbox"
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"
+	    	    android:layout_alignParentRight="true"
+            	android:layout_marginTop="10sp" 
+	    	    android:button="@null"
+	    	    android:background="@drawable/setting_check_push"
+	    	    />
 	    
     	</RelativeLayout>
 	    
@@ -158,10 +170,11 @@
     </RelativeLayout>
     
 	<RelativeLayout
-        android:id="@+id/setting_aboutus"
+        android:id="@+id/setting_aboutus_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/setting_change_city_layout"
+        android:layout_alignRight="@+id/setting_done"
         android:layout_below="@+id/setting_push_and_new_layout"
         android:layout_marginTop="10sp"
         android:orientation="horizontal"

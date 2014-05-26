@@ -37,5 +37,18 @@
     <string name="setting_receive_push">接收推送</string>
     <string name="setting_new">检测新版本</string>
     <string name="setting_aboutus">关于我们</string>
+    
+    <string name="food_detail">美食详情</string>
+    <string name="food_detail_location">洪山区珞瑜路1037号华中科技大学</string>
+    
+    <string name="invitedetail_invite">邀请</string>
+    <string name="invitedetail_invite_goeat">等一起去吃</string>
+    <string name="invitedetail_tuan">点击查看团购</string>
+    
+    <string name="restaurantdetail_title">餐厅详情</string>
+    
+    <string name="sendphoto_name_hint">名字</string>
+    <string name="sendphoto_des_hint">把你的心情写下来吧。。。</string>
+    <string name="sendphoto_location_text">点击添加定位</string>
 
 </resources>

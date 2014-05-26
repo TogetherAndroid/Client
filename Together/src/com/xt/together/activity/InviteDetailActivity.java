@@ -32,45 +32,55 @@ import android.widget.Toast;
 public class InviteDetailActivity extends Activity {
 	
 	private Button btnBack;
-	private Button btnSina;
-	private TextView txtName;
-	private TextView txtPosition;
-	private TextView txtInvite;
-	private TextView txtDate;
-	private TextView txtAddress;
-	private TextView txtPhone;
-	private ImageView imageView;
 	private ImageLoader imageLoader;
 	private Oauth2AccessToken mAccessToken;
 	private StatusesAPI mStatusesAPI;
 	private Bitmap bitmap = null;
-
+	
+	private ImageView inviteDetailPic;
+	private ImageLoader headLoader;
+	private ImageView inviteDetailHeadPic;
+	private TextView inviteDetailName;
+	private TextView inviteDetailTime;
+	private TextView inviteDetailLocation;
+	private TextView inviteDetailPhone;
+	private ImageView inviteDetailShare;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_invitedetail);
-		btnBack = (Button)findViewById(R.id.invitedetail_back);
-		btnSina = (Button)findViewById(R.id.invitedetail_sina);
-		txtName = (TextView)findViewById(R.id.invitedetail_name);
-		txtPosition = (TextView)findViewById(R.id.invitedetail_position);
-		txtInvite = (TextView)findViewById(R.id.invitedetail_invite);
-		txtDate = (TextView)findViewById(R.id.invitedetail_date);
-		txtAddress = (TextView)findViewById(R.id.invitedetail_address);
-		txtPhone = (TextView)findViewById(R.id.invitedetail_phone);
-		imageView = (ImageView)findViewById(R.id.invitedetail_img);
-		btnBack.setOnClickListener(new BackOnClickListener());
-		btnSina.setOnClickListener(new SinaOnClickListener());
+		
 		Invite invite = (Invite)getIntent().getSerializableExtra("invite");
-		txtName.setText(invite.getName());
-		txtPosition.setText(invite.getAddress());
-		txtInvite.setText(invite.getInvited());
-		txtDate.setText(invite.getDate());
-		txtAddress.setText(invite.getAddress());
-		txtPhone.setText(invite.getPhone());
+		
+		inviteDetailPic = (ImageView)findViewById(R.id.invitedetail_foodpic);
 		imageLoader = new ImageLoader();
 		ImageLoadTask imageLoadTask = new ImageLoadTask();
 		imageLoadTask.execute(invite.getImage(),null,null);
 		
+		inviteDetailHeadPic = (ImageView)findViewById(R.id.invitedetail_invite_head);
+		
+		inviteDetailName = (TextView)findViewById(R.id.invitedetail_invite_person);
+		inviteDetailName.setText(invite.getInvited());
+		
+		inviteDetailTime = (TextView)findViewById(R.id.invitedetail_time_text);
+		inviteDetailTime.setText(invite.getDate());
+		
+		inviteDetailLocation = (TextView)findViewById(R.id.invitedetail_location_text);
+		inviteDetailLocation.setText(invite.getAddress());
+		
+		inviteDetailPhone = (TextView)findViewById(R.id.invitedetail_phone_text);
+		inviteDetailPhone.setText(invite.getPhone());
+		
+		inviteDetailShare = (ImageView)findViewById(R.id.invitedetail_share);
+		inviteDetailShare.setOnClickListener(new SinaOnClickListener());
+		
+		btnBack = (Button)findViewById(R.id.invitedetail_back);
+
+		btnBack.setOnClickListener(new BackOnClickListener());
+
+				
 		mAccessToken = AccessTokenKeeper.readAccessToken(InviteDetailActivity.this);
 		mStatusesAPI = new StatusesAPI(mAccessToken);
 	}
@@ -109,7 +119,28 @@ public class InviteDetailActivity extends Activity {
 				return;
 			}
 			bitmap = result;
-			imageView.setImageBitmap(result);
+			inviteDetailPic.setImageBitmap(result);
+		}
+		
+	}
+	
+	class HeadLoadTask extends AsyncTask<Object, Void, Bitmap> {
+
+		@Override
+		protected Bitmap doInBackground(Object... params) {
+			String url = (String)params[0];
+			Bitmap bitmap = imageLoader.loadImageFromInternet(url);
+			return bitmap;
+		}
+
+		@Override
+		protected void onPostExecute(Bitmap result) {
+			super.onPostExecute(result);
+			if(result == null) {
+				return;
+			}
+			bitmap = result;
+			inviteDetailHeadPic.setImageBitmap(result);
 		}
 		
 	}
@@ -128,7 +159,7 @@ public class InviteDetailActivity extends Activity {
 				}
 			}
 			
-			mStatusesAPI.upload(txtName.getText().toString(), bitmap, null, null, mListener);
+			mStatusesAPI.upload(inviteDetailName.getText().toString(), bitmap, null, null, mListener);
 			return null;
 		}
 				

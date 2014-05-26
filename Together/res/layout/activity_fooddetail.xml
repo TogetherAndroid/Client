@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="@drawable/fooddetail_background"
+    >
 
     <TextView
         android:id="@+id/fooddetail_title"
@@ -9,6 +11,7 @@
         android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:gravity="center"
+        android:text="@string/food_detail"
         android:background="@drawable/title_background"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -21,7 +24,149 @@
         android:layout_toRightOf="@+id/fooddetail_back"
         style="@style/division_left"
         android:src="@drawable/title_division" />
+    
+    <ImageView 
+        android:id="@+id/fooddetail_share"
+        android:layout_alignBottom="@+id/fooddetail_title"
+        style="@style/btn_setting"
+        android:src="@drawable/food_detail_share"
+        />
+    
     <RelativeLayout
+        android:id="@+id/fooddetail_foodpic_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="240dp"
+        android:layout_below="@+id/fooddetail_title" >
+        
+        <ImageView 
+            android:id="@+id/fooddetail_foodpic"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="false"
+            />
+        
+        <ImageView 
+            android:id="@+id/fooddetail_add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fooddetail_add_button" 
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="21dp"
+            android:layout_marginRight="21dp"
+            />      
+        
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/fooddetail_location_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fooddetail_back"
+        android:layout_alignRight="@+id/fooddetail_share"
+        android:layout_below="@+id/fooddetail_foodpic_layout"
+        android:background="@drawable/fooddetail_list_layout"
+        android:layout_marginTop="12dp"
+        >
+        
+        <ImageView 
+            android:id="@+id/fooddetail_location_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/fooddetail_location_pic"/>
+        
+        <TextView 
+            android:id="@+id/fooddetail_location_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="14sp"
+            android:textColor="#000000"
+            android:layout_toRightOf="@+id/fooddetail_location_pic"
+            android:layout_marginLeft="20dp"
+            android:text="@string/food_detail_location"
+            />
+        
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/fooddetail_like_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fooddetail_back"
+        android:layout_alignRight="@+id/fooddetail_share"
+        android:layout_below="@+id/fooddetail_location_layout"
+        android:background="@drawable/fooddetail_list_layout"
+        android:layout_marginTop="14dp"
+        >
+        
+        <ImageView 
+            android:id="@+id/fooddetail_like_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/fooddetail_like_pic"/>
+        
+        <ImageView 
+            android:id="@+id/fooddetail_like1"
+            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/fooddetail_like_pic"
+            android:layout_marginLeft="20dp"
+            />
+        
+        <ImageView 
+            android:id="@+id/fooddetail_like2"
+            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/fooddetail_like1"
+            android:layout_marginLeft="10dp"
+            />
+        
+         <ImageView 
+            android:id="@+id/fooddetail_like3"
+            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/fooddetail_like2"
+            android:layout_marginLeft="10dp"
+            />
+         
+         <ImageView 
+            android:id="@+id/fooddetail_like4"
+            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/fooddetail_like3"
+            android:layout_marginLeft="10dp"
+            />
+                 
+         <ImageView 
+            android:id="@+id/fooddetail_like5"
+            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/fooddetail_like4"
+            android:layout_marginLeft="10dp"
+            />
+    </RelativeLayout>
+    
+ <!--    <RelativeLayout
         android:id="@+id/fooddetail_bottom"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
@@ -139,5 +284,5 @@
         		android:src="@drawable/empty_photo" />
         	</RelativeLayout>
     </ScrollView>
-
+ -->
 </RelativeLayout>

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="@drawable/fooddetail_background"
+    >
 
     <TextView
         android:id="@+id/restaurantdetail_title"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
         android:layout_alignParentTop="true"
+        android:gravity="center"
+		android:text="@string/restaurantdetail_title"
+		android:textAppearance="?android:attr/textAppearanceLarge" 
         android:background="@drawable/title_background"/>
     
     <Button
@@ -20,14 +25,14 @@
         style="@style/division_left"
         android:src="@drawable/title_division" />
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/restaurantdetail_title"
-        android:scaleType="fitXY"
-        android:src="@drawable/background" />
+	<ImageView 
+	    android:id="@+id/restaurantdetail_share"
+	    android:layout_alignBottom="@+id/restaurantdetail_title"
+	    style="@style/btn_setting"
+	    android:src="@drawable/food_detail_share"
+	    />
 
-    <RelativeLayout
+<!--   <RelativeLayout
         android:id="@+id/restaurantdetail_bottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -60,19 +65,139 @@
             android:layout_marginRight="40dp"
             android:background="@drawable/bottom_share" />
     </RelativeLayout>
-
+-->
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/restaurantdetail_bottom"
         android:layout_below="@id/restaurantdetail_title" >
 
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background" >
-
-            <ImageView
+            android:background="@drawable/fooddetail_background" >
+		
+            <RelativeLayout
+        		android:id="@+id/restaurantdetail_foodpic_layout"
+        		android:layout_width="fill_parent"
+        		android:layout_height="240dp">
+        
+        		<ImageView 
+            		android:id="@+id/restaurantdetail_foodpic"
+            		android:layout_width="fill_parent"
+            		android:layout_height="fill_parent"
+            		android:clickable="false"
+            		/>
+        
+        		<ImageView 
+            		android:id="@+id/restaurantdetail_add_button"
+            		android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/fooddetail_add_button" 
+            		android:layout_alignParentBottom="true"
+            		android:layout_alignParentRight="true"
+            		android:layout_marginBottom="21dp"
+            		android:layout_marginRight="21dp"
+            		/>      
+        
+    		</RelativeLayout>
+    		
+            <RelativeLayout 
+        		android:id="@+id/restaurantdetail_location_layout"
+        		android:layout_width="fill_parent"
+        		android:layout_height="wrap_content"
+        		android:layout_marginLeft="10dp"
+        		android:layout_marginRight="12dp"
+        		android:layout_below="@+id/restaurantdetail_foodpic_layout"
+        		android:background="@drawable/fooddetail_list_layout"
+        		android:layout_marginTop="10dp"
+        	>
+        
+        		<ImageView 
+            		android:id="@+id/restaurantdetail_location_pic"
+            		android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_centerVertical="true"
+            		android:layout_marginLeft="10dp"
+            		android:src="@drawable/fooddetail_location_pic"/>
+        
+        		<TextView 
+            		android:id="@+id/restaurantdetail_location_text"
+            		android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_centerVertical="true"
+            		android:textSize="14sp"
+            		android:textColor="#000000"
+            		android:layout_toRightOf="@+id/restaurantdetail_location_pic"
+            		android:layout_marginLeft="20dp"
+            		android:text="@string/food_detail_location"
+            	/>
+        
+    		</RelativeLayout>
+    		
+           	<RelativeLayout 
+        		android:id="@+id/restaurantdetail_shopsign_layout"
+        		android:layout_width="fill_parent"
+        		android:layout_height="wrap_content"
+        		android:layout_marginLeft="10dp"
+        		android:layout_marginRight="12dp"
+        		android:layout_below="@+id/restaurantdetail_location_layout"
+        		android:background="@drawable/fooddetail_list_layout"
+        		android:layout_marginTop="12dp"
+        	>
+        
+        		<ImageView 
+            		android:id="@+id/restaurantdetail_shopsign_pic"
+            		android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_centerVertical="true"
+            		android:layout_marginLeft="10dp"
+            		android:src="@drawable/restaurantdetail_shopsign"/>
+        
+        		<TextView 
+            		android:id="@+id/restaurantdetail_shopsign_text"
+            		android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_centerVertical="true"
+            		android:textSize="14sp"
+            		android:textColor="#000000"
+            		android:layout_toRightOf="@+id/restaurantdetail_shopsign_pic"
+            		android:layout_marginLeft="20dp"
+            	/>
+        
+    		</RelativeLayout>
+    		
+          	<RelativeLayout 
+        		android:id="@+id/restaurantdetail_phone_layout"
+        		android:layout_width="fill_parent"
+        		android:layout_height="wrap_content"
+        		android:layout_marginLeft="10dp"
+        		android:layout_marginRight="12dp"
+        		android:layout_below="@+id/restaurantdetail_shopsign_layout"
+        		android:background="@drawable/fooddetail_list_layout"
+        		android:layout_marginTop="12dp"
+        	>
+        
+        		<ImageView 
+            		android:id="@+id/restaurantdetail_phone_pic"
+            		android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_centerVertical="true"
+            		android:layout_marginLeft="10dp"
+            		android:src="@drawable/fooddetail_location_pic"/>
+        
+        		<TextView 
+            		android:id="@+id/restaurantdetail_phone_text"
+            		android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_centerVertical="true"
+            		android:textSize="14sp"
+            		android:textColor="#000000"
+            		android:layout_toRightOf="@+id/restaurantdetail_phone_pic"
+            		android:layout_marginLeft="20dp"
+            	/>
+        
+    		</RelativeLayout>
+<!--             <ImageView
                 android:id="@+id/restaurantdetail_menu_img"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -165,7 +290,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#222222"
                 android:textSize="16sp" />
-
+-->
         </RelativeLayout>
     </ScrollView>
 

@@ -17,28 +17,33 @@ import com.xt.together.utils.ImageLoader;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class RestaurantDetail extends Activity {
 	
 	private Button btnBack;
-	private Button btnShare;
-	private Button btnStore;
-	private Button btnInvite;
-	private ImageView imageView;
-	private TextView txtName;
-	private TextView txtAddress;
-	private TextView txtSpecialty;
-	private TextView txtPhone;
+//	private Button btnShare;
+//	private Button btnStore;
+//	private Button btnInvite;
+//	private ImageView imageView;
+//	private TextView txtName;
+//	private TextView txtAddress;
+//	private TextView txtSpecialty;
+//	private TextView txtPhone;
 	
 	private Restaurant restaurant = null;
 	private ImageLoader imageLoader;
@@ -46,6 +51,17 @@ public class RestaurantDetail extends Activity {
 	private Oauth2AccessToken mAccessToken;
 	private StatusesAPI mStatusesAPI;
 	private Bitmap bitmap = null;
+	
+	private ImageView restaurantDetailPic;
+	private ImageView restaurantDetailShare;
+	private ImageView restaurantDetailAddpop;
+	private TextView restaurantDetailLocation;
+	private TextView restaurantDetailShopSign;
+	private TextView restaurantDetailPhone;
+	private PopupWindow popupwindow;
+	private RelativeLayout popupwindowLayout;
+	private ImageView restaurantDetailInvite;
+	private ImageView restaurantDetailLike;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +69,9 @@ public class RestaurantDetail extends Activity {
 		setContentView(R.layout.activity_restaurantdetail);
 		restaurant = (Restaurant)getIntent().getSerializableExtra("restaurant");
 		btnBack = (Button)findViewById(R.id.restaurantdetail_back);
-		btnShare = (Button)findViewById(R.id.restaurantdetail_share);
+		
+		
+/*		btnShare = (Button)findViewById(R.id.restaurantdetail_share);
 		btnInvite = (Button)findViewById(R.id.restaurantdetail_invite);
 		btnStore = (Button)findViewById(R.id.restaurantdetail_like);
 		imageView = (ImageView)findViewById(R.id.restaurantdetail_img);
@@ -61,9 +79,9 @@ public class RestaurantDetail extends Activity {
 		txtAddress = (TextView)findViewById(R.id.restaurantdetail_address);
 		txtSpecialty = (TextView)findViewById(R.id.restaurantdetail_specialty);
 		txtPhone = (TextView)findViewById(R.id.restaurantdetail_phone);
-		
+*/		
 		btnBack.setOnClickListener(new BackOnClickListener());
-		btnShare.setOnClickListener(new ShareOnClickListener());
+/*		btnShare.setOnClickListener(new ShareOnClickListener());
 		btnStore.setOnClickListener(new StoreOnClickListener());
 		btnInvite.setOnClickListener(new InviteOnClickListener());
 		
@@ -71,9 +89,52 @@ public class RestaurantDetail extends Activity {
 		txtAddress.setText(restaurant.getAddress());
 		txtSpecialty.setText("招牌菜：" + restaurant.getSpecialty());
 		txtPhone.setText("电话：" + restaurant.getPhone());
+		*/
+		restaurantDetailShare = (ImageView)findViewById(R.id.restaurantdetail_share);
+		restaurantDetailShare.setOnClickListener(new ShareOnClickListener());
+		
+		restaurantDetailPic = (ImageView)findViewById(R.id.restaurantdetail_foodpic);
 		imageLoader = new ImageLoader();
 		ImageLoadTask imageLoadTask = new ImageLoadTask();
 		imageLoadTask.execute(restaurant.getImage(),null,null);
+		
+		restaurantDetailLocation = (TextView)findViewById(R.id.restaurantdetail_location_text);
+		restaurantDetailLocation.setText(restaurant.getAddress());
+		
+		restaurantDetailPhone = (TextView)findViewById(R.id.restaurantdetail_phone_text);
+		restaurantDetailPhone.setText(restaurant.getPhone());
+		
+		restaurantDetailShopSign = (TextView)findViewById(R.id.restaurantdetail_shopsign_text);
+		restaurantDetailShopSign.setText(restaurant.getSpecialty());
+		
+		LayoutInflater inflater = LayoutInflater.from(this);
+		View popview = inflater.inflate(R.layout.pupupwindow_fooddetail, null);
+		popupwindow = new PopupWindow(popview, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, false);
+		popupwindow.setBackgroundDrawable(new BitmapDrawable());
+		popupwindow.setFocusable(true);
+		popupwindow.setOutsideTouchable(true);
+		
+		popupwindowLayout = (RelativeLayout)popview.findViewById(R.id.popupwindow_layout);
+		
+		restaurantDetailAddpop = (ImageView)findViewById(R.id.restaurantdetail_add_button);
+		restaurantDetailAddpop.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if(popupwindow.isShowing()){
+					popupwindow.dismiss();
+				}else{
+					popupwindow.showAsDropDown(arg0, -restaurantDetailAddpop.getWidth() *4 - popupwindowLayout.getWidth() * 2 - 45, -restaurantDetailAddpop.getHeight() - 21);
+				}
+			}
+			
+		});
+		
+		restaurantDetailInvite = (ImageView)popview.findViewById(R.id.fooddetail_popup_invite);
+		restaurantDetailInvite.setOnClickListener(new InviteOnClickListener());
+		restaurantDetailLike = (ImageView)popview.findViewById(R.id.fooddetail_popup_like);
+		restaurantDetailLike.setOnClickListener(new StoreOnClickListener());
 		
 		mAccessToken = AccessTokenKeeper.readAccessToken(RestaurantDetail.this);
 		mStatusesAPI = new StatusesAPI(mAccessToken);
@@ -95,7 +156,7 @@ public class RestaurantDetail extends Activity {
 				return;
 			}
 			bitmap = result;
-			imageView.setImageBitmap(result);
+			restaurantDetailPic.setImageBitmap(result);
 		}
 		
 	}
@@ -166,7 +227,7 @@ public class RestaurantDetail extends Activity {
 				}
 			}
 			
-			mStatusesAPI.upload(txtName.getText().toString(), bitmap, null, null, mListener);
+			mStatusesAPI.upload(restaurant.getName().toString(), bitmap, null, null, mListener);
 			return null;
 		}
 				

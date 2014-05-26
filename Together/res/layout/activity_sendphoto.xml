@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sendphoto_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -18,15 +19,7 @@
         android:layout_height="fill_parent"
         android:layout_below="@id/sendphoto_title"
         android:scaleType="fitXY"
-        android:src="@drawable/background" />
-
-    <ImageView
-        android:id="@+id/sendphoto_menu_address"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/sendphoto_image"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/sendphoto_menu_address" />
+        android:src="@drawable/fooddetail_background" />
 
     <Button
         android:id="@+id/sendphoto_back"
@@ -45,11 +38,145 @@
         android:background="@drawable/sendphoto_check" />
 
     <ImageView
+        android:id="@+id/sendphoto_division"
         android:layout_toLeftOf="@id/sendphoto_send"
         style="@style/division_right"
         android:contentDescription="分割线"
         android:src="@drawable/title_division" />
+    
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/sendphoto_title">
+        
+        <RelativeLayout 
+            android:id="@+id/sendphoto_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+            
+            <RelativeLayout 
+                android:id="@+id/sendphoto_name_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sendphoto_name_edittext_back" 
+                android:layout_marginTop="10dp"
+				android:layout_marginLeft="10dp"				
+				android:layout_marginRight="12dp">
+                
+                <EditText
+                    android:id="@+id/sendphoto_name_edittext"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:maxLength="15"
+                    android:singleLine="true"
+                    android:textSize="12dp"
+                    android:background="@null"
+                    android:hint="@string/sendphoto_name_hint" />
+                
+            </RelativeLayout>
+            
+            <RelativeLayout 
+                android:id="@+id/sendphoto_des_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sendphoto_des_back"
+                android:layout_below="@+id/sendphoto_name_layout"
+                android:layout_marginTop="10dp"
+                android:layout_alignLeft="@+id/sendphoto_name_layout"
+                android:layout_alignRight="@+id/sendphoto_name_layout">
+                    
+				<EditText 
+				    android:id="@+id/sendphoto_des_edittext"
+				    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginLeft="14dp"
+				    android:layout_marginTop="14dp"
+				    android:layout_marginRight="10dp"
+				    android:maxLength="140"
+				    android:textSize="12dp"
+				    android:background="@null"
+				    android:hint="@string/sendphoto_des_hint"/>
+                
+            </RelativeLayout>
+            
+            <RelativeLayout 
+                android:id="@+id/sendphoto_location_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sendphoto_des_layout"
+                android:layout_alignLeft="@+id/sendphoto_des_layout"
+                android:background="@drawable/sendphoto_location_back"
+                android:layout_marginTop="20dp">"
 
+                <TextView 
+                    android:id="@+id/sendphoto_location_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:text="@string/sendphoto_location_text"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="32dp"
+                    />
+                
+            </RelativeLayout>
+            
+            <RelativeLayout
+                android:id="@+id/sendphoto_pic_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="300dp"
+                android:layout_below="@+id/sendphoto_location_layout"
+                android:layout_marginTop="14dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/sendphoto_pic_back">
+                
+                <ImageView 
+                    android:id="@+id/sendphoto_pic"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
+                    android:clickable="false"
+                    />
+                
+                <ImageView 
+                    android:id="@+id/sendphoto_addmore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/sendphoto_pic"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="70dp"
+                    android:src="@drawable/sendphoto_pic_addmore"/>
+                
+                <ImageView 
+                    android:id="@+id/sendphoto_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="155dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/sendphoto_pic_delete"/>
+                
+            </RelativeLayout>
+            
+            
+        </RelativeLayout>
+        
+    </ScrollView>
+    
+
+<!--  
+
+    <ImageView
+        android:id="@+id/sendphoto_menu_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sendphoto_image"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/sendphoto_menu_address" />
+        
     <ImageView
         android:id="@+id/sendphoto_icon_address"
         android:layout_width="wrap_content"
@@ -72,7 +199,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#222222"
         android:textSize="17sp" />
-
+ 
     <ImageView
         android:id="@+id/sendphoto_menu_description"
         android:layout_width="fill_parent"
@@ -80,7 +207,7 @@
         android:layout_above="@id/sendphoto_menu_address"
         android:layout_marginBottom="10dp"
         android:src="@drawable/sendphoto_menu_description" />
-
+  
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -121,6 +248,7 @@
         android:inputType="textMultiLine" >
         <requestFocus />
         </MultiAutoCompleteTextView>
+        -->
     
 <!--  	<EditText
         android:id="@+id/sendphoto_description"

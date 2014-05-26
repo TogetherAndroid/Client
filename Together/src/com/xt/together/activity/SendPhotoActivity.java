@@ -11,6 +11,7 @@ import com.sina.weibo.sdk.openapi.models.StatusList;
 import com.xt.together.R;
 import com.xt.together.constant.constant;
 import com.xt.together.http.HttpData;
+import com.xt.together.waterfall.PLA_AbsListView.LayoutParams;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -25,9 +26,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.MultiAutoCompleteTextView.Tokenizer;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class SendPhotoActivity extends Activity {
@@ -42,25 +45,49 @@ public class SendPhotoActivity extends Activity {
 	private FriendshipsAPI mFriendshipsAPI;
 	private Status status = null;
 	
-
+	private EditText sendPhotoNameText;
+	private EditText sendPhotoDesText;
+	private ImageView sendPhotoDesPic;
+	private ImageView sendPhotoDelete;
+//	private RelativeLayout sendPhotoPicLayout;
+//	private RelativeLayout sendPhotoLayout;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sendphoto);
 		btnBack = (Button)findViewById(R.id.sendphoto_back);
 		btnSend = (Button)findViewById(R.id.sendphoto_send);
-		txtDescription = (MultiAutoCompleteTextView)findViewById(R.id.sendphoto_description);
-		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, constant.friendsNames);
-		txtDescription.setAdapter(adapter);
-		txtDescription.setThreshold(1);
-		txtDescription.setTokenizer(new SendPhotoActivity.myTokenizer());   
+		sendPhotoNameText = (EditText)findViewById(R.id.sendphoto_name_edittext);
+		sendPhotoDesText = (EditText)findViewById(R.id.sendphoto_des_edittext);
+		sendPhotoDesPic = (ImageView)findViewById(R.id.sendphoto_pic);
+		sendPhotoDelete = (ImageView)findViewById(R.id.sendphoto_delete);
+//		sendPhotoLayout = (RelativeLayout)findViewById(R.id.sendphoto_layout);
+//		sendPhotoPicLayout = (RelativeLayout)findViewById(R.id.sendphoto_pic_layout);
+//		sendPhotoPicLayout.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, 1000));
+//		txtDescription = (MultiAutoCompleteTextView)findViewById(R.id.sendphoto_description);
+//		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, constant.friendsNames);
+//		txtDescription.setAdapter(adapter);
+//		txtDescription.setThreshold(1);
+//		txtDescription.setTokenizer(new SendPhotoActivity.myTokenizer());   
 		
-		txtDescription.addTextChangedListener(freindTextWatcher);
-		txtAddress = (TextView)findViewById(R.id.sendphoto_address);
-		imageView = (ImageView)findViewById(R.id.sendphoto_image);
+//		txtDescription.addTextChangedListener(freindTextWatcher);
+//		txtAddress = (TextView)findViewById(R.id.sendphoto_address);
+//		imageView = (ImageView)findViewById(R.id.sendphoto_image);
 		btnBack.setOnClickListener(new BackOnClickListener());
 		btnSend.setOnClickListener(new SendOnClickListener());
-		imageView.setImageBitmap(MainActivity.bitmap);
+		sendPhotoDesPic.setImageBitmap(MainActivity.bitmap);
+		
+		sendPhotoDelete.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View view) {
+				// TODO Auto-generated method stub
+				sendPhotoDesPic.setImageBitmap(null);
+			}
+			
+		});
 		
 		mAccessToken = AccessTokenKeeper.readAccessToken(SendPhotoActivity.this);
 		mStatusesAPI = new StatusesAPI(mAccessToken);
@@ -81,8 +108,6 @@ public class SendPhotoActivity extends Activity {
 
 		@Override
 		public void onClick(View arg0) {
-			String description = txtDescription.getText().toString();
-			String address = txtAddress.getText().toString();
 			new GetDataTask().execute();
 		}
 		
@@ -151,7 +176,7 @@ public class SendPhotoActivity extends Activity {
 
         @Override
         protected String[] doInBackground(String... params) {
-        		String aa = new HttpData().addPostStatusData(constant.HTTPMYRECIPEURL, constant.userScreenName, "wuhan", txtDescription.getText().toString(), params[0], constant.USERHTTPID);
+        		String aa = new HttpData().addPostStatusData(constant.HTTPMYRECIPEURL, constant.userScreenName, "wuhan", sendPhotoNameText.getText().toString() + sendPhotoDesText.getText().toString(), params[0], constant.USERHTTPID);
             return null;
         }
 

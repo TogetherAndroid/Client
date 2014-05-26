@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/fooddetail_background"
+     >
 
     <TextView
         android:id="@+id/inviteddetail_title"
@@ -16,7 +18,230 @@
         android:textColor="#ffffff"
         android:textSize="25sp" />
     
+    
+    <Button
+        android:id="@+id/inviteddetail_back"
+		style="@style/btn_back"
+        android:background="@drawable/title_back" />
+
     <ImageView
+        android:layout_toRightOf="@+id/inviteddetail_back"
+        style="@style/division_left"
+        android:src="@drawable/title_division" />
+    
+    <ImageView 
+        android:id="@+id/inviteddetail_share"
+        android:layout_alignBottom="@+id/inviteddetail_title"
+        style="@style/btn_setting"
+        android:src="@drawable/food_detail_share"
+        />
+    
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/inviteddetail_title">
+    
+   		<RelativeLayout
+        	android:id="@+id/inviteddetail_layout"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content" >
+        
+   		    <RelativeLayout 
+   		        android:id="@+id/inviteddetail_foodpic_layout"
+        		android:layout_width="fill_parent"
+        		android:layout_height="240dp">
+   		        
+   		        <ImageView 
+            		android:id="@+id/inviteddetail_foodpic"
+            		android:layout_width="fill_parent"
+            		android:layout_height="fill_parent"
+            		android:clickable="false"
+            	/>
+   		        
+   		    </RelativeLayout>
+
+          	
+        	<RelativeLayout 
+   		  		android:id="@+id/inviteddetail_invite_layout"
+   		    	android:layout_width="fill_parent"
+   		    	android:layout_height="wrap_content"
+   		    	android:layout_marginLeft="10dp"
+   		    	android:layout_marginRight="12dp"
+   		    	android:layout_marginTop="12dp"
+   		    	android:background="@drawable/invitedetail_invite_layout"
+   		    	android:layout_below="@+id/inviteddetail_foodpic_layout">
+   		    
+   		    	<TextView 
+   		        	android:id="@+id/inviteddetail_invite"
+   		        	android:layout_width="wrap_content"
+   		        	android:layout_height="wrap_content"
+   		        	android:layout_centerVertical="true"
+   		        	android:textSize="14sp"
+   		        	android:textColor="#000000"
+   		        	android:layout_marginLeft="10dp"
+   		        	android:text="@string/invitedetail_invite"
+   		        	/>
+   		    
+   		    	<ImageView 
+   		    	    android:id="@+id/inviteddetail_invite_head"
+   		    	    android:layout_height="40dp"
+   		    	    android:layout_width="45dp"
+   		    	    android:layout_centerVertical="true"
+   		    	    android:layout_toRightOf ="@+id/inviteddetail_invite"
+   		    	    android:layout_marginLeft="10dp" 
+   		    	    />
+   		    	
+   		    	<TextView 
+   		    	    android:id="@+id/inviteddetail_invite_person"
+   		    	    android:layout_width="wrap_content"
+   		    	    android:layout_height="wrap_content"
+   		    	    android:layout_centerVertical="true"
+   		    	    android:textSize="14sp"
+   		    	    android:textColor="#000000"
+   		    	    android:layout_toRightOf="@+id/inviteddetail_invite_head"
+   		    	    android:layout_marginLeft="10dp" />
+   		    	
+   		    	<TextView 
+   		    	    android:id="@+id/inviteddetail_invite_goeat"
+   		    	    android:layout_width="wrap_content"
+   		    	    android:layout_height="wrap_content"
+   		    	    android:layout_centerVertical="true"
+   		    	    android:textSize="14sp"
+   		    	    android:textColor="#000000"
+   		    	    android:layout_toRightOf="@+id/inviteddetail_invite_person"
+   		    	    android:text="@string/invitedetail_invite_goeat"
+   		    	    android:layout_marginLeft="10dp" />
+   		    	
+   			</RelativeLayout>
+   			
+        	<RelativeLayout 
+        	    android:id="@+id/inviteddetail_time_layout"
+   		    	android:layout_width="fill_parent"
+   		    	android:layout_height="wrap_content"
+   		    	android:layout_marginLeft="10dp"
+   		    	android:layout_marginRight="12dp"
+   		    	android:layout_marginTop="12dp"
+   		    	android:background="@drawable/invitedetail_invite_layout"
+   		    	android:layout_below="@+id/inviteddetail_invite_layout"
+        	    >
+        	    
+        	    <ImageView 
+        	        android:id="@+id/inviteddetail_time_pic"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:layout_centerVertical="true"
+        	        android:layout_marginLeft="10dp"
+        	        android:src="@drawable/invitedetail_time_pic"
+        	        />
+        	    
+        	    <TextView 
+        	        android:id="@+id/inviteddetail_time_text"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:layout_centerVertical="true"
+        	        android:layout_toRightOf="@+id/inviteddetail_time_pic"
+        	        android:layout_marginLeft="20dp"
+        	        android:textSize="14sp"
+        	        android:textColor="#000000"
+        	        />
+        	    
+        	</RelativeLayout>
+         
+        	
+        	<RelativeLayout 
+        	    android:id="@+id/inviteddetail_location_layout"
+   		    	android:layout_width="fill_parent"
+   		    	android:layout_height="wrap_content"
+   		    	android:layout_marginLeft="10dp"
+   		    	android:layout_marginRight="12dp"
+   		    	android:layout_marginTop="0dp"
+   		    	android:background="@drawable/invitedetail_invite_layout"
+   		    	android:layout_below="@+id/inviteddetail_time_layout"
+        	    >
+        	    
+        	    <ImageView 
+        	        android:id="@+id/inviteddetail_location_pic"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:layout_centerVertical="true"
+        	        android:layout_marginLeft="10dp"
+        	        android:src="@drawable/invitedetail_location_pic"
+        	        />
+        	    
+        	    <TextView 
+        	        android:id="@+id/inviteddetail_location_text"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:layout_centerVertical="true"
+        	        android:layout_toRightOf="@+id/inviteddetail_location_pic"
+        	        android:layout_marginLeft="20dp"
+        	        android:textSize="14sp"
+        	        android:textColor="#000000"
+        	        />
+        	    
+        	</RelativeLayout>
+        	
+        	<RelativeLayout 
+        	    android:id="@+id/inviteddetail_phone_layout"
+   		    	android:layout_width="fill_parent"
+   		    	android:layout_height="wrap_content"
+   		    	android:layout_marginLeft="10dp"
+   		    	android:layout_marginRight="12dp"
+   		    	android:layout_marginTop="0dp"
+   		    	android:background="@drawable/invitedetail_invite_layout"
+   		    	android:layout_below="@+id/inviteddetail_location_layout"
+        	    >
+        	    
+        	    <ImageView 
+        	        android:id="@+id/inviteddetail_phone_pic"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:layout_centerVertical="true"
+        	        android:layout_marginLeft="10dp"
+        	        android:src="@drawable/invitedetail_phone_pic"
+        	        />
+        	    
+        	    <TextView 
+        	        android:id="@+id/inviteddetail_phone_text"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:layout_centerVertical="true"
+        	        android:layout_toRightOf="@+id/inviteddetail_phone_pic"
+        	        android:layout_marginLeft="20dp"
+        	        android:textSize="14sp"
+        	        android:textColor="#000000"
+        	        />
+        	    
+        	</RelativeLayout>
+        	
+        	<RelativeLayout 
+        	    android:id="@+id/inviteddetail_tuan"
+        	    android:layout_width="fill_parent"
+   		    	android:layout_height="wrap_content"
+   		    	android:layout_marginLeft="10dp"
+   		    	android:layout_marginRight="12dp"
+   		    	android:layout_marginTop="12dp"
+   		    	android:background="@drawable/invitedetail_invite_layout"
+   		    	android:layout_below="@+id/inviteddetail_phone_layout"       	    
+        	    >
+        	    
+        	    <TextView 
+        	        android:id="@+id/inviteddetail_tuan"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:layout_centerInParent="true"
+        	        android:textSize="14sp"
+        	        android:textColor="#000000"
+        	        android:text="@string/invitedetail_tuan"
+        	        />
+        	    
+        	    
+        	</RelativeLayout>
+        	
+    	</RelativeLayout>
+    	   	
+    </ScrollView>
+<!--    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/inviteddetail_title"
@@ -162,15 +387,7 @@
         </RelativeLayout>
 
     </ScrollView>
+-->
 
-    <Button
-        android:id="@+id/inviteddetail_back"
-		style="@style/btn_back"
-        android:background="@drawable/title_back" />
-
-    <ImageView
-        android:layout_toRightOf="@+id/inviteddetail_back"
-        style="@style/division_left"
-        android:src="@drawable/title_division" />
 
 </RelativeLayout>

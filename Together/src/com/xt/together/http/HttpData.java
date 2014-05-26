@@ -65,13 +65,13 @@ public class HttpData {
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return null;
 			} finally {
 				try {
 					in.close();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					return null;
 				}
 				urlConn.disconnect();
 			}
@@ -116,7 +116,7 @@ public class HttpData {
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return null;
 			} finally{
 				
 			}
@@ -156,11 +156,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -201,11 +201,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -240,11 +240,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -295,11 +295,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -335,11 +335,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -374,11 +374,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -430,11 +430,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -469,11 +469,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -519,12 +519,12 @@ public class HttpData {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			Log.e(constant.DEBUG_TAG, "error1");
-			e.printStackTrace();
+			return null;
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			Log.e(constant.DEBUG_TAG, "error2");
-			e.printStackTrace();
+			return null;
 		}
 		
 		
@@ -553,13 +553,12 @@ public class HttpData {
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
-		
-		return "error";
+
 	}
 	
 	public String addPostStatusData(String url,  String name, String address, String description, String image, String userWeiboId){
@@ -593,11 +592,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -631,11 +630,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -672,11 +671,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -712,11 +711,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -755,11 +754,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -791,11 +790,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -831,11 +830,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -870,11 +869,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -919,11 +918,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -959,11 +958,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
@@ -1000,11 +999,11 @@ public class HttpData {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确转码");
-			e.printStackTrace();
+			return null;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			Log.e(DEBUG_TAG, "没有正确执行http请求");
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return null;
