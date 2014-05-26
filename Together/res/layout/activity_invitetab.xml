@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
+	<TextView
+        android:id="@+id/invitetab_title"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/title_background"
+        android:text="消息"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/invitetab_back"
+        style="@style/btn_back"
+        android:background="@drawable/title_back"/>
+    <ImageView
+	    android:id="@+id/invitetab_setting"
+	    android:layout_alignBottom="@+id/invitetab_title"
+		style="@style/btn_setting"
+	    android:src="@drawable/title_setting" 
+	    android:contentDescription="设置按钮"/>
+    <LinearLayout 
+        android:orientation="vertical"
+       	android:layout_width="fill_parent" 
+       	android:layout_height="fill_parent"
+       	android:layout_below="@id/invitetab_title">
+
+       	<android.support.v4.app.FragmentTabHost
+       		android:id="@android:id/tabhost"
+       		android:layout_width="fill_parent"
+       		android:layout_height="wrap_content" >
+       		<FrameLayout
+           		android:id="@android:id/tabcontent"
+           		android:layout_width="0dp"
+           		android:layout_height="0dp" 
+           		android:layout_weight="0"/>           
+   		</android.support.v4.app.FragmentTabHost>
+       	<FrameLayout
+           	android:id="@+id/invitetab_content"
+           	android:layout_width="fill_parent"
+           	android:layout_height="fill_parent" />
+
+    </LinearLayout>
+	    
+</RelativeLayout>

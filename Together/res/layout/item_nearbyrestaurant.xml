@@ -2,57 +2,55 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="120dp"
-    android:background="@drawable/item_restaurant">
-
-    <ImageView
-        android:id="@+id/item_nearbyrestaurant_img"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+    android:background="#ecf0f1">
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="30dp"
-        android:src="@drawable/empty_photo" />
-
-    <TextView
-        android:id="@+id/item_nearbyrestaurant_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:paddingBottom="20dp"
-        android:layout_toRightOf="@id/item_nearbyrestaurant_img"
         android:layout_marginLeft="10dp"
-        android:textColor="#222222"
-        android:textSize="18sp"
-        android:text="玩辣主题餐厅" />
-
-    <TextView
-        android:id="@+id/item_nearbyrestaurant_specialty"
-        android:layout_width="160dp"
-        android:singleLine="true"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/item_nearbyrestaurant_average"
-        android:layout_centerVertical="true"
-        android:paddingTop="50dp"
-        android:textSize="12sp"
-        android:textColor="#6A6A6A"
-        android:text="招牌菜：宫保鸡丁、麻婆豆腐" />
-
-    <TextView
-        android:id="@+id/item_nearbyrestaurant_average"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/item_nearbyrestaurant_name"
-        android:layout_centerVertical="true"
-        android:paddingTop="25dp"
-        android:textSize="12sp"
-        android:textColor="#6A6A6A"
-        android:text="￥40/人" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/item_restaurant_arrow" />
-
+        android:layout_marginRight="10dp"
+        android:background="#ffffff">
+        <ImageView
+	        android:id="@+id/item_nearbyrestaurant_img"
+	        android:layout_width="110dp"
+	        android:layout_height="110dp"
+	        android:layout_centerVertical="true"
+	        android:src="@drawable/empty_photo" />
+	    <TextView
+	        android:id="@+id/item_nearbyrestaurant_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:paddingBottom="50dp"
+	        android:singleLine="true"
+	        android:layout_toRightOf="@id/item_nearbyrestaurant_img"
+	        android:layout_marginLeft="15dp"
+	        android:textColor="#222222"
+	        android:textSize="18sp"
+	        android:text="玩辣主题餐厅" />
+	
+	    <TextView
+	        android:id="@+id/item_nearbyrestaurant_specialty"
+	        android:layout_width="160dp"
+	        android:singleLine="true"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/item_nearbyrestaurant_average"
+	        android:layout_centerVertical="true"
+	        android:paddingTop="50dp"
+	        android:textSize="12sp"
+	        android:textColor="#6A6A6A"
+	        android:text="招牌菜：宫保鸡丁、麻婆豆腐" />
+	
+	    <TextView
+	        android:id="@+id/item_nearbyrestaurant_average"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/item_nearbyrestaurant_name"
+	        android:layout_centerVertical="true"
+	        android:singleLine="true"
+	        android:paddingTop="25dp"
+	        android:textSize="12sp"
+	        android:textColor="#6A6A6A"
+	        android:text="￥40/人" />
+    </RelativeLayout>
 </RelativeLayout>

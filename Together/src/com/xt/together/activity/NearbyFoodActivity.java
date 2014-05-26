@@ -8,35 +8,41 @@ import com.xt.together.constant.constant;
 import com.xt.together.http.HttpData;
 import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Food;
+import com.xt.together.utils.BaseActivity;
 import com.xt.together.utils.ImageLoader;
+import com.xt.together.utils.SlideMenu;
 import com.xt.together.waterfall.ScaleImageView;
 import com.xt.together.waterfall.XListView;
 import com.xt.together.waterfall.XListView.IXListViewListener;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class NearbyFoodActivity extends Fragment implements IXListViewListener{
+public class NearbyFoodActivity extends BaseActivity implements IXListViewListener{
 	
 	private XListView listView;
 	private StaggeredAdapter adapter;
 	private static List<Food> listNearbyFood = new ArrayList<Food>();
-	private ImageView settingButton  ;
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.activity_nearbyfood, null);		
-	}
+	private ImageView settingButton;
+	private Button btnMenu;
+	private SlideMenu slideMenu;
+	private RelativeLayout cameraLayout;
+	private RelativeLayout nearbyfoodLayout;
+	private RelativeLayout nearbyrestaurantLayout;
+	private RelativeLayout friendcircleLayout;
+	private RelativeLayout myrecipeLayout;
 
 	@Override
 	public void onResume() {
@@ -45,10 +51,13 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		settingButton = (ImageView)this.getView().findViewById(R.id.nearbyfood_setting);
-		listView = (XListView)getView().findViewById(R.id.food_list);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_nearbyfood);
+		settingButton = (ImageView)findViewById(R.id.nearbyfood_setting);
+		btnMenu = (Button)findViewById(R.id.nearbyfood_menu);
+		slideMenu = (SlideMenu)findViewById(R.id.nearbyfood_slide);
+		listView = (XListView)findViewById(R.id.food_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
 		adapter = new StaggeredAdapter(listNearbyFood);
@@ -57,10 +66,59 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(NearbyFoodActivity.this.getActivity(), SettingActivity.class);
+				Intent intent = new Intent(NearbyFoodActivity.this, SettingActivity.class);
 				startActivity(intent);		
 			}
 			
+		});
+		btnMenu.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (slideMenu.isMainScreenShowing()) {
+					slideMenu.openMenu();
+				} else {
+					slideMenu.closeMenu();
+				}
+			}
+		});
+		cameraLayout = (RelativeLayout)findViewById(R.id.menu_camera);
+		cameraLayout.setOnClickListener(new CameraOnClickListener());
+		nearbyfoodLayout = (RelativeLayout)findViewById(R.id.menu_nearbyfood);
+		nearbyfoodLayout.setBackgroundColor(Color.argb(255, 159, 219, 174));
+		nearbyfoodLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+			}
+		});
+		nearbyrestaurantLayout = (RelativeLayout)findViewById(R.id.menu_nearbyrestaurant);
+		nearbyrestaurantLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(NearbyFoodActivity.this, NearbyRestaurant.class);
+				startActivity(intent);
+			}
+		});
+		friendcircleLayout = (RelativeLayout)findViewById(R.id.menu_friendcircle);
+		friendcircleLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(NearbyFoodActivity.this, FriendCircleActivity.class);
+				startActivity(intent);
+			}
+		});
+		myrecipeLayout = (RelativeLayout)findViewById(R.id.menu_myrecipe);
+		myrecipeLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(NearbyFoodActivity.this, MyRecipe.class);
+				startActivity(intent);
+			}
 		});
 	}
 
@@ -105,10 +163,12 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 		
 		private List<Food> list;
         private ImageLoader imageLoader;
+        private Typeface fontFace;
 
         public StaggeredAdapter(List<Food> list) {
             this.imageLoader = new ImageLoader();
             this.list = list;
+            this.fontFace = Typeface.createFromAsset(getAssets(), "font/font.ttf");
         }
 
         @Override
@@ -122,9 +182,10 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
             		convertView = layoutInflator.inflate(R.layout.item_food, null);
                 viewHolder = new ViewHolder();
             		viewHolder.imageView = (ScaleImageView)convertView.findViewById(R.id.item_food_img);
-                viewHolder.txtShop = (TextView)convertView.findViewById(R.id.item_food_shop);
-                viewHolder.txtPrice = (TextView)convertView.findViewById(R.id.item_food_price);
+                viewHolder.txtName = (TextView)convertView.findViewById(R.id.item_food_name);
+                viewHolder.txtName.setTypeface(fontFace);
                 viewHolder.txtShare = (TextView)convertView.findViewById(R.id.item_food_share);
+                viewHolder.txtShare.setTypeface(fontFace);
                 convertView.setTag(viewHolder);
             } else {
             		viewHolder = (ViewHolder) convertView.getTag();
@@ -133,9 +194,8 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
             imageLoader.nearbyFoodLoadImage(food.getImage(), this, viewHolder);
             viewHolder.imageView.setImageWidth(240);
             viewHolder.imageView.setImageHeight(240);
-            viewHolder.txtPrice.setText("人均:" + food.getPrice());
-            viewHolder.txtShare.setText(food.getShare() + "人喜欢");
-            viewHolder.txtShop.setText(food.getShop());
+            viewHolder.txtName.setText(food.getName());
+            viewHolder.txtShare.setText(food.getShop());
             convertView.setOnClickListener(new ViewOnClickListener(food));
             
             return convertView;
@@ -166,7 +226,7 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(NearbyFoodActivity.this.getActivity(), FoodDetailActivity.class);
+				Intent intent = new Intent(NearbyFoodActivity.this, FoodDetailActivity.class);
 				intent.putExtra("food", this.food);
 				startActivity(intent);
 			}
@@ -178,8 +238,9 @@ public class NearbyFoodActivity extends Fragment implements IXListViewListener{
 	
 	public final class ViewHolder {
         public ScaleImageView imageView;
-        TextView txtShop;
-        TextView txtPrice;
+        TextView txtName;
         TextView txtShare;
     }
+	
+	
 }

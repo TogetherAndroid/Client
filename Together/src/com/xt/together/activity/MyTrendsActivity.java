@@ -17,6 +17,7 @@ import com.xt.together.waterfall.XListView.IXListViewListener;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -84,7 +85,7 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 
         @Override
         protected void onPostExecute(String[] result) {
-        	adapter.notifyDataSetChanged();
+        		adapter.notifyDataSetChanged();
             super.onPostExecute(result);
         }
     }
@@ -98,10 +99,12 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 		
 		private ImageLoader imageLoader;
         private List<Trends> list;
+        private Typeface fontFace;
 
         public StaggeredAdapter(List<Trends> list) {
             this.list = list;
             this.imageLoader = new ImageLoader();
+            this.fontFace = Typeface.createFromAsset(getAssets(), "font/font.ttf");
         }
 
         @Override
@@ -112,12 +115,13 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 
             if (convertView == null) {
                 LayoutInflater layoutInflator = LayoutInflater.from(parent.getContext());
-                convertView = layoutInflator.inflate(R.layout.item_mytrends, null);
+                convertView = layoutInflator.inflate(R.layout.item_food, null);
                 viewHolder = new ViewHolder();
-                viewHolder.imageView = (ScaleImageView) convertView.findViewById(R.id.item_mytrends_img);
-                viewHolder.txtShop = (TextView) convertView.findViewById(R.id.item_mytrends_shop);
-                viewHolder.txtPrice = (TextView) convertView.findViewById(R.id.item_mytrends_price);
-                viewHolder.txtShare = (TextView) convertView.findViewById(R.id.item_mytrends_share);
+                viewHolder.imageView = (ScaleImageView) convertView.findViewById(R.id.item_food_img);
+                viewHolder.txtName = (TextView) convertView.findViewById(R.id.item_food_name);
+                viewHolder.txtName.setTypeface(fontFace);
+                viewHolder.txtShare = (TextView) convertView.findViewById(R.id.item_food_share);
+                viewHolder.txtShare.setTypeface(fontFace);
                 convertView.setTag(viewHolder);
             } else {
             		viewHolder = (ViewHolder) convertView.getTag();
@@ -126,9 +130,8 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
             imageLoader.MyTrendsLoadImage(trends.getImage(), this, viewHolder);
             viewHolder.imageView.setImageWidth(240);
             viewHolder.imageView.setImageHeight(240);
-            viewHolder.txtPrice.setText(trends.getName());
+            viewHolder.txtName.setText(trends.getName());
             viewHolder.txtShare.setText(trends.getDescription());
-            viewHolder.txtShop.setText(trends.getAddress());
             convertView.setOnClickListener(new ViewOnClickListener(trends));
             return convertView;
         }
@@ -174,8 +177,7 @@ public class MyTrendsActivity extends Activity implements IXListViewListener{
 	
 	public final class ViewHolder {
         public ScaleImageView imageView;
-        TextView txtShop;
-        TextView txtPrice;
+        TextView txtName;
         TextView txtShare;
     }
 

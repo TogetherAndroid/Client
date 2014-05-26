@@ -9,41 +9,91 @@ import com.xt.together.control.PullToRefreshListView;
 import com.xt.together.http.HttpData;
 import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Restaurant;
+import com.xt.together.utils.BaseListActivity;
 import com.xt.together.utils.ImageLoader;
+import com.xt.together.utils.SlideMenu;
 
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class NearbyRestaurant extends ListFragment {
+public class NearbyRestaurant extends BaseListActivity {
 	
 	private static List<Restaurant> listNearbyRestaurant = new ArrayList<Restaurant>();
 	private NearbyRestaurantAdapter adapter;
 	private ImageView btnSetting;
+	private SlideMenu slideMenu;
+	private Button btnMenu;
+	private RelativeLayout cameraLayout;
+	private RelativeLayout nearbyfoodLayout;
+	private RelativeLayout nearbyrestaurantLayout;
+	private RelativeLayout friendcircleLayout;
+	private RelativeLayout myrecipeLayout;
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.activity_nearbyrestaurant, null);
-	}	
-	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		btnSetting = (ImageView)getView().findViewById(R.id.nearbyrestaurant_setting);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_nearbyrestaurant);
+		btnSetting = (ImageView)findViewById(R.id.nearbyrestaurant_setting);
 		btnSetting.setOnClickListener(new SettingOnClickListener());
+		slideMenu = (SlideMenu)findViewById(R.id.nearybyrestaurant_slide);
+		btnMenu = (Button)findViewById(R.id.nearbyrestaurant_menu);
+		btnMenu.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				if (slideMenu.isMainScreenShowing()) {
+					slideMenu.openMenu();
+				} else {
+					slideMenu.closeMenu();
+				}
+			}
+		});
+		cameraLayout = (RelativeLayout)findViewById(R.id.menu_camera);
+		cameraLayout.setOnClickListener(new CameraOnClickListener());
+		nearbyfoodLayout = (RelativeLayout)findViewById(R.id.menu_nearbyfood);
+		nearbyfoodLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(NearbyRestaurant.this, NearbyFoodActivity.class);
+				startActivity(intent);
+			}
+		});
+		nearbyrestaurantLayout = (RelativeLayout)findViewById(R.id.menu_nearbyrestaurant);
+		nearbyrestaurantLayout.setBackgroundColor(Color.argb(255, 159, 219, 174));
+		friendcircleLayout = (RelativeLayout)findViewById(R.id.menu_friendcircle);
+		friendcircleLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(NearbyRestaurant.this, FriendCircleActivity.class);
+				startActivity(intent);
+			}
+		});
+		myrecipeLayout = (RelativeLayout)findViewById(R.id.menu_myrecipe);
+		myrecipeLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(NearbyRestaurant.this, MyRecipe.class);
+				startActivity(intent);
+			}
+		});
 		initView();
 	}
 
@@ -55,15 +105,14 @@ public class NearbyRestaurant extends ListFragment {
                 new GetDataTask().execute();
             }
         });
-//		listNearbyRestaurant = Restaurant.getRestaurantList();
-        adapter = new NearbyRestaurantAdapter(getActivity(), listNearbyRestaurant);
+        adapter = new NearbyRestaurantAdapter(this, listNearbyRestaurant);
         setListAdapter(adapter);
 	}
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		Intent intent = new Intent(getActivity(),RestaurantDetail.class);
+		Intent intent = new Intent(this,RestaurantDetail.class);
 		intent.putExtra("restaurant", listNearbyRestaurant.get(position - 1));
 		startActivity(intent);
 	}
@@ -74,12 +123,11 @@ public class NearbyRestaurant extends ListFragment {
         protected String[] doInBackground(Void... params) {
         	String jsonText = new HttpData().getPostNearbyResData(constant.HTTPNERABYRESTAURANTURL);
         	JsonAnalyze jsonAnalyze = new JsonAnalyze();
-        	Log.e(constant.DEBUG_TAG, jsonText);
         	Restaurant[] newrestaurant =jsonAnalyze.jsonNearbyRestaurantAnalyze(jsonText);
 			if (null != newrestaurant) {
 				listNearbyRestaurant.removeAll(listNearbyRestaurant);
 				for (int i = 0; i < newrestaurant.length; i++) {
-					Log.e("com.xt.together", newrestaurant[i].getName()
+					Log.e("com.xt.together", newrestaurant[i].getLike()
 							+ "hahahhaa");
 					listNearbyRestaurant.add(newrestaurant[i]);
 				}
@@ -101,11 +149,13 @@ public class NearbyRestaurant extends ListFragment {
     		private List<Restaurant> list;
     		private LayoutInflater inflater;
     		private ImageLoader imageLoader;
+    		private Typeface fontFace;
     	
     		public NearbyRestaurantAdapter(Context context, List<Restaurant> list) {
     			this.list = list;
     			this.inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     			this.imageLoader = new ImageLoader();
+    			this.fontFace = Typeface.createFromAsset(getAssets(), "font/font.ttf");
     		}
 
 		@Override
@@ -132,8 +182,11 @@ public class NearbyRestaurant extends ListFragment {
 				viewHolder = new ViewHolder();
 				viewHolder.imageView = (ImageView)convertView.findViewById(R.id.item_nearbyrestaurant_img);
 				viewHolder.txtAverage = (TextView)convertView.findViewById(R.id.item_nearbyrestaurant_average);
+				viewHolder.txtAverage.setTypeface(fontFace);
 				viewHolder.txtName = (TextView)convertView.findViewById(R.id.item_nearbyrestaurant_name);
+				viewHolder.txtName.setTypeface(fontFace);
 				viewHolder.txtSpecialty = (TextView)convertView.findViewById(R.id.item_nearbyrestaurant_specialty);
+				viewHolder.txtSpecialty.setTypeface(fontFace);
 				convertView.setTag(viewHolder);
 			} else {
 				viewHolder = (ViewHolder)convertView.getTag();
@@ -159,7 +212,7 @@ public class NearbyRestaurant extends ListFragment {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(NearbyRestaurant.this.getActivity(),SettingActivity.class);
+			Intent intent = new Intent(NearbyRestaurant.this,SettingActivity.class);
 			startActivity(intent);
 		}
 		

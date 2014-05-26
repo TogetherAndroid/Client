@@ -16,11 +16,13 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /><!-- 用于评论模块分享位置信息 -->
     <application
         android:allowBackup="true"
-        android:icon="@drawable/together_icon"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar" >
         <activity
             android:name="com.xt.together.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,9 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity 
-            android:name="com.xt.together.activity.MainActivity">
+            android:name="com.xt.together.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation">
         </activity>
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"
@@ -38,55 +41,98 @@
             android:launchMode="singleTask"
             android:noHistory="true"
             android:theme="@style/Theme.UMDialog"
-            android:windowSoftInputMode="stateVisible|adjustResize" >
+            android:windowSoftInputMode="stateVisible|adjustResize" 
+            android:screenOrientation="portrait">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.NearbyFoodActivity">
         </activity>
         <activity 
-            android:name="com.xt.together.activity.NearbyFoodRestaurant">
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
+            android:name="com.xt.together.activity.NearbyRestaurant">
         </activity>
-        <activity 
-            android:name="com.xt.together.activity.MyRecipeActivity">
+        <activity
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
+            android:name="com.xt.together.activity.MyRecipe">
         </activity>
-        <activity 
+        <activity
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.FriendCircleActivity">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.RestaurantDetail">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.InviteActivity">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.InviteDetailActivity">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.InvitedActivity">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.InvitedDetailActivity">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.LikeActivity">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.StoreActivity">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.MyTrendsActivity">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.SendPhotoActivity">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.FoodDetailActivity">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.SettingActivity">
         </activity>
         <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:name="com.xt.together.activity.InvitingActivity">
+        </activity>
+        <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
+            android:name="com.xt.together.activity.LikeTabActivity">
+        </activity>
+        <activity 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
+            android:name="com.xt.together.activity.InviteTabActivity">
         </activity>
         <meta-data
             android:name="UMENG_APPKEY"

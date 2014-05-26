@@ -11,37 +11,37 @@ import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Invite;
 import com.xt.together.utils.ImageLoader;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class InviteActivity extends ListActivity {
+public class InviteActivity extends ListFragment {
 	
 	private static List<Invite> listInvite = new ArrayList<Invite>();
-	private Button btnBack;
-	private ImageView btnSetting;
 	private InviteAdapter adapter;
+	
+	
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_invite);
-		btnBack = (Button)findViewById(R.id.invite_back);
-		btnBack.setOnClickListener(new BackOnClickListener());
-		btnSetting = (ImageView)findViewById(R.id.invite_setting);
-		btnSetting.setOnClickListener(new SettingOnClickListener());
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.activity_invite, null);
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		((PullToRefreshListView) getListView()).setOnRefreshListener(new com.xt.together.control.PullToRefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -49,15 +49,14 @@ public class InviteActivity extends ListActivity {
                 new GetDataTask().execute();
             }
         });
-		adapter = new InviteAdapter(this, listInvite);
+		adapter = new InviteAdapter(getActivity(), listInvite);
         setListAdapter(adapter);
 	}
 	
-	
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		Intent intent = new Intent(InviteActivity.this,InviteDetailActivity.class);
+		Intent intent = new Intent(getActivity(),InviteDetailActivity.class);
 		intent.putExtra("invite", listInvite.get(position - 1));
 		startActivity(intent);
 	}
@@ -68,11 +67,13 @@ public class InviteActivity extends ListActivity {
 		private List<Invite> list;
 		private LayoutInflater inflater;
 		private ImageLoader imageLoader;
+		private Typeface fontFace;
 		
 		public InviteAdapter(Context context, List<Invite> list) {
 			this.list = list;
 			this.inflater = LayoutInflater.from(context);
 			this.imageLoader = new ImageLoader();
+			this.fontFace = Typeface.createFromAsset(getActivity().getAssets(), "font/font.ttf");
 		}
 
 		@Override
@@ -98,9 +99,13 @@ public class InviteActivity extends ListActivity {
 				viewHolder = new ViewHolder();
 				viewHolder.imageView = (ImageView)convertView.findViewById(R.id.invite_item_img);
 				viewHolder.txtName = (TextView)convertView.findViewById(R.id.invite_item_name);
+				viewHolder.txtName.setTypeface(fontFace);
 				viewHolder.txtAddress = (TextView)convertView.findViewById(R.id.invite_item_position);
+				viewHolder.txtAddress.setTypeface(fontFace);
 				viewHolder.txtInvited = (TextView)convertView.findViewById(R.id.invite_item_invited);
+				viewHolder.txtInvited.setTypeface(fontFace);
 				viewHolder.txtDate = (TextView)convertView.findViewById(R.id.invite_item_date);
+				viewHolder.txtDate.setTypeface(fontFace);
 				convertView.setTag(viewHolder);
 			} else {
 				viewHolder = (ViewHolder)convertView.getTag();
@@ -139,31 +144,12 @@ public class InviteActivity extends ListActivity {
             //mListItems.addFirst("Added after refresh...");
 
             // Call onRefreshComplete when the list has been refreshed.
-        	adapter.notifyDataSetChanged();
-        	((PullToRefreshListView) getListView()).onRefreshComplete();
+        		adapter.notifyDataSetChanged();
+        		((PullToRefreshListView) getListView()).onRefreshComplete();
 
-            super.onPostExecute(result);
+        		super.onPostExecute(result);
         }
     }
-	
-	class BackOnClickListener implements OnClickListener {
-
-		@Override
-		public void onClick(View v) {
-			InviteActivity.this.finish();
-		}
-		
-	}
-	
-	class SettingOnClickListener implements OnClickListener {
-
-		@Override
-		public void onClick(View v) {
-			Intent intent = new Intent(InviteActivity.this,SettingActivity.class);
-			startActivity(intent);
-		}
-		
-	}
 	
 	public final class ViewHolder {
 		public ImageView imageView;

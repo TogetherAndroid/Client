@@ -14,16 +14,16 @@ import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
 import com.sina.weibo.sdk.openapi.StatusesAPI;
 import com.sina.weibo.sdk.openapi.models.ErrorInfo;
-import com.sina.weibo.sdk.openapi.models.Status;
 import com.sina.weibo.sdk.openapi.models.StatusList;
 import com.xt.together.R;
 import com.xt.together.constant.constant;
 import com.xt.together.http.HttpData;
-import com.xt.together.json.JsonAnalyze;
-import com.xt.together.model.Food;
+import com.xt.together.utils.ImageLoader;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -38,6 +38,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.MultiAutoCompleteTextView.Tokenizer;
@@ -49,7 +51,9 @@ public class InvitingActivity extends Activity {
 	private MultiAutoCompleteTextView foodNameTextView;
 	private TextView dateTextView;
 	private TextView addressTextView;
-	private TextView phoneTextView;
+	private TextView nameTextView;
+	private EditText phoneTextView;
+	private ImageView imageView;
 	private String foodName;
 	private String foodImage;
 	private List<String> partFriendsIds = new ArrayList<String>();
@@ -57,6 +61,7 @@ public class InvitingActivity extends Activity {
 	private List<String> partFriendsHeads = new ArrayList<String>();
 	private Oauth2AccessToken mAccessToken;
 	private StatusesAPI mStatusesAPI;
+	private ImageLoader imageLoader;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,15 +70,26 @@ public class InvitingActivity extends Activity {
 		btnBack = (Button)findViewById(R.id.inviting_back);
 		btnFinish = (Button)findViewById(R.id.inviting_finish);
 		foodNameTextView = (MultiAutoCompleteTextView)findViewById(R.id.inviting_menu_inviting_text);
+		Typeface fontFace = Typeface.createFromAsset(getAssets(), "font/font.ttf");
+		foodNameTextView.setTypeface(fontFace);
 		dateTextView = (TextView)findViewById(R.id.inviting_menu_date_text);
+		dateTextView.setTypeface(fontFace);
 		addressTextView = (TextView)findViewById(R.id.inviting_menu_address_text);
-		phoneTextView = (TextView)findViewById(R.id.inviting_menu_phone_text);
+		addressTextView.setTypeface(fontFace);
+		phoneTextView = (EditText)findViewById(R.id.inviting_menu_phone_text);
+		phoneTextView.setTypeface(fontFace);
+		imageView = (ImageView)findViewById(R.id.inviting_img);
+		nameTextView = (TextView)findViewById(R.id.inviting_name);
+		nameTextView.setTypeface(fontFace);
 		btnBack.setOnClickListener(new BackOnClickListener());
 		btnFinish.setOnClickListener(new finishOnClickListener());
 		Intent intent = getIntent();
 		foodName = intent.getStringExtra("foodName");
 		foodImage = intent.getStringExtra("foodImage");
-		foodNameTextView.setText(foodName);
+		nameTextView.setText(foodName);
+		ImageLoadTask imageLoadTask = new ImageLoadTask();
+		imageLoader = new ImageLoader();
+		imageLoadTask.execute(foodImage,null,null);
 		addressTextView.setText(intent.getStringExtra("foodAddress"));
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy 年 MM 月 dd 日  HH 时 mm 分");
 		Date curDate = new Date(System.currentTimeMillis());
@@ -88,7 +104,6 @@ public class InvitingActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
-				// TODO Auto-generated method stub
 				Log.e(constant.DEBUG_TAG, constant.friendsIds[position] + "we get what we have clicked");
 				if(constant.friendsIds[position] != null){
 					partFriendsIds.add(constant.friendsIds[position]);
@@ -101,6 +116,23 @@ public class InvitingActivity extends Activity {
 		
 		mAccessToken = AccessTokenKeeper.readAccessToken(this);
 		mStatusesAPI = new StatusesAPI(mAccessToken);
+	}
+	
+	class ImageLoadTask extends AsyncTask<Object, Void, Bitmap> {
+
+		@Override
+		protected Bitmap doInBackground(Object... params) {
+			String url = (String)params[0];
+			Bitmap bitmap = imageLoader.loadImageFromInternet(url);
+
+			return bitmap;
+		}
+
+		@Override
+		protected void onPostExecute(Bitmap result) {
+			super.onPostExecute(result);
+			imageView.setImageBitmap(result);
+		}
 	}
 	
 	class BackOnClickListener implements OnClickListener {
@@ -116,7 +148,6 @@ public class InvitingActivity extends Activity {
 
 		@Override
 		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
 			mStatusesAPI.update(foodNameTextView.getText().toString(), null, null, mstatusListener);
 			new GetDataTask().execute();
 		}
@@ -127,7 +158,6 @@ public class InvitingActivity extends Activity {
 
 		@Override
 		public void onComplete(String response) {
-			// TODO Auto-generated method stub
 			if(!TextUtils.isEmpty(response)){
                 if (response.startsWith("{\"statuses\"")) {
                     // 调用 StatusList#parse 解析字符串成微博列表对象

@@ -21,14 +21,10 @@ import android.util.Log;
 public class ImageUpload {
 	public static String Upload(File file){
 		if(!file.exists()) {
-			Log.e(constant.DEBUG_TAG,"file do not exist" );
-			System.out.println("file do not exist");
 			return null;
 		}else{
-			Log.e(constant.DEBUG_TAG,"file do exist" );
 		}
 		String url = getUrl(file.getName(), "POST");
-		Log.e(constant.DEBUG_TAG, url);
 		try {	
 			PostMethod filePost = new PostMethod(url);
 			Part[] parts = {new FilePart(file.getName(), file)};
@@ -37,12 +33,9 @@ public class ImageUpload {
 		    client.getHttpConnectionManager().getParams().setConnectionTimeout(5000);
 		    int status = client.executeMethod(filePost);
 			if(status == 200){//如果状态码为200,就是正常返回
-				Log.e(constant.DEBUG_TAG,"上传成功" );
-				System.out.println("上传成功");
 				return getUrl(file.getName(), "GET");
 			} else {
 				Log.e(constant.DEBUG_TAG,"上传失败" + status );
-				System.out.println("上传失败" + status);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

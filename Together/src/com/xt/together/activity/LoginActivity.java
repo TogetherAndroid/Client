@@ -52,7 +52,6 @@ public class LoginActivity extends Activity{
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				mSsoHandler = new SsoHandler(LoginActivity.this, mWeiboAuth);
 				mSsoHandler.authorize(new AuthListener());
 			}});

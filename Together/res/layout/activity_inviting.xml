@@ -46,6 +46,8 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:background="@drawable/background" >
             <ImageView
                 android:id="@+id/inviting_menu_inviting"
@@ -53,27 +55,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/inviting_menu_inviting" />
- 
-            <!--  
-            <TextView 
-                android:id="@+id/inviting_menu_inviting_text"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                />
-            -->
+
             <MultiAutoCompleteTextView
-       			android:id="@+id/inviting_menu_inviting_text"
-        		android:layout_width="fill_parent"
-        		android:layout_height="wrap_content"
-        		android:layout_marginBottom="30dp"
-        		android:layout_alignParentTop="true"
-        		android:layout_marginTop="10dp"
-        		android:layout_centerHorizontal="true"
-        		android:ems="10"
-        		android:gravity="top"
-       			android:inputType="textMultiLine" >
-        		<requestFocus />
+                android:id="@+id/inviting_menu_inviting_text"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/transparent"
+                android:ems="10"
+                android:hint="点此输入@邀请好友"
+                android:inputType="textMultiLine" >
         	</MultiAutoCompleteTextView>
         	
             <ImageView
@@ -85,9 +78,11 @@
             
             <TextView 
                 android:id="@+id/inviting_menu_date_text"
-                android:layout_width="fill_parent"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/inviting_menu_inviting"
+                android:layout_alignTop="@id/inviting_menu_date"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
                 />
             <ImageView
                 android:id="@+id/inviting_menu_address"
@@ -97,25 +92,49 @@
                 android:src="@drawable/fooddetail_menu_address" />
             <TextView 
                 android:id="@+id/inviting_menu_address_text"
-                android:layout_width="fill_parent"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/inviting_menu_date"
-                />
-
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:singleLine="true"
+                android:layout_alignTop="@id/inviting_menu_address"/>
             <ImageView
                 android:id="@+id/inviting_menu_phone"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/inviting_menu_address"
                 android:src="@drawable/inviting_menu_phone" />
-            
-            <TextView 
+            <EditText 
                 android:id="@+id/inviting_menu_phone_text"
-                android:layout_width="fill_parent"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/inviting_menu_address"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:inputType="phone"
+                android:background="@drawable/transparent"
+                android:hint="点此输入电话"
+                android:layout_alignTop="@id/inviting_menu_phone"
                 />
-            
+
+            <ImageView
+                android:id="@+id/inviting_img"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignLeft="@+id/inviting_menu_inviting_text"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/empty_photo" />
+
+            <TextView
+                android:id="@+id/inviting_name"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/inviting_img"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/inviting_img"
+                android:text="TextView" />
+
          </RelativeLayout>
     </ScrollView>
 

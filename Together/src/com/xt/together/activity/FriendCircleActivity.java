@@ -9,32 +9,36 @@ import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
 import com.sina.weibo.sdk.openapi.legacy.FriendshipsAPI;
-import com.sina.weibo.sdk.openapi.models.ErrorInfo;
 import com.xt.together.R;
 import com.xt.together.constant.constant;
 import com.xt.together.http.HttpData;
 import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Food;
 import com.xt.together.model.FriendsCircle;
+import com.xt.together.utils.BaseActivity;
 import com.xt.together.utils.ImageLoader;
+import com.xt.together.utils.SlideMenu;
 import com.xt.together.waterfall.ScaleImageView;
 import com.xt.together.waterfall.XListView;
 import com.xt.together.waterfall.XListView.IXListViewListener;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class FriendCircleActivity extends Fragment implements IXListViewListener{
+public class FriendCircleActivity extends BaseActivity implements IXListViewListener{
 	
 	private XListView listView;
 	private StaggeredAdapter adapter;
@@ -42,28 +46,70 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 	private ImageView btnSetting;
 	private Oauth2AccessToken mAccessToken;
 	private FriendshipsAPI mFriendshipsAPI;
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		
-		return inflater.inflate(R.layout.activity_friendcircle, null);		
-	}
-	
-	
+	private Button btnMenu;
+	private SlideMenu slideMenu;
+	private RelativeLayout cameraLayout;
+	private RelativeLayout nearbyfoodLayout;
+	private RelativeLayout nearbyrestaurantLayout;
+	private RelativeLayout friendcircleLayout;
+	private RelativeLayout myrecipeLayout;
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		btnSetting = (ImageView)getView().findViewById(R.id.friendcircle_setting);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_friendcircle);
+		btnMenu = (Button)findViewById(R.id.friendcircle_menu);
+		slideMenu = (SlideMenu)findViewById(R.id.friendcircle_slide);
+		btnSetting = (ImageView)findViewById(R.id.friendcircle_setting);
 		btnSetting.setOnClickListener(new SettingOnClickListener());
-		listView = (XListView)getView().findViewById(R.id.friendcircle_list);
+		listView = (XListView)findViewById(R.id.friendcircle_list);
 		listView.setPullLoadEnable(true);
 		listView.setXListViewListener(this);
 		adapter = new StaggeredAdapter(listFriendCircle);
 		adapter.notifyDataSetChanged();
-		mAccessToken = AccessTokenKeeper.readAccessToken(this.getActivity());
-
+		mAccessToken = AccessTokenKeeper.readAccessToken(this);
+btnMenu.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (slideMenu.isMainScreenShowing()) {
+					slideMenu.openMenu();
+				} else {
+					slideMenu.closeMenu();
+				}
+			}
+		});
+		cameraLayout = (RelativeLayout)findViewById(R.id.menu_camera);
+		cameraLayout.setOnClickListener(new CameraOnClickListener());
+		nearbyfoodLayout = (RelativeLayout)findViewById(R.id.menu_nearbyfood);
+		nearbyfoodLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(FriendCircleActivity.this, NearbyFoodActivity.class);
+				startActivity(intent);
+			}
+		});
+		nearbyrestaurantLayout = (RelativeLayout)findViewById(R.id.menu_nearbyrestaurant);
+		nearbyrestaurantLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(FriendCircleActivity.this, NearbyRestaurant.class);
+				startActivity(intent);
+			}
+		});
+		friendcircleLayout = (RelativeLayout)findViewById(R.id.menu_friendcircle);
+		friendcircleLayout.setBackgroundColor(Color.argb(255, 159, 219, 174));
+		myrecipeLayout = (RelativeLayout)findViewById(R.id.menu_myrecipe);
+		myrecipeLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(FriendCircleActivity.this, MyRecipe.class);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override
@@ -102,7 +148,6 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 		
 		@Override
 		public void onWeiboException(WeiboException e) {
-			ErrorInfo info = ErrorInfo.parse(e.getMessage());
 		}
 	};
 	
@@ -133,10 +178,12 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 		
 		private ImageLoader imageLoader;
         private List<FriendsCircle> list;
+        private Typeface fontFace;
 
         public StaggeredAdapter(List<FriendsCircle> list) {
             this.list = list;
             this.imageLoader = new ImageLoader();
+            this.fontFace = Typeface.createFromAsset(getAssets(), "font/font.ttf");
         }
 
         @Override
@@ -147,12 +194,13 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 
             if (convertView == null) {
                 LayoutInflater layoutInflator = LayoutInflater.from(parent.getContext());
-                convertView = layoutInflator.inflate(R.layout.item_friendcircle, null);
+                convertView = layoutInflator.inflate(R.layout.item_food, null);
                 viewHolder = new ViewHolder();
-                viewHolder.imageView = (ScaleImageView) convertView.findViewById(R.id.item_circle_img);
-                viewHolder.txtShop = (TextView) convertView.findViewById(R.id.item_circle_shop);
-                viewHolder.txtPrice = (TextView) convertView.findViewById(R.id.item_circle_price);
-                viewHolder.txtShare = (TextView) convertView.findViewById(R.id.item_circle_share);
+                viewHolder.imageView = (ScaleImageView) convertView.findViewById(R.id.item_food_img);
+                viewHolder.txtName = (TextView) convertView.findViewById(R.id.item_food_name);
+                viewHolder.txtName.setTypeface(fontFace);
+                viewHolder.txtShare = (TextView) convertView.findViewById(R.id.item_food_share);
+                viewHolder.txtShare.setTypeface(fontFace);
                 convertView.setTag(viewHolder);
             } else {
             		viewHolder = (ViewHolder) convertView.getTag();
@@ -161,9 +209,8 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
             imageLoader.FriendCircleLoadImage(friendsCircle.getImage(), this, viewHolder);
             viewHolder.imageView.setImageWidth(240);
             viewHolder.imageView.setImageHeight(240);
-            viewHolder.txtPrice.setText(friendsCircle.getName());
+            viewHolder.txtName.setText(friendsCircle.getName());
             viewHolder.txtShare.setText(friendsCircle.getAddress());
-            viewHolder.txtShop.setText(friendsCircle.getDescription());
             convertView.setOnClickListener(new ViewOnClickListener(friendsCircle));
             
             return convertView;
@@ -196,7 +243,7 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
     			public void onClick(View v) {
     				Food food = new Food(null, friendsCircle.getName(), null, null, friendsCircle.getImage(),
     						friendsCircle.getAddress(), friendsCircle.getDescription(), friendsCircle.getFoodLike());
-    				Intent intent = new Intent(FriendCircleActivity.this.getActivity(), FoodDetailActivity.class);
+    				Intent intent = new Intent(FriendCircleActivity.this, FoodDetailActivity.class);
     				intent.putExtra("food", food);
     				startActivity(intent);
     			}
@@ -205,8 +252,7 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 	
 	public final class ViewHolder {
         public ScaleImageView imageView;
-        TextView txtShop;
-        TextView txtPrice;
+        TextView txtName;
         TextView txtShare;
     }
 	
@@ -214,7 +260,7 @@ public class FriendCircleActivity extends Fragment implements IXListViewListener
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(FriendCircleActivity.this.getActivity(),SettingActivity.class);
+			Intent intent = new Intent(FriendCircleActivity.this,SettingActivity.class);
 			startActivity(intent);
 		}
 		

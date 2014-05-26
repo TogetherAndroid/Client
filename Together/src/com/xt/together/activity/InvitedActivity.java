@@ -11,45 +11,37 @@ import com.xt.together.json.JsonAnalyze;
 import com.xt.together.model.Invite;
 import com.xt.together.utils.ImageLoader;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class InvitedActivity extends ListActivity {
+public class InvitedActivity extends ListFragment {
 	
-	private Button btnBack;
-	private ImageView btnSetting;
 	private static List<Invite> listInvited = new ArrayList<Invite>();
 	private InvitedAdapter adapter;
+	
+	
 
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-		Intent intent = new Intent(InvitedActivity.this,InvitedDetailActivity.class);
-		intent.putExtra("invite", listInvited.get(position - 1));
-		startActivity(intent);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.activity_invited, null);
 	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_invited);
-		btnBack = (Button)findViewById(R.id.invited_back);
-		btnBack.setOnClickListener(new BackOnClickListener());
-		btnSetting = (ImageView)findViewById(R.id.invited_setting);
-		btnSetting.setOnClickListener(new SettingOnClickListener());
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		((PullToRefreshListView) getListView()).setOnRefreshListener(new com.xt.together.control.PullToRefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -57,8 +49,16 @@ public class InvitedActivity extends ListActivity {
                 new GetDataTask().execute();
             }
         });
-		adapter = new InvitedAdapter(this, listInvited);
+		adapter = new InvitedAdapter(getActivity(), listInvited);
         setListAdapter(adapter);
+	}
+
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+		Intent intent = new Intent(getActivity(),InvitedDetailActivity.class);
+		intent.putExtra("invite", listInvited.get(position - 1));
+		startActivity(intent);
 	}
 	
 	private class InvitedAdapter extends BaseAdapter {
@@ -66,11 +66,13 @@ public class InvitedActivity extends ListActivity {
 		private List<Invite> list;
 		private LayoutInflater inflater;
 		private ImageLoader imageLoader;
+		private Typeface fontFace;
 		
 		public InvitedAdapter(Context context, List<Invite> list) {
 			this.list = list;
 			this.inflater = LayoutInflater.from(context);
 			this.imageLoader = new ImageLoader();
+			this.fontFace = Typeface.createFromAsset(getActivity().getAssets(), "font/font.ttf");
 		}
 
 		@Override
@@ -96,9 +98,13 @@ public class InvitedActivity extends ListActivity {
 				viewHolder = new ViewHolder();
 				viewHolder.imageView = (ImageView)convertView.findViewById(R.id.invite_item_img);
 				viewHolder.txtName = (TextView)convertView.findViewById(R.id.invite_item_name);
+				viewHolder.txtName.setTypeface(fontFace);
 				viewHolder.txtAddress = (TextView)convertView.findViewById(R.id.invite_item_position);
+				viewHolder.txtAddress.setTypeface(fontFace);
 				viewHolder.txtInvited = (TextView)convertView.findViewById(R.id.invite_item_invited);
+				viewHolder.txtInvited.setTypeface(fontFace);
 				viewHolder.txtDate = (TextView)convertView.findViewById(R.id.invite_item_date);
+				viewHolder.txtDate.setTypeface(fontFace);
 				convertView.setTag(viewHolder);
 			} else {
 				viewHolder = (ViewHolder)convertView.getTag();
@@ -120,8 +126,8 @@ public class InvitedActivity extends ListActivity {
         protected String[] doInBackground(Void... params) {
             // Simulates a background job.
         	String url = "http://togetherxt.duapp.com/invite";
-        	Log.e(constant.DEBUG_TAG, "the send id is " +  AccessTokenKeeper.readAccessToken(InvitedActivity.this).getUid());
-        	String jsonString = new HttpData().getPostInvitedData(url, AccessTokenKeeper.readAccessToken(InvitedActivity.this).getUid());
+        	Log.e(constant.DEBUG_TAG, "the send id is " +  AccessTokenKeeper.readAccessToken(getActivity()).getUid());
+        	String jsonString = new HttpData().getPostInvitedData(url, AccessTokenKeeper.readAccessToken(getActivity()).getUid());
         	Invite[] newInvited = new JsonAnalyze().jsonInviteAnalyze(jsonString);
         	if( null != newInvited){
         		listInvited.removeAll(listInvited);
@@ -144,25 +150,6 @@ public class InvitedActivity extends ListActivity {
             super.onPostExecute(result);
         }
     }
-	
-	class BackOnClickListener implements OnClickListener {
-
-		@Override
-		public void onClick(View v) {
-			InvitedActivity.this.finish();
-		}
-		
-	}
-	
-	class SettingOnClickListener implements OnClickListener {
-
-		@Override
-		public void onClick(View v) {
-			Intent intent = new Intent(InvitedActivity.this,SettingActivity.class);
-			startActivity(intent);
-		}
-		
-	}
 	
 	public final class ViewHolder {
 		public ImageView imageView;

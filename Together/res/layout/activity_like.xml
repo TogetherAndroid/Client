@@ -2,48 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-    <TextView
-        android:id="@+id/like_title"
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:textColor="#ffffff"
-        android:background="@drawable/title_background"
-        android:text="@string/myrecipe_like"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/like_back"
-        style="@style/btn_back"
-        android:background="@drawable/title_back"/>
     <com.xt.together.waterfall.XListView
         android:id="@+id/like_list"
         android:scrollbars="vertical"
         android:fastScrollEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
-        android:layout_below="@+id/like_title"
         android:background="@drawable/background"/>
-    <ImageView
-        android:layout_toRightOf="@+id/like_back"
-        style="@style/division_left"
-        android:src="@drawable/title_division" />
-    
-    <ImageView
-	    android:id="@+id/like_setting"
-	    android:layout_alignBottom="@+id/like_title"
-		style="@style/btn_setting"
-	    android:src="@drawable/title_setting" 
-	    android:contentDescription="设置按钮"/>
-	
-	<ImageView
-        android:layout_toLeftOf="@id/like_setting"
-        style="@style/division_right"
-        android:src="@drawable/title_division" 
-        android:contentDescription="分割线"/>
-
 </RelativeLayout>

@@ -2,47 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-    <TextView
-        android:id="@+id/invited_title"
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:textColor="#ffffff"
-        android:background="@drawable/title_background"
-        android:text="@string/myrecipe_invited"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
     <com.xt.together.control.PullToRefreshListView
 	    android:id="@+id/android:list"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:divider="@null"
-	    android:layout_below="@+id/invited_title"
 	    android:background="@drawable/background"  />
-
-    <Button
-        android:id="@+id/invited_back"
-     	style="@style/btn_back"
-        android:background="@drawable/title_back" />
-    <ImageView
-        android:layout_toRightOf="@+id/invited_back"
-        style="@style/division_left"
-        android:src="@drawable/title_division" />
-    
-    <ImageView
-	    android:id="@+id/invited_setting"
-	    android:layout_alignBottom="@+id/invited_title"
-		style="@style/btn_setting"
-	    android:src="@drawable/title_setting" 
-	    android:contentDescription="设置按钮"/>
-	
-	<ImageView
-        android:layout_toLeftOf="@id/invited_setting"
-        style="@style/division_right"
-        android:src="@drawable/title_division" 
-        android:contentDescription="分割线"/>
-
 </RelativeLayout>

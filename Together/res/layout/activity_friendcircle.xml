@@ -3,35 +3,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/friendcircle_title"
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:gravity="center"
-        android:text="@string/main_circle"
-        android:background="@drawable/title_background"
-        android:layout_alignParentTop="true"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    <com.xt.together.waterfall.XListView
-        android:id="@+id/friendcircle_list"
-        android:scrollbars="vertical"
-        android:fastScrollEnabled="true"
-        android:layout_below="@id/friendcircle_title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background" />
-    <ImageView
-	    android:id="@+id/friendcircle_setting"
-	    android:layout_alignBottom="@id/friendcircle_title"
-	    style="@style/btn_setting"
-	    android:src="@drawable/title_setting" 
-	    android:contentDescription="设置按钮"/>
 	
-	<ImageView
-        android:layout_toLeftOf="@id/friendcircle_setting"
-        style="@style/division_right"
-        android:src="@drawable/title_division" 
-        android:contentDescription="分割线"/>
+    <com.xt.together.utils.SlideMenu
+        android:id="@+id/friendcircle_slide"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
+        <include layout="@layout/layout_menu" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+		        android:id="@+id/friendcircle_title"
+		        android:layout_width="fill_parent"
+		        android:layout_height="48dp"
+		        android:gravity="center"
+		        android:text="@string/main_circle"
+		        android:background="@drawable/title_background"
+		        android:layout_alignParentTop="true"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+		    <com.xt.together.waterfall.XListView
+		        android:id="@+id/friendcircle_list"
+		        android:scrollbars="vertical"
+		        android:fastScrollEnabled="true"
+		        android:layout_below="@id/friendcircle_title"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:background="@drawable/background" />
+		     <Button
+		   		android:id="@+id/friendcircle_menu"
+		   		style="@style/btn_back"
+		   		android:background="@drawable/icon_menu" />
+		    <ImageView
+			    android:id="@+id/friendcircle_setting"
+			    android:layout_alignBottom="@id/friendcircle_title"
+			    style="@style/btn_setting"
+			    android:src="@drawable/title_setting" 
+			    android:contentDescription="设置按钮"/>
+		</RelativeLayout>
+    </com.xt.together.utils.SlideMenu>
 </RelativeLayout>

@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#000000"
-    android:orientation="vertical" >
-    <TextView
-        android:id="@+id/nearbyrestaurant_title"
+    android:layout_height="fill_parent" >
+    <com.xt.together.utils.SlideMenu
+        android:id="@+id/nearybyrestaurant_slide"
         android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:gravity="center"
-        android:text="@string/main_restaurant"
-        android:textSize="25sp"
-        android:textColor="#ffffff"
-        android:background="@drawable/title_background"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_height="fill_parent" >
 
-	<com.xt.together.control.PullToRefreshListView
-	    android:id="@+id/android:list"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:divider="@null"
-	    android:layout_below="@id/nearbyrestaurant_title" 
-	    android:background="@drawable/background"/>
+        <include layout="@layout/layout_menu" />
 
-	<ImageView
-	    android:id="@+id/nearbyrestaurant_setting"
-	    android:layout_alignBottom="@id/nearbyrestaurant_title"
-	    style="@style/btn_setting"
-	    android:src="@drawable/title_setting" 
-	    android:contentDescription="设置按钮"/>
-	
-	<ImageView
-       	style="@style/division_right"
-        android:layout_toLeftOf="@id/nearbyrestaurant_setting"
-        android:src="@drawable/title_division" 
-        android:contentDescription="分割线"/>
-
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#000000">
+			<TextView
+		        android:id="@+id/nearbyrestaurant_title"
+		        android:layout_width="fill_parent"
+		        android:layout_height="48dp"
+		        android:gravity="center"
+		        android:text="@string/main_restaurant"
+		        android:textSize="25sp"
+		        android:textColor="#ffffff"
+		        android:background="@drawable/title_background"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+			<com.xt.together.control.PullToRefreshListView
+			    android:id="@+id/android:list"
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"
+			    android:divider="@null"
+			    android:layout_below="@id/nearbyrestaurant_title" 
+			    android:background="@drawable/background"/>
+			<Button
+        		android:id="@+id/nearbyrestaurant_menu"
+        		style="@style/btn_back"
+        		android:background="@drawable/icon_menu" />
+			<ImageView
+			    android:id="@+id/nearbyrestaurant_setting"
+			    android:layout_alignBottom="@id/nearbyrestaurant_title"
+			    style="@style/btn_setting"
+			    android:src="@drawable/title_setting" 
+			    android:contentDescription="设置按钮"/>
+        </RelativeLayout>
+    </com.xt.together.utils.SlideMenu>
 </RelativeLayout>

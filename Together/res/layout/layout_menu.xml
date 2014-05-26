@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/menu_camera" 
+        android:layout_width="150dp"
+   		android:layout_height="0dp"
+   		android:layout_weight="1"
+   		android:background="#ffffff">
+       	<ImageView
+       	    android:id="@+id/main_camera"
+       	    android:layout_width="wrap_content"
+       	    android:layout_height="wrap_content"
+       	    android:layout_centerHorizontal="true"
+       	    android:layout_centerVertical="true"
+       	    android:background="@drawable/menu_camera" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/menu_nearbyfood"  
+        android:layout_width="150dp"
+   		android:layout_height="0dp"
+   		android:layout_weight="1"
+   		android:background="#ffffff">
+       	<ImageView
+       	    android:id="@+id/main_nearbyfood"
+       	    android:layout_width="wrap_content"
+       	    android:layout_height="wrap_content"
+       	    android:layout_centerHorizontal="true"
+       	    android:layout_centerVertical="true"
+       	    android:background="@drawable/menu_nearbyfood" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/menu_nearbyrestaurant"  
+        android:layout_width="150dp"
+   		android:layout_height="0dp"
+   		android:layout_weight="1"
+   		android:background="#ffffff">
+       	<ImageView
+       	    android:id="@+id/main_nearbyrestaurant"
+       	    android:layout_width="wrap_content"
+       	    android:layout_height="wrap_content"
+       	    android:layout_centerHorizontal="true"
+       	    android:layout_centerVertical="true"
+       	    android:background="@drawable/menu_nearbyrestaurant" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/menu_friendcircle"  
+        android:layout_width="150dp"
+   		android:layout_height="0dp"
+   		android:layout_weight="1"
+   		android:background="#ffffff">
+       	<ImageView
+       	    android:id="@+id/main_friendcircle"
+       	    android:layout_width="wrap_content"
+       	    android:layout_height="wrap_content"
+       	    android:layout_centerHorizontal="true"
+       	    android:layout_centerVertical="true"
+       	    android:background="@drawable/menu_friendcircle" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/menu_myrecipe"  
+        android:layout_width="150dp"
+   		android:layout_height="0dp"
+   		android:layout_weight="1"
+   		android:background="#ffffff">
+       	<ImageView
+       	    android:id="@+id/main_myrecipe"
+       	    android:layout_width="wrap_content"
+       	    android:layout_height="wrap_content"
+       	    android:layout_centerHorizontal="true"
+       	    android:layout_centerVertical="true"
+       	    android:background="@drawable/menu_myrecipe" />
+    </RelativeLayout>
+</LinearLayout>
