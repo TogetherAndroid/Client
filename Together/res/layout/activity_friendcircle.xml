@@ -30,7 +30,7 @@
 		        android:layout_below="@id/friendcircle_title"
 		        android:layout_width="match_parent"
 		        android:layout_height="match_parent"
-		        android:background="@drawable/background" />
+		        android:background="#ecf0f1" />
 		     <Button
 		   		android:id="@+id/friendcircle_menu"
 		   		style="@style/btn_back"

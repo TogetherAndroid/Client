@@ -7,5 +7,5 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:divider="@null"
-	    android:background="@drawable/background"  />
+	    android:background="#ecf0f1"  />
 </RelativeLayout>

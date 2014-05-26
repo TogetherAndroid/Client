@@ -44,6 +44,6 @@
         android:layout_below="@+id/mytrends_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background" />
+        android:background="#ecf0f1" />
 
 </RelativeLayout>

@@ -39,10 +39,10 @@
 		    <ImageView
 		        android:id="@+id/myrecipe_menu_head"
 		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
+		        android:layout_height="120dp"
 		        android:layout_below="@+id/myrecipe_title"
-		        android:scaleType="fitXY"
-		        android:src="@drawable/myrecipe_menu_head" />
+		        android:background="#ffffff"
+		        android:scaleType="fitXY"/>
 		
 		
 		    <ImageView

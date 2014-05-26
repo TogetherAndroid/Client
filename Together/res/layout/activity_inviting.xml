@@ -26,7 +26,7 @@
         android:layout_height="fill_parent"
         android:layout_below="@id/inviting_title"
         android:scaleType="fitXY"
-        android:src="@drawable/background" />
+        android:background="#ecf0f1" />
     <Button
         android:id="@+id/inviting_finish"
         android:layout_width="wrap_content"
@@ -34,8 +34,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:textColor="#ffffff"
-        android:textSize="18sp"
-        android:background="@drawable/inviting_btn_inviting" />
+        android:textSize="18sp"/>
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -48,13 +47,12 @@
             android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:background="@drawable/background" >
+            android:background="#ecf0f1" >
             <ImageView
                 android:id="@+id/inviting_menu_inviting"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/inviting_menu_inviting" />
+                android:layout_alignParentTop="true"/>
 
             <MultiAutoCompleteTextView
                 android:id="@+id/inviting_menu_inviting_text"
@@ -73,8 +71,7 @@
                 android:id="@+id/inviting_menu_date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/inviting_menu_inviting"
-                android:src="@drawable/inviting_menu_date" />
+                android:layout_below="@id/inviting_menu_inviting"/>
             
             <TextView 
                 android:id="@+id/inviting_menu_date_text"
@@ -88,8 +85,7 @@
                 android:id="@+id/inviting_menu_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/inviting_menu_date"
-                android:src="@drawable/fooddetail_menu_address" />
+                android:layout_below="@id/inviting_menu_date"/>
             <TextView 
                 android:id="@+id/inviting_menu_address_text"
                 android:layout_width="230dp"
@@ -102,8 +98,7 @@
                 android:id="@+id/inviting_menu_phone"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/inviting_menu_address"
-                android:src="@drawable/inviting_menu_phone" />
+                android:layout_below="@id/inviting_menu_address"/>
             <EditText 
                 android:id="@+id/inviting_menu_phone_text"
                 android:layout_width="230dp"
