@@ -138,7 +138,7 @@ public class FoodDetailActivity extends Activity {
 				if(popupwindow.isShowing()){
 					popupwindow.dismiss();
 				}else{
-					popupwindow.showAsDropDown(view, -addPop.getWidth() * 4 - popupwindowLayout.getWidth() * 2 - 45, -addPop.getHeight() - 21);
+					popupwindow.showAsDropDown(view,  -addPop.getWidth() * 5, -addPop.getHeight() - 21);
 				}
 			}
 			

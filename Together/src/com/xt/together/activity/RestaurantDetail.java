@@ -120,12 +120,12 @@ public class RestaurantDetail extends Activity {
 		restaurantDetailAddpop.setOnClickListener(new OnClickListener(){
 
 			@Override
-			public void onClick(View arg0) {
+			public void onClick(View view) {
 				// TODO Auto-generated method stub
 				if(popupwindow.isShowing()){
 					popupwindow.dismiss();
 				}else{
-					popupwindow.showAsDropDown(arg0, -restaurantDetailAddpop.getWidth() *4 - popupwindowLayout.getWidth() * 2 - 45, -restaurantDetailAddpop.getHeight() - 21);
+					popupwindow.showAsDropDown(view,  -restaurantDetailAddpop.getWidth() * 5, -restaurantDetailAddpop.getHeight() - 21);
 				}
 			}
 			

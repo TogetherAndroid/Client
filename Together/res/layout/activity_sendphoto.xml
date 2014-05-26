@@ -26,11 +26,6 @@
 		style="@style/btn_back"
         android:background="@drawable/title_back" />
 
-    <ImageView
-        android:layout_toRightOf="@+id/sendphoto_back"
-        style="@style/division_left"
-        android:src="@drawable/title_division" />
-
     <Button
         android:id="@+id/sendphoto_send"
         android:layout_alignBottom="@id/sendphoto_title"

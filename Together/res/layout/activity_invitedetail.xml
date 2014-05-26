@@ -23,10 +23,6 @@
         style="@style/btn_back"
         android:background="@drawable/title_back" />
 
-    <ImageView
-        android:layout_toRightOf="@+id/invitedetail_back"
-        style="@style/division_left"
-        android:src="@drawable/title_division" />
     
     <ImageView 
         android:id="@+id/invitedetail_share"

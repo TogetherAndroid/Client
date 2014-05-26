@@ -13,7 +13,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -31,7 +30,6 @@ import org.json.JSONException;
 
 import com.xt.together.constant.constant;
 import com.xt.together.utils.ImageUpload;
-
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.util.Log;
@@ -143,9 +141,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -188,9 +186,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -227,9 +225,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -282,9 +280,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -322,9 +320,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -361,9 +359,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -417,9 +415,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -456,9 +454,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -579,9 +577,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -617,9 +615,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -658,9 +656,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -698,9 +696,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -741,9 +739,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -777,9 +775,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -817,9 +815,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -856,9 +854,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -905,9 +903,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -945,9 +943,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());
@@ -986,9 +984,9 @@ public class HttpData {
 			httpRequest.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
 			httpRequest.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			DefaultHttpClient client = new DefaultHttpClient();
-			HttpResponse httpResponse = client.execute(httpRequest);
 			client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1500);
 			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 1500);
+			HttpResponse httpResponse = client.execute(httpRequest);
 			
 			if(httpResponse.getStatusLine().getStatusCode() == 200){
 				strResult = EntityUtils.toString(httpResponse.getEntity());

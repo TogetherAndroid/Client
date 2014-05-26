@@ -20,6 +20,9 @@ import com.xt.together.model.TrendsLike;
 public class JsonAnalyze {
 
 	public Restaurant[] jsonNearbyRestaurantAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		int status = -1;
 		Restaurant[] newrestaurant  = null;
 		try {
@@ -56,6 +59,9 @@ public class JsonAnalyze {
 	}
 	
 	public Food[] jsonFoodAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		int status = -1;
 		Food[] newFood  = null;
 		try {
@@ -87,6 +93,9 @@ public class JsonAnalyze {
 	
 	public JSONArray jsonWeiboFansAnalyze(String jsonString){
 
+		if(null == jsonString){
+			return null;
+		}
 		JSONArray friendids = null;
 		try {
 			JSONObject restaurantInfo = new JSONObject(jsonString);
@@ -102,6 +111,9 @@ public class JsonAnalyze {
 	
 	
 	public String[] jsonFriendsAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		String[] friendsName = null;
 		try {
 			JSONObject friendsInfo = new JSONObject(jsonString);
@@ -120,6 +132,9 @@ public class JsonAnalyze {
 	}
 	
 	public String[] jsonFriendsHeadAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		String[] friendsName = null;
 		try {
 			JSONObject friendsInfo = new JSONObject(jsonString);
@@ -138,6 +153,9 @@ public class JsonAnalyze {
 	}
 	
 	public String[] jsonFriendsIdAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		String[] friendsName = null;
 		try {
 			JSONObject friendsInfo = new JSONObject(jsonString);
@@ -158,6 +176,9 @@ public class JsonAnalyze {
 	 * 分析从mytrends获得的json，是一个双重数组
 	 */
 	public Trends[] jsonMyTrendsAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		
 		int status = -1;
 		Trends[] trends  = null;
@@ -203,6 +224,9 @@ public class JsonAnalyze {
 	}
 	
 	public Food[] jsonFoodLikeAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		int status = -1;
 		Food[] newFood  = null;
 		try {
@@ -234,6 +258,9 @@ public class JsonAnalyze {
 	
 	
 	public Restaurant[] jsonStoreAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		int status = -1;
 		Restaurant[] newRestaurant  = null;
 		try {
@@ -266,6 +293,9 @@ public class JsonAnalyze {
 	
 	
 	public String jsonIDAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		int status = -1;
 		String HttpId = "";
 		try {
@@ -291,6 +321,9 @@ public class JsonAnalyze {
 	}
 	
 	public Food[] jsonNearbyFoodAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		int status = -1;
 		Food[] newFood  = null;
 		try {
@@ -342,6 +375,7 @@ public class JsonAnalyze {
 	}
 	
 	public boolean jsonAddStoreAnalyze(String jsonString){
+
 		boolean isAddSuccess = false;
 		try {
 			JSONObject status = new JSONObject(jsonString);
@@ -358,6 +392,9 @@ public class JsonAnalyze {
 	}
 	
 	public FriendsCircle[] jsonFriendsCircleAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		int status = -1;
 		FriendsCircle[] newFriendsCircle  = null;
 		try {
@@ -394,6 +431,9 @@ public class JsonAnalyze {
 	}
 	
 	public Invite[] jsonInviteAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		int status = -1;
 		Invite[] newInvite  = null;
 		try {
@@ -432,6 +472,9 @@ public class JsonAnalyze {
 	}
 	
 	public Invite[] jsonInvitedAnalyze(String jsonString){
+		if(null == jsonString){
+			return null;
+		}
 		int status = -1;
 		Invite[] newInvite  = null;
 		try {

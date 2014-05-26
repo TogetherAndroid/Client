@@ -19,11 +19,7 @@
         android:id="@+id/restaurantdetail_back"
 		style="@style/btn_back"
         android:background="@drawable/title_back" />
-    
-    <ImageView
-        android:layout_toRightOf="@+id/restaurantdetail_back"
-        style="@style/division_left"
-        android:src="@drawable/title_division" />
+
 
 	<ImageView 
 	    android:id="@+id/restaurantdetail_share"
@@ -183,7 +179,7 @@
             		android:layout_height="wrap_content"
             		android:layout_centerVertical="true"
             		android:layout_marginLeft="10dp"
-            		android:src="@drawable/fooddetail_location_pic"/>
+            		android:src="@drawable/invitedetail_phone_pic"/>
         
         		<TextView 
             		android:id="@+id/restaurantdetail_phone_text"
