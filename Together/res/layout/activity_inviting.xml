@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/fooddetail_background"
+     >
     <TextView
         android:id="@+id/inviting_title"
         android:layout_width="fill_parent"
@@ -17,38 +19,218 @@
         style="@style/btn_back"
         android:background="@drawable/title_back" />
     
-    <ImageView
-        android:layout_toRightOf="@+id/inviting_back"
-        style="@style/division_left"
-        android:src="@drawable/title_division" />
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/inviting_title"
-        android:scaleType="fitXY"
-        android:background="#ecf0f1" />
-    <Button
-        android:id="@+id/inviting_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:textColor="#ffffff"
-        android:textSize="18sp"/>
+    <ImageView 
+        android:id="@+id/inviting_share"
+        android:layout_alignBottom="@+id/inviting_title"
+        style="@style/btn_setting"
+        android:src="@drawable/food_detail_share"
+        />
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/inviting_title"
-        android:layout_above="@id/inviting_finish" >
-
+        android:layout_below="@id/inviting_title"  >
+        
         <RelativeLayout
+        	android:id="@+id/inviting_layout"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content" >
+
+            <RelativeLayout 
+   		        android:id="@+id/inviting_foodpic_layout"
+        		android:layout_width="fill_parent"
+        		android:layout_height="240dp">
+   		        
+   		        <ImageView 
+            		android:id="@+id/inviting_foodpic"
+            		android:layout_width="fill_parent"
+            		android:layout_height="fill_parent"
+            		android:clickable="false"
+            	/>
+   		        
+   		    </RelativeLayout>
+
+          	
+        	<RelativeLayout 
+   		  		android:id="@+id/inviting_invite_layout"
+   		    	android:layout_width="fill_parent"
+   		    	android:layout_height="wrap_content"
+   		    	android:layout_marginLeft="10dp"
+   		    	android:layout_marginRight="12dp"
+   		    	android:layout_marginTop="12dp"
+   		    	android:background="@drawable/inviting_invite_layout"
+   		    	android:layout_below="@+id/inviting_foodpic_layout">
+   		    
+
+   		    	<ImageView 
+   		    	    android:id="@+id/inviting_invite_head"
+   		    	    android:layout_height="wrap_content"
+   		    	    android:layout_width="wrap_content"
+   		    	    android:layout_centerVertical="true"
+   		    	    android:layout_toRightOf ="@+id/inviting_invite"
+   		    	    android:layout_marginLeft="10dp" 
+   		    	    android:src="@drawable/inviting_invite_friend"
+   		    	    />
+   		    	
+   		    	<EditText 
+   		    	    android:id="@+id/inviting_invite_edittext"
+   		    	    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_toRightOf="@+id/inviting_invite_head"
+				    android:layout_marginLeft="14dp"
+				    android:layout_centerVertical="true"
+				    android:layout_marginRight="10dp"
+				    android:singleLine="true"
+				    android:textSize="12dp"
+				    android:background="@null"
+				    android:hint="点击添加好友"
+   		    	    />
+
+   		    	
+   			</RelativeLayout>
+   			
+        	<RelativeLayout 
+        	    android:id="@+id/inviting_time_layout"
+   		    	android:layout_width="fill_parent"
+   		    	android:layout_height="wrap_content"
+   		    	android:layout_marginLeft="10dp"
+   		    	android:layout_marginRight="12dp"
+   		    	android:layout_marginTop="12dp"
+   		    	android:background="@drawable/inviting_list_back"
+   		    	android:layout_below="@+id/inviting_invite_layout"
+        	    >
+        	    
+        	    <ImageView 
+        	        android:id="@+id/inviting_time_pic"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:layout_centerVertical="true"
+        	        android:layout_marginLeft="10dp"
+        	        android:src="@drawable/invitedetail_time_pic"
+        	        />
+        	    
+        	   <EditText 
+   		    	    android:id="@+id/inviting_time_edittext"
+   		    	    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_toRightOf="@+id/inviting_time_pic"
+				    android:layout_marginLeft="14dp"
+				    android:layout_centerVertical="true"
+				    android:layout_marginRight="10dp"
+				    android:singleLine="true"
+				    android:textSize="12dp"
+				    android:background="@null"
+				    android:hint="写下你约会的时间吧"
+   		    	    />
+        	</RelativeLayout>
+         
+        	
+        	<RelativeLayout 
+        	    android:id="@+id/inviting_location_layout"
+   		    	android:layout_width="fill_parent"
+   		    	android:layout_height="wrap_content"
+   		    	android:layout_marginLeft="10dp"
+   		    	android:layout_marginRight="12dp"
+   		    	android:layout_marginTop="0dp"
+   		    	android:background="@drawable/inviting_list_back"
+   		    	android:layout_below="@+id/inviting_time_layout"
+        	    >
+        	    
+        	    <ImageView 
+        	        android:id="@+id/inviting_location_pic"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:layout_centerVertical="true"
+        	        android:layout_marginLeft="10dp"
+        	        android:src="@drawable/invitedetail_location_pic"
+        	        />
+        	    
+
+        	    
+        	    <EditText 
+   		    	    android:id="@+id/inviting_location_edittext"
+   		    	    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_toRightOf="@+id/inviting_location_pic"
+				    android:layout_marginLeft="14dp"
+				    android:layout_centerVertical="true"
+				    android:layout_marginRight="10dp"
+				    android:singleLine="true"
+				    android:textSize="12dp"
+				    android:background="@null"
+				    android:hint="和朋友见面的地点"
+   		    	    />
+        	</RelativeLayout>
+        	
+        	<RelativeLayout 
+        	    android:id="@+id/inviting_phone_layout"
+   		    	android:layout_width="fill_parent"
+   		    	android:layout_height="wrap_content"
+   		    	android:layout_marginLeft="10dp"
+   		    	android:layout_marginRight="12dp"
+   		    	android:layout_marginTop="0dp"
+   		    	android:background="@drawable/inviting_list_back"
+   		    	android:layout_below="@+id/inviting_location_layout"
+        	    >
+        	    
+        	    <ImageView 
+        	        android:id="@+id/inviting_phone_pic"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:layout_centerVertical="true"
+        	        android:layout_marginLeft="10dp"
+        	        android:src="@drawable/invitedetail_phone_pic"
+        	        />
+        	    
+        	    <EditText 
+   		    	    android:id="@+id/inviting_phone_edittext"
+   		    	    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_toRightOf="@+id/inviting_phone_pic"
+				    android:layout_marginLeft="14dp"
+				    android:layout_centerVertical="true"
+				    android:layout_marginRight="10dp"
+				    android:singleLine="true"
+				    android:textSize="12dp"
+				    android:background="@null"
+				    android:hint="留下你的联系方式"
+   		    	    />
+        	    
+        	</RelativeLayout>
+        	
+        	<RelativeLayout 
+        	    android:id="@+id/inviting_tuan"
+        	    android:layout_width="fill_parent"
+   		    	android:layout_height="wrap_content"
+   		    	android:layout_marginLeft="10dp"
+   		    	android:layout_marginRight="12dp"
+   		    	android:layout_marginTop="12dp"
+   		    	android:background="@drawable/invitedetail_invite_layout"
+   		    	android:layout_below="@+id/inviting_phone_layout"       	    
+        	    >
+        	    
+        	    <TextView 
+        	        android:id="@+id/inviting_tuan"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:layout_centerInParent="true"
+        	        android:textSize="14sp"
+        	        android:textColor="#000000"
+        	        android:text="点击查看团购信息"
+        	        />
+        	    
+        	    
+        	</RelativeLayout>
+        	
+    	</RelativeLayout>
+            
+  <!--         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:background="#ecf0f1" >
-            <ImageView
+           <ImageView
                 android:id="@+id/inviting_menu_inviting"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -131,6 +313,8 @@
                 android:text="TextView" />
 
          </RelativeLayout>
+         
+         -->
     </ScrollView>
 
 </RelativeLayout>
