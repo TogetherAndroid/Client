@@ -30,6 +30,7 @@ public class MainActivity extends BaseActivity{
 	private ImageView imgCamera = null;
 	private ImageView imgFriendcircle = null;
 	private ImageView imgMyrecipe = null;
+	private ImageView imgSetting = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,14 @@ public class MainActivity extends BaseActivity{
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this, MyRecipe.class);
+				startActivity(intent);
+			}
+		});
+		imgSetting = (ImageView)findViewById(R.id.main_setting);
+		imgSetting.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, SettingActivity.class);
 				startActivity(intent);
 			}
 		});

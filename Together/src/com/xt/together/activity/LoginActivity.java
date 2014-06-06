@@ -22,11 +22,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class LoginActivity extends Activity{
 
 //	private Button loginButton;
-	private LoginButton loginButton;
+	private Button loginButton;
 	private WeiboAuth mWeiboAuth;
 	private Oauth2AccessToken mAccessToken;
 	private UsersAPI mUserAPI;
@@ -47,7 +48,7 @@ public class LoginActivity extends Activity{
 		
 		mWeiboAuth = new WeiboAuth(this, constant.APP_KEY,constant.REDIRECT_URL, constant.SCOPE);
 		
-		loginButton = (LoginButton)findViewById(R.id.login_button_default);
+		loginButton = (Button)findViewById(R.id.login_button_default);
 		loginButton.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -61,13 +62,11 @@ public class LoginActivity extends Activity{
 
 		@Override
 		public void onCancel() {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onComplete(Bundle values) {
-			// TODO Auto-generated method stub
 			mAccessToken = Oauth2AccessToken.parseAccessToken(values);
 			if(mAccessToken.isSessionValid()){
 				Log.w(constant.DEBUG_TAG, "更新token");
@@ -87,8 +86,7 @@ public class LoginActivity extends Activity{
 
 		@Override
 		public void onWeiboException(WeiboException arg0) {
-			// TODO Auto-generated method stub
-			
+			arg0.printStackTrace();
 		}
 			
 	}
@@ -111,8 +109,7 @@ public class LoginActivity extends Activity{
 
 		@Override
 		public void onWeiboException(WeiboException arg0) {
-			// TODO Auto-generated method stub
-			
+			arg0.printStackTrace();
 		}
 		
 	};
@@ -120,7 +117,6 @@ public class LoginActivity extends Activity{
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		if(mSsoHandler != null){

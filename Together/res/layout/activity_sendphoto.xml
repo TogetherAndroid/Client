@@ -31,14 +31,6 @@
         android:layout_alignBottom="@id/sendphoto_title"
 		style="@style/btn_setting"
         android:background="@drawable/sendphoto_check" />
-
-    <ImageView
-        android:id="@+id/sendphoto_division"
-        android:layout_toLeftOf="@id/sendphoto_send"
-        style="@style/division_right"
-        android:contentDescription="分割线"
-        android:src="@drawable/title_division" />
-    
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

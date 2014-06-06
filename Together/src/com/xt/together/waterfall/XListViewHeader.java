@@ -1,9 +1,4 @@
-/**
- * @file XListViewHeader.java
- * @create Apr 18, 2012 5:22:27 PM
- * @author Maxwin
- * @description XListView's header
- */
+
 package com.xt.together.waterfall;
 
 import com.xt.together.R;
@@ -51,7 +46,7 @@ public class XListViewHeader extends LinearLayout {
 	}
 
 	private void initView(Context context) {
-		// 初始情况，设置下拉刷新view高度为0
+		// ���濮������碉��璁剧疆涓������锋��view楂�搴�涓�0
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LayoutParams.FILL_PARENT, 0);
 		mContainer = (LinearLayout) LayoutInflater.from(context).inflate(
@@ -78,11 +73,11 @@ public class XListViewHeader extends LinearLayout {
 	public void setState(int state) {
 		if (state == mState) return ;
 		
-		if (state == STATE_REFRESHING) {	// 显示进度
+		if (state == STATE_REFRESHING) {	// ��剧ず杩�搴�
 			mArrowImageView.clearAnimation();
 			mArrowImageView.setVisibility(View.INVISIBLE);
 			mProgressBar.setVisibility(View.VISIBLE);
-		} else {	// 显示箭头图片
+		} else {	// ��剧ず绠�澶村�剧��
 			mArrowImageView.setVisibility(View.VISIBLE);
 			mProgressBar.setVisibility(View.INVISIBLE);
 		}

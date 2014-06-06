@@ -5,15 +5,17 @@
     android:background="#ecf0f1">
     <RelativeLayout 
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="100dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:background="#ffffff">
         <ImageView
 	        android:id="@+id/item_nearbyrestaurant_img"
-	        android:layout_width="110dp"
-	        android:layout_height="110dp"
+	        android:layout_width="100dp"
+	        android:layout_height="100dp"
 	        android:layout_centerVertical="true"
 	        android:src="@drawable/empty_photo" />
 	    <TextView

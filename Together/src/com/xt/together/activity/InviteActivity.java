@@ -3,6 +3,13 @@ package com.xt.together.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.exception.WeiboException;
+import com.sina.weibo.sdk.net.RequestListener;
+import com.sina.weibo.sdk.openapi.StatusesAPI;
+import com.sina.weibo.sdk.openapi.models.ErrorInfo;
+import com.sina.weibo.sdk.openapi.models.Status;
+import com.sina.weibo.sdk.openapi.models.StatusList;
 import com.xt.together.R;
 import com.xt.together.constant.constant;
 import com.xt.together.control.PullToRefreshListView;
@@ -13,24 +20,31 @@ import com.xt.together.utils.ImageLoader;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class InviteActivity extends ListFragment {
 	
 	private static List<Invite> listInvite = new ArrayList<Invite>();
 	private InviteAdapter adapter;
-	
+	private Oauth2AccessToken mAccessToken;
+	private StatusesAPI mStatusesAPI;
+	private Status status = null;
 	
 
 	@Override
@@ -49,6 +63,10 @@ public class InviteActivity extends ListFragment {
                 new GetDataTask().execute();
             }
         });
+		
+		mAccessToken = AccessTokenKeeper.readAccessToken(this.getActivity());
+		mStatusesAPI = new StatusesAPI(mAccessToken);
+		
 		adapter = new InviteAdapter(getActivity(), listInvite);
         setListAdapter(adapter);
 	}
@@ -92,8 +110,8 @@ public class InviteActivity extends ListFragment {
 		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder viewHolder = null;
+		public View getView(final int position, View convertView, ViewGroup parent) {
+			final ViewHolder viewHolder;
 			if(convertView == null) {
 				convertView = inflater.inflate(R.layout.item_invite, null);
 				viewHolder = new ViewHolder();
@@ -106,6 +124,10 @@ public class InviteActivity extends ListFragment {
 				viewHolder.txtInvited.setTypeface(fontFace);
 				viewHolder.txtDate = (TextView)convertView.findViewById(R.id.invite_item_date);
 				viewHolder.txtDate.setTypeface(fontFace);
+				viewHolder.imgMore = (ImageView)convertView.findViewById(R.id.invite_item_more);
+				viewHolder.menuLayout = (LinearLayout)convertView.findViewById(R.id.invite_item_menu);
+				viewHolder.imgDelete = (ImageView)convertView.findViewById(R.id.invite_item_delete);
+				viewHolder.imgShare = (ImageView)convertView.findViewById(R.id.invite_item_share);
 				convertView.setTag(viewHolder);
 			} else {
 				viewHolder = (ViewHolder)convertView.getTag();
@@ -116,6 +138,34 @@ public class InviteActivity extends ListFragment {
 			viewHolder.txtDate.setText(invite.getDate());
 			viewHolder.txtInvited.setText(invite.getInvited());
 			viewHolder.txtAddress.setText(invite.getAddress());
+			viewHolder.menuLayout.setVisibility(View.GONE);
+			viewHolder.imgMore.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					viewHolder.menuLayout.setVisibility(viewHolder.menuLayout.isShown()?View.GONE:View.VISIBLE);
+				}
+			});
+			viewHolder.imgDelete.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					SharedPreferences invitedPreferences = getActivity().getSharedPreferences("invited_list", 0);
+        				String invitedList = invitedPreferences.getString("invite_list", " ");
+        				invitedList = invitedList + "\"" + viewHolder.id + "\"";
+        				invitedPreferences.edit().putString("invite_list", invitedList).commit();
+        				list.remove(position);
+        				adapter.notifyDataSetChanged();
+				}
+			});
+			viewHolder.imgShare.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mStatusesAPI.update(viewHolder.txtName.getText().toString() + viewHolder.txtDate.getText() + 
+							viewHolder.txtAddress.getText() + "@" + viewHolder.txtInvited.getText() + "", null, null, mstatusListener);
+
+//					Toast.makeText(InviteActivity.this.getActivity().getApplicationContext(), "默认Toast样式",
+//						     Toast.LENGTH_SHORT).show();
+				}
+			});
 			return convertView;
 		}
 		
@@ -131,11 +181,14 @@ public class InviteActivity extends ListFragment {
         	Invite[] newInvite = new JsonAnalyze().jsonInviteAnalyze(jsonString);
         	if( null != newInvite){
         		listInvite.removeAll(listInvite);
+        		SharedPreferences invitedPreferences = getActivity().getSharedPreferences("invite_list", 0);
+        		String inviteList = invitedPreferences.getString("invite_list", " ");
         		for(int i = 0; i < newInvite.length; i ++){
-        			listInvite.add(newInvite[i]);
+        			if (!inviteList.contains("\"" + newInvite[i].getId() + "\"")) {
+        				listInvite.add(newInvite[i]);
+				}
         		}
         	}
-        	Log.e(constant.DEBUG_TAG, jsonString);
             return null;
         }
 
@@ -151,11 +204,48 @@ public class InviteActivity extends ListFragment {
         }
     }
 	
+	private  RequestListener mstatusListener = new RequestListener(){
+
+		@Override
+		public void onComplete(String response) {
+			// TODO Auto-generated method stub
+			if(!TextUtils.isEmpty(response)){
+                if (response.startsWith("{\"statuses\"")) {
+                    // 调用 StatusList#parse 解析字符串成微博列表对象
+                    StatusList statuses = StatusList.parse(response);
+                    if (statuses != null && statuses.total_number > 0) {
+                    	Log.e(constant.DEBUG_TAG, "获得微博信息成功，条数" + statuses.statusList.size());
+                    }
+                } else if (response.startsWith("{\"created_at\"")) {
+                    // 调用 Status#parse 解析字符串成微博对象
+                    status = Status.parse(response);
+                    Log.e(constant.DEBUG_TAG, "获得微博信息成功，id" + status.id);
+                } else {
+                    Log.e("com.sina.weibo.sdk.demo", response);
+                }
+   //             new postStatusTask().execute();
+			}
+			
+		}
+
+		@Override
+		public void onWeiboException(WeiboException e) {
+			ErrorInfo info = ErrorInfo.parse(e.getMessage());
+			Log.e(constant.DEBUG_TAG, "获得微博信息成功，错误" +  info.toString());
+		}
+		
+	};
+	
 	public final class ViewHolder {
 		public ImageView imageView;
 		TextView txtName;
 		TextView txtAddress;
 		TextView txtDate;
 		TextView txtInvited;
+		ImageView imgMore;
+		LinearLayout menuLayout;
+		ImageView imgDelete;
+		ImageView imgShare;
+		String id;
 	}
 }

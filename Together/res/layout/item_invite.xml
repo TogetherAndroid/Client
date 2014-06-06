@@ -60,4 +60,37 @@
         android:textColor="#6A6A6A"
         android:text="被邀人XXXX" />
 
+    <ImageView
+        android:id="@+id/invite_item_more"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/item_invite_more" />
+
+    <LinearLayout
+        android:id="@+id/invite_item_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/invite_item_more"
+        android:layout_alignRight="@id/invite_item_more"
+        android:orientation="horizontal"
+        android:background="@drawable/item_invite_menu">
+        <ImageView
+	        android:id="@+id/invite_item_delete"
+	        android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:src="@drawable/item_invite_delete" />
+        <ImageView
+	        android:id="@+id/invite_item_share"
+	        android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:src="@drawable/item_invite_share" />
+    </LinearLayout>
+
 </RelativeLayout>

@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.R.bool;
 import android.util.Log;
 
 import com.xt.together.constant.constant;
@@ -458,7 +457,7 @@ public class JsonAnalyze {
 						invitedname = invitedname.replace("@", "");
 						invitedString += invitedname;
 					}
-					newInvite[i] = new Invite(jo.getString("name"), jo.getString("address"),
+					newInvite[i] = new Invite(jo.getString("id"), jo.getString("name"), jo.getString("address"),
 							jo.getString("date"), null, invitedString, jo.getString("phone"),jo.getString("image")
 							);
 				
@@ -499,7 +498,7 @@ public class JsonAnalyze {
 						invitedname = invitedname.replace("@", "");
 						invitedString += invitedname;
 					}
-					newInvite[i] = new Invite(jo.getString("name"), jo.getString("address"),
+					newInvite[i] = new Invite(jo.getString("id"), jo.getString("name"), jo.getString("address"),
 							jo.getString("date"), null, invitedString, jo.getString("phone"),jo.getString("image")
 							);
 				

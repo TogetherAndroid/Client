@@ -193,7 +193,7 @@ public class NearbyFoodActivity extends BaseActivity implements IXListViewListen
             
             imageLoader.nearbyFoodLoadImage(food.getImage(), this, viewHolder);
             viewHolder.imageView.setImageWidth(240);
-            viewHolder.imageView.setImageHeight(240);
+            viewHolder.imageView.setImageHeight(360);
             viewHolder.txtName.setText(food.getName());
             viewHolder.txtShare.setText(food.getShop());
             convertView.setOnClickListener(new ViewOnClickListener(food));

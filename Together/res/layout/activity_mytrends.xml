@@ -19,10 +19,6 @@
         android:id="@+id/mytrends_back"
 		style="@style/btn_back"
         android:background="@drawable/title_back" />
-    <ImageView
-        android:layout_toRightOf="@+id/mytrends_back"
-        style="@style/division_left"
-        android:src="@drawable/title_division" />
     
     <ImageView
 	    android:id="@+id/mytrends_setting"
@@ -30,12 +26,6 @@
 		style="@style/btn_setting"
 	    android:src="@drawable/title_setting" 
 	    android:contentDescription="设置按钮"/>
-	
-	<ImageView
-        android:layout_toLeftOf="@id/mytrends_setting"
-        style="@style/division_right"
-        android:src="@drawable/title_division" 
-        android:contentDescription="分割线"/>
     
     <com.xt.together.waterfall.XListView
         android:id="@+id/mytrends_list"

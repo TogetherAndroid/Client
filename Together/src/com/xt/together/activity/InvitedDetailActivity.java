@@ -133,7 +133,7 @@ public class InvitedDetailActivity extends Activity {
 				}
 			}
 			
-			mStatusesAPI.upload(invitedDetailName.getText().toString(), bitmap, null, null, mListener);
+			mStatusesAPI.upload("@"+invitedDetailName.getText().toString(), bitmap, null, null, mListener);
 			return null;
 		}
 				

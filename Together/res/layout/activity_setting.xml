@@ -24,14 +24,7 @@
         android:id="@+id/setting_done"
         android:layout_alignBottom="@+id/setting_title"
         style="@style/btn_setting"
-        android:src="@drawable/setting_done"
-        />
-    
-    <ImageView
-        android:layout_toRightOf="@+id/setting_back"
-        style="@style/division_left"
-        android:src="@drawable/title_division" />
-
+        android:src="@drawable/setting_done"/>
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="fill_parent"

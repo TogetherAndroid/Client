@@ -49,6 +49,7 @@ public class SendPhotoActivity extends Activity {
 	private EditText sendPhotoDesText;
 	private ImageView sendPhotoDesPic;
 	private ImageView sendPhotoDelete;
+	private boolean isDeletePic = false;
 //	private RelativeLayout sendPhotoPicLayout;
 //	private RelativeLayout sendPhotoLayout;
 	
@@ -85,6 +86,7 @@ public class SendPhotoActivity extends Activity {
 			public void onClick(View view) {
 				// TODO Auto-generated method stub
 				sendPhotoDesPic.setImageBitmap(null);
+				isDeletePic = true;
 			}
 			
 		});
@@ -109,6 +111,11 @@ public class SendPhotoActivity extends Activity {
 		@Override
 		public void onClick(View arg0) {
 			new GetDataTask().execute();
+			if(isDeletePic == true){
+				mStatusesAPI.upload(sendPhotoNameText.getText().toString() + sendPhotoDesText.getText().toString(), null, null, null, mstatusListener);
+			}else if(isDeletePic == false){
+				mStatusesAPI.upload(sendPhotoNameText.getText().toString() + sendPhotoDesText.getText().toString(), MainActivity.bitmap, null, null, mstatusListener);
+			}
 		}
 		
 	}
@@ -145,7 +152,7 @@ public class SendPhotoActivity extends Activity {
                 } else {
                     Log.e("com.sina.weibo.sdk.demo", response);
                 }
-                new postStatusTask().execute();
+   //             new postStatusTask().execute();
 			}
 			
 		}

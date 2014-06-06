@@ -244,7 +244,7 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
             resetHeaderPadding();
 
             // Set refresh view text to the pull label
-            mRefreshViewText.setText(R.string.pull_to_refresh_tap_label);
+            mRefreshViewText.setText("下拉刷新");
             // Replace refresh drawable with arrow drawable
             mRefreshViewImage.setImageResource(R.drawable.ic_pulltorefresh_arrow);
             // Clear the full rotation animation
@@ -287,13 +287,13 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
                 if ((mRefreshView.getBottom() >= mRefreshViewHeight + 20
                         || mRefreshView.getTop() >= 0)
                         && mRefreshState != RELEASE_TO_REFRESH) {
-                    mRefreshViewText.setText(R.string.pull_to_refresh_release_label);
+                    mRefreshViewText.setText("松开");
                     mRefreshViewImage.clearAnimation();
                     mRefreshViewImage.startAnimation(mFlipAnimation);
                     mRefreshState = RELEASE_TO_REFRESH;
                 } else if (mRefreshView.getBottom() < mRefreshViewHeight + 20
                         && mRefreshState != PULL_TO_REFRESH) {
-                    mRefreshViewText.setText(R.string.pull_to_refresh_pull_label);
+                    mRefreshViewText.setText("下拉刷新");
                     if (mRefreshState != TAP_TO_REFRESH) {
                         mRefreshViewImage.clearAnimation();
                         mRefreshViewImage.startAnimation(mReverseFlipAnimation);
@@ -341,7 +341,7 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
         mRefreshViewProgress.setVisibility(View.VISIBLE);
 
         // Set refresh view text to the refreshing label
-        mRefreshViewText.setText(R.string.pull_to_refresh_refreshing_label);
+        mRefreshViewText.setText("下拉刷新");
 
         mRefreshState = REFRESHING;
     }
