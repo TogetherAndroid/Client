@@ -43,14 +43,15 @@ import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.MultiAutoCompleteTextView.Tokenizer;
+import android.widget.Toast;
 
 public class InvitingActivity extends Activity {
 	
 	private Button btnBack;
-	private Button btnFinish;
-	private MultiAutoCompleteTextView foodNameTextView;
-	private TextView dateTextView;
-	private TextView addressTextView;
+	private ImageView invitingShare;
+	private MultiAutoCompleteTextView invitingFriendsText;
+	private EditText dateTextView;
+	private EditText addressTextView;
 	private TextView nameTextView;
 	private EditText phoneTextView;
 	private ImageView imageView;
@@ -68,38 +69,39 @@ public class InvitingActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_inviting);
 		btnBack = (Button)findViewById(R.id.inviting_back);
-		btnFinish = (Button)findViewById(R.id.inviting_finish);
-		foodNameTextView = (MultiAutoCompleteTextView)findViewById(R.id.inviting_menu_inviting_text);
+		invitingShare = (ImageView)findViewById(R.id.inviting_share);
+		invitingFriendsText = (MultiAutoCompleteTextView)findViewById(R.id.inviting_invite_edittext);
 		Typeface fontFace = Typeface.createFromAsset(getAssets(), "font/font.ttf");
-		foodNameTextView.setTypeface(fontFace);
-		dateTextView = (TextView)findViewById(R.id.inviting_menu_date_text);
+		invitingFriendsText.setTypeface(fontFace);
+		dateTextView = (EditText)findViewById(R.id.inviting_time_edittext);
 		dateTextView.setTypeface(fontFace);
-		addressTextView = (TextView)findViewById(R.id.inviting_menu_address_text);
+		addressTextView = (EditText)findViewById(R.id.inviting_location_edittext);
 		addressTextView.setTypeface(fontFace);
-		phoneTextView = (EditText)findViewById(R.id.inviting_menu_phone_text);
+		phoneTextView = (EditText)findViewById(R.id.inviting_phone_edittext);
 		phoneTextView.setTypeface(fontFace);
-		imageView = (ImageView)findViewById(R.id.inviting_img);
-		nameTextView = (TextView)findViewById(R.id.inviting_name);
-		nameTextView.setTypeface(fontFace);
+		imageView = (ImageView)findViewById(R.id.inviting_foodpic);
+//		nameTextView = (TextView)findViewById(R.id.inviting_name);
+//		nameTextView.setTypeface(fontFace);
 		btnBack.setOnClickListener(new BackOnClickListener());
-		btnFinish.setOnClickListener(new finishOnClickListener());
+		invitingShare.setOnClickListener(new finishOnClickListener());
 		Intent intent = getIntent();
 		foodName = intent.getStringExtra("foodName");
 		foodImage = intent.getStringExtra("foodImage");
-		nameTextView.setText(foodName);
+//		nameTextView.setText(foodName);
 		ImageLoadTask imageLoadTask = new ImageLoadTask();
 		imageLoader = new ImageLoader();
 		imageLoadTask.execute(foodImage,null,null);
-		addressTextView.setText(intent.getStringExtra("foodAddress"));
+//		addressTextView.setText(intent.getStringExtra("foodAddress"));
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy 年 MM 月 dd 日  HH 时 mm 分");
 		Date curDate = new Date(System.currentTimeMillis());
-		dateTextView.setText(formatter.format(curDate));
+//		dateTextView.setText(formatter.format(curDate));
 		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, constant.friendsNames);
-		foodNameTextView.setAdapter(adapter);
-		foodNameTextView.setThreshold(1);
-		foodNameTextView.setTokenizer(new InvitingActivity.myTokenizer());
-		foodNameTextView.addTextChangedListener(freindTextWatcher);
-		foodNameTextView.setOnItemClickListener(new OnItemClickListener(){
+		invitingFriendsText.setAdapter(adapter);
+		invitingFriendsText.setThreshold(1);
+		invitingFriendsText.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+//		invitingFriendsText.setTokenizer(new InvitingActivity.myTokenizer());
+//		invitingFriendsText.addTextChangedListener(freindTextWatcher);
+		invitingFriendsText.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
@@ -148,8 +150,12 @@ public class InvitingActivity extends Activity {
 
 		@Override
 		public void onClick(View arg0) {
-			mStatusesAPI.update(foodNameTextView.getText().toString(), null, null, mstatusListener);
+			mStatusesAPI.update(invitingFriendsText.getText().toString() + dateTextView.getText().toString() +
+					addressTextView.getText().toString() + phoneTextView.getText().toString(),null, null, mstatusListener);
+			Toast.makeText(getApplicationContext(), "微博已经发送",
+				     Toast.LENGTH_SHORT).show();
 			new GetDataTask().execute();
+			
 		}
 		
 	}
@@ -197,6 +203,7 @@ public class InvitingActivity extends Activity {
 
         @Override
         protected void onPostExecute(String[] result) {
+        	InvitingActivity.this.finish();
             super.onPostExecute(result);
             
         }
@@ -206,21 +213,21 @@ public class InvitingActivity extends Activity {
 
 		@Override
 		public void afterTextChanged(Editable text) {
-			if (foodNameTextView.getSelectionEnd() > 0) {
+			if (invitingFriendsText.getSelectionEnd() > 0) {
 				char lastText = text
-						.charAt(foodNameTextView.getSelectionEnd() - 1);
+						.charAt(invitingFriendsText.getSelectionEnd() - 1);
 				if ('@' == lastText) {
-					if(!foodNameTextView.isPopupShowing()){
-						foodNameTextView.showDropDown();
+					if(!invitingFriendsText.isPopupShowing()){
+						invitingFriendsText.showDropDown();
 					}
 				}
 			}
 			
 			
-			if(foodNameTextView.getSelectionEnd() < foodName.length()){
-				text.delete(0, foodNameTextView.length());
+			if(invitingFriendsText.getSelectionEnd() < foodName.length()){
+				text.delete(0, invitingFriendsText.length());
 				text.insert(0, foodName, 0, foodName.length());
-				text.delete(foodName.length(), foodNameTextView.length());				
+				text.delete(foodName.length(), invitingFriendsText.length());				
 			}
 		}
 

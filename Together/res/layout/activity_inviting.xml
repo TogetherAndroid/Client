@@ -72,7 +72,7 @@
    		    	    android:src="@drawable/inviting_invite_friend"
    		    	    />
    		    	
-   		    	<EditText 
+   		    	<MultiAutoCompleteTextView
    		    	    android:id="@+id/inviting_invite_edittext"
    		    	    android:layout_width="fill_parent"
 				    android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
    		    	    android:layout_width="fill_parent"
 				    android:layout_height="wrap_content"
 				    android:layout_toRightOf="@+id/inviting_time_pic"
-				    android:layout_marginLeft="14dp"
+				    android:layout_marginLeft="17dp"
 				    android:layout_centerVertical="true"
 				    android:layout_marginRight="10dp"
 				    android:singleLine="true"
@@ -152,7 +152,7 @@
    		    	    android:layout_width="fill_parent"
 				    android:layout_height="wrap_content"
 				    android:layout_toRightOf="@+id/inviting_location_pic"
-				    android:layout_marginLeft="14dp"
+				    android:layout_marginLeft="17dp"
 				    android:layout_centerVertical="true"
 				    android:layout_marginRight="10dp"
 				    android:singleLine="true"
@@ -187,7 +187,7 @@
    		    	    android:layout_width="fill_parent"
 				    android:layout_height="wrap_content"
 				    android:layout_toRightOf="@+id/inviting_phone_pic"
-				    android:layout_marginLeft="14dp"
+				    android:layout_marginLeft="17dp"
 				    android:layout_centerVertical="true"
 				    android:layout_marginRight="10dp"
 				    android:singleLine="true"
